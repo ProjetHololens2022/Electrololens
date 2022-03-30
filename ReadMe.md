@@ -11,9 +11,7 @@
 **` 2020.3.20f1 `**
 
 #### Installer MRTK Toolkit
-Le MRTK Toolkit est dans le repo, executez : `../MixedRealityFeatureTool/MixedRealityFeatureTool.exe`
-
-Ou telechargez le sur : <a href="https://www.microsoft.com/en-us/download/details.aspx?id=102778" target="_blank">https://www.microsoft.com/en-us/download/details.aspx?id=102778</a>
+Telechargez le sur : <a href="https://www.microsoft.com/en-us/download/details.aspx?id=102778" target="_blank">https://www.microsoft.com/en-us/download/details.aspx?id=102778</a>
 
 
 Puis cochez les options suivantes :
