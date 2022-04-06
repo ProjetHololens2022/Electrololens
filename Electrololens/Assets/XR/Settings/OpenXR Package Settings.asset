@@ -100,6 +100,21 @@ MonoBehaviour:
   company: Unity
   priority: 0
   required: 0
+--- !u!114 &-5259884508224447224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5a1f07dc5afe854f9f12a4194aca3fb, type: 3}
+  m_Name: WebGL
+  m_EditorClassIdentifier: 
+  features: []
+  m_renderMode: 1
+  m_depthSubmissionMode: 0
 --- !u!114 &-4305387708712195190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -380,7 +395,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5a1f07dc5afe854f9f12a4194aca3fb, type: 3}
   m_Name: Android
   m_EditorClassIdentifier: 
-  features: []
+  features:
+  - {fileID: 9136914559147588199}
+  - {fileID: -3769625382761477966}
+  - {fileID: -4305387708712195190}
+  - {fileID: 2603479991181973163}
+  - {fileID: 6263186770278509829}
+  - {fileID: -6056797522033022859}
+  - {fileID: 3213836825979205814}
+  - {fileID: 3651192819863218038}
   m_renderMode: 1
   m_depthSubmissionMode: 0
 --- !u!114 &11400000
@@ -395,11 +418,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f0ebc320a151d3408ea1e9fce54d40e, type: 3}
   m_Name: OpenXR Package Settings
   m_EditorClassIdentifier: 
-  Keys: 010000000e00000007000000
+  Keys: 010000000e000000070000000d000000
   Values:
   - {fileID: -1438883808356944590}
   - {fileID: -1865502933251644481}
   - {fileID: -234654014862965911}
+  - {fileID: -5259884508224447224}
 --- !u!114 &183655899365371310
 MonoBehaviour:
   m_ObjectHideFlags: 0
