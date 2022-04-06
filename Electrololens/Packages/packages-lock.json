@@ -1,13 +1,22 @@
 {
   "dependencies": {
     "com.microsoft.mixedreality.openxr": {
-      "version": "file:MixedReality/com.microsoft.mixedreality.openxr-1.4.0.tgz",
+      "version": "file:MixedReality/com.microsoft.mixedreality.openxr-1.3.1.tgz",
       "depth": 0,
       "source": "local-tarball",
       "dependencies": {
         "com.unity.xr.arfoundation": "4.1.7",
         "com.unity.xr.management": "4.2.0",
         "com.unity.xr.openxr": "1.3.1"
+      }
+    },
+    "com.microsoft.mixedreality.toolkit.examples": {
+      "version": "file:MixedReality/com.microsoft.mixedreality.toolkit.examples-2.7.3.tgz",
+      "depth": 0,
+      "source": "local-tarball",
+      "dependencies": {
+        "com.microsoft.mixedreality.toolkit.foundation": "2.7.3",
+        "com.microsoft.mixedreality.toolkit.extensions": "2.7.3"
       }
     },
     "com.microsoft.mixedreality.toolkit.extensions": {
@@ -33,6 +42,21 @@
       "dependencies": {
         "com.unity.textmeshpro": "2.1.4"
       }
+    },
+    "com.microsoft.mixedreality.worldlockingsamples": {
+      "version": "file:MixedReality/com.microsoft.mixedreality.worldlockingsamples-1.5.8.tgz",
+      "depth": 0,
+      "source": "local-tarball",
+      "dependencies": {
+        "com.microsoft.mixedreality.toolkit.foundation": "2.7.0",
+        "com.microsoft.mixedreality.worldlockingtools": "1.5.8"
+      }
+    },
+    "com.microsoft.mixedreality.worldlockingtools": {
+      "version": "file:MixedReality/com.microsoft.mixedreality.worldlockingtools-1.5.8.tgz",
+      "depth": 0,
+      "source": "local-tarball",
+      "dependencies": {}
     },
     "com.unity.collab-proxy": {
       "version": "1.11.2",
