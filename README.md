@@ -23,5 +23,9 @@ Puis cochez les options suivantes :
 - Mixed Reality Toolkit Extension : `2.7.3`
 - Mixed Reality Toolkit Foundation : `2.7.3`
 - Mixed Reality Toolkit Standard Assets : `2.7.3`
+- Mixed Reality Toolkit Examples : `2.7.3`
 
+##### World Locking Tools 
+- WLT Samples : `1.5.8`
+- WLT Core : `1.5.8`
 ---
