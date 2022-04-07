@@ -14,6 +14,7 @@ public class GameArea : MonoBehaviour
 
     public void LockPlace(){
         gameObject.GetComponent<Microsoft.MixedReality.Toolkit.UI.ObjectManipulator>().enabled = false;
+        gameObject.GetComponent<BoxCollider>().enabled = false;
         platform.SetActive(true);
     }
 }
