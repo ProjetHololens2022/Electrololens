@@ -4,7 +4,16 @@ using UnityEngine;
 
 public class GameArea : MonoBehaviour
 {
-    void LockPlace(){
+
+    [SerializeField]
+    private GameObject platform;
+
+    void Start(){
+        platform.SetActive(false);
+    }
+
+    public void LockPlace(){
         gameObject.GetComponent<Microsoft.MixedReality.Toolkit.UI.ObjectManipulator>().enabled = false;
+        platform.SetActive(true);
     }
 }
