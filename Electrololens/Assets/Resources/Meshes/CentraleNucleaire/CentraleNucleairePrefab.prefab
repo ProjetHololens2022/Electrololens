@@ -17,6 +17,8 @@ GameObject:
   - component: {fileID: 8649543896165464260}
   - component: {fileID: 1545611406630031413}
   - component: {fileID: 1495526572338120822}
+  - component: {fileID: 5248195358421216641}
+  - component: {fileID: 6446690328457684111}
   m_Layer: 0
   m_Name: CentraleNucleairePrefab
   m_TagString: Untagged
@@ -203,3 +205,34 @@ MonoBehaviour:
   proximityType: 3
   constraintOnMovement: 2
   useLocalSpaceForConstraint: 0
+--- !u!114 &5248195358421216641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 506657874716124142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 820f94d57893bf843a0cd6d93313fe6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handType: 3
+  proximityType: 3
+  scaleMinimum: 1
+  scaleMaximum: 1
+  relativeToInitialState: 1
+--- !u!114 &6446690328457684111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 506657874716124142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a04ec5e01ae2e342879b708550398d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handType: -1
+  proximityType: -1
