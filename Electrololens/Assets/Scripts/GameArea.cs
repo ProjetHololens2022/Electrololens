@@ -24,11 +24,15 @@ public class GameArea : MonoBehaviour
     IEnumerator popPuns(Transform child){
         float scale = 0.0f;
         float time = 0.5f;
+        float rotation = 0.0f;
         while(scale < 1.0f){
             child.localScale = new Vector3(scale,scale,scale);
+            child.rotation = Quaternion.Euler(0,rotation,0);
             yield return 0;
             scale += (1.0f/time) * Time.deltaTime;
+            rotation += (360.0f/time) * Time.deltaTime;
             Mathf.Clamp(scale,0.0f,1.0f);
+            Mathf.Clamp(rotation,0.0f,360.0f);
         }
     }
 }
