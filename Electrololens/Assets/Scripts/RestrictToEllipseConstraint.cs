@@ -22,14 +22,18 @@ public class RestrictToEllipseConstraint : TransformConstraint
         if(ellipse == null){
             return;
         }
-        float equation = Mathf.Pow(transform.Position.x-ellipse.position.x,2.0f)/Mathf.Pow(0.3f,2.0f) + Mathf.Pow(transform.Position.z-ellipse.position.z,2.0f)/Mathf.Pow(0.2f,2.0f);
-        Debug.Log(equation);
+        Vector3 localDir = transform.Position-ellipse.position; //Angle 0
+        localDir = Quaternion.Euler(0, ellipse.eulerAngles.y, 0) * localDir; //Angle X
+        //PROBLEME ICI
+        float equation = Mathf.Pow(localDir.x,2.0f)/Mathf.Pow(0.3f,2.0f) + Mathf.Pow(localDir.z,2.0f)/Mathf.Pow(0.2f,2.0f);
         if(equation > 1.0f){
-            Vector3 dir = transform.Position-ellipse.position;
-            dir = Vector3.Normalize(dir);
-            dir.x *= 0.3f;
-            dir.z *= 0.2f;
-            transform.Position = ellipse.position + dir;
+            localDir = Vector3.Normalize(localDir);
+            localDir = Quaternion.Euler(0, -ellipse.eulerAngles.y, 0) * localDir; //Angle 0
+            localDir = Quaternion.Euler(0, -ellipse.eulerAngles.y, 0) * localDir; //Angle 0
+            localDir.x *= 0.3f;
+            localDir.z *= 0.2f;
+            localDir = Quaternion.Euler(0, ellipse.eulerAngles.y, 0) * localDir; //Angle X
+            transform.Position = ellipse.position + localDir;
         }
     }
 }
