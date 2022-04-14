@@ -45,13 +45,7 @@ public class VirtualObject : MonoBehaviour
         return strTree;
     }
 
-    public ArboRessource GetTree(){
-        ArboRessource ar = new ArboRessource(this.gameObject, new List<ArboRessource>());
-        foreach(GameObject child in children){
-            ar.AddChild(child.GetComponent<VirtualObject>().GetTree());
-        }
-        return ar;
-    }
+
 
     public void AddChild(GameObject child) {
         if(children.Contains(child)) {
@@ -194,22 +188,6 @@ public class VirtualObject : MonoBehaviour
     public bool isUsingGravity()
     {
         return useGravity;
-    }
-
-    /**
-     * Rewrite me in children classes
-     */ 
-    public virtual void ShowAccurateUI() {
-        if(accurateUI != null) {
-            Debug.LogWarning("You can't instantiate two AccurateUI.");
-            return;
-        }
-        Debug.Log("Spawn UI");
-        Vector3 camVect = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y - (transform.localScale.y), Camera.main.transform.position.z + 0.8f);
-        accurateUI = Instantiate(accurateUIPrefab,camVect,Quaternion.identity);
-        Debug.Log(accurateUI.GetComponent<ObjectTarget>());
-        accurateUI.GetComponent<ObjectTarget>().SetTarget(this.gameObject);
-        Debug.Log(accurateUI);
     }
 
     /**
