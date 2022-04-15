@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5292947100582138040
+--- !u!1 &2885080229997076956
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,45 +8,46 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4310455637405545512}
-  - component: {fileID: 6591481898436419825}
-  - component: {fileID: 646195561362717957}
+  - component: {fileID: 8139069049699374855}
+  - component: {fileID: 8341273301964421636}
+  - component: {fileID: 2212368872402980484}
   m_Layer: 0
-  m_Name: Visual
+  m_Name: ElectricPolePrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4310455637405545512
+--- !u!4 &8139069049699374855
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5292947100582138040}
+  m_GameObject: {fileID: 2885080229997076956}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
-  m_Children: []
-  m_Father: {fileID: 5458333242573160036}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 8700746156805802631}
+  m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &6591481898436419825
+--- !u!33 &8341273301964421636
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5292947100582138040}
-  m_Mesh: {fileID: -2432090755550338912, guid: a2979a795402d9442ad7963cbfa3bbaf, type: 3}
---- !u!23 &646195561362717957
+  m_GameObject: {fileID: 2885080229997076956}
+  m_Mesh: {fileID: -2432090755550338912, guid: 09e320031d598b748b0c4edf82cd03c0, type: 3}
+--- !u!23 &2212368872402980484
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5292947100582138040}
+  m_GameObject: {fileID: 2885080229997076956}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -59,7 +60,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 4262850592147981743, guid: a2979a795402d9442ad7963cbfa3bbaf, type: 3}
+  - {fileID: 8815434284084854477, guid: 09e320031d598b748b0c4edf82cd03c0, type: 3}
+  - {fileID: -6053280941784162455, guid: 09e320031d598b748b0c4edf82cd03c0, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -81,7 +83,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &6535539084303725200
+--- !u!1 &5255657169468688643
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -89,26 +91,25 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5458333242573160036}
+  - component: {fileID: 8700746156805802631}
   m_Layer: 0
-  m_Name: BigElectricPolePrefab
+  m_Name: WireEndPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5458333242573160036
+--- !u!4 &8700746156805802631
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6535539084303725200}
+  m_GameObject: {fileID: 5255657169468688643}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.986, z: 0.015}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 4310455637405545512}
-  m_Father: {fileID: 0}
+  m_Children: []
+  m_Father: {fileID: 8139069049699374855}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

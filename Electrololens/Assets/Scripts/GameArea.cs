@@ -25,9 +25,10 @@ public class GameArea : MonoBehaviour
         float scale = 0.0f;
         float time = 0.5f;
         float rotation = 0.0f;
+        float baseAngle = child.eulerAngles.y;
         while(scale < 1.0f){
             child.localScale = new Vector3(scale,scale,scale);
-            child.rotation = Quaternion.Euler(0,rotation,0);
+            child.rotation = Quaternion.Euler(0,rotation + baseAngle,0);
             yield return 0;
             scale += (1.0f/time) * Time.deltaTime;
             rotation += (360.0f/time) * Time.deltaTime;
