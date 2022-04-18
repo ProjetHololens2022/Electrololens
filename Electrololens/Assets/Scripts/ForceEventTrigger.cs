@@ -9,12 +9,28 @@ public class ForceEventTrigger : MonoBehaviour
 
         GameObject gsoc = gameObject.transform.parent.gameObject;
         ScrollingObjectCollection soc = gsoc.GetComponent<ScrollingObjectCollection>();
-        int fvci = soc.FirstVisibleCellIndex;
-        Debug.Log("Hello index is :" + fvci);
+        for (int i = 0; i < 4; i++)
+        {
+            Debug.Log("loop " + i + ": " + soc.FirstVisibleCellIndex + " visible : " + soc.IsCellVisible(i));
+        }
+/*        int fvci = soc.FirstVisibleCellIndex;
 
         GameObject ggoc = GameObject.Find("Container").gameObject.transform.GetChild(0).gameObject;
-
         GameObject selected = ggoc.transform.GetChild(fvci).gameObject;
-        Debug.Log(selected.name);
+        Debug.Log(selected.name);*/
+    }
+
+    public void NextItem()
+    {
+        GameObject gsoc = gameObject.transform.parent.gameObject;
+        ScrollingObjectCollection soc = gsoc.GetComponent<ScrollingObjectCollection>();
+        soc.MoveByTiers(1);
+    }
+
+    public void PrevItem()
+    {
+        GameObject gsoc = gameObject.transform.parent.gameObject;
+        ScrollingObjectCollection soc = gsoc.GetComponent<ScrollingObjectCollection>();
+        soc.MoveByTiers(-1);
     }
 }
