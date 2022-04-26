@@ -69,10 +69,11 @@ public class ConsommateurClass : MonoBehaviour
 
     public void showInfo()
     {
-        Debug.Log("Nom : " + nom);
-        Debug.Log("Consommation : " + consommation);
-        Debug.Log("Taux de satisfaction : " + tauxDeSatisfaction);
-        Debug.Log("Nombre d'habitants : " + nbHabitants);
+        /*        Debug.Log("Nom : " + nom);
+                Debug.Log("Consommation : " + consommation);
+                Debug.Log("Taux de satisfaction : " + tauxDeSatisfaction);
+                Debug.Log("Nombre d'habitants : " + nbHabitants);*/
+        print(infoVille);
 
         infoVille.updateLoadingBar(infoVille.getProgressConsoLoadingBar(), (float)consommation / 100);
         infoVille.updateLoadingBar(infoVille.getProgressConsoLoadingBar(), (float)tauxDeSatisfaction / 100);

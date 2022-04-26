@@ -10,6 +10,6 @@ public class MenuDisplay : MonoBehaviour
 
     public void afficheMenu()
     {
-        menu.SetActive(!menu.active);
+        menu.SetActive(!menu.activeSelf);
     }
 }

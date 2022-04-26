@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Microsoft.MixedReality.Toolkit.UI;
-
+using System.Threading.Tasks;
 
 public class InfoVille : MonoBehaviour
 {
@@ -21,9 +21,9 @@ public class InfoVille : MonoBehaviour
 
     void Start()
     {
-        IProgressIndicator progressConsoLoadingBar = progressConso.GetComponent<IProgressIndicator>();
-        IProgressIndicator progressApportLoadingBar = progressApport.GetComponent<IProgressIndicator>();
-        IProgressIndicator progressEmissionLoadingBar = progressEmission.GetComponent<IProgressIndicator>();
+        progressConsoLoadingBar = progressConso.GetComponent<IProgressIndicator>();
+        progressApportLoadingBar = progressApport.GetComponent<IProgressIndicator>();
+        progressEmissionLoadingBar = progressEmission.GetComponent<IProgressIndicator>();
     }
     
     // Update is called once per frame
@@ -46,13 +46,11 @@ public class InfoVille : MonoBehaviour
 
     public async void updateLoadingBar(IProgressIndicator progressIndicator, float progress)
     {
-        print("on est là");
         if (progressIndicator != null)
         {
             progressIndicator.OpenAsync();
             progressIndicator.Progress = progress;
             progressIndicator.CloseAsync();
-
         }
     }
 
