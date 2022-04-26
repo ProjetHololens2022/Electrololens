@@ -17,18 +17,18 @@ public class ProducteurClass : MonoBehaviour
 {
 
 
-    private String nom;
+    private string nom;
     private Type type;
     private int production;
     private int emissionCO2;
 
 
-    public String getNom()
+    public string getNom()
     {
         return nom;
     }
 
-    public void setNom(String nom)
+    public void setNom(string nom)
     {
         this.nom = nom;
     }
@@ -48,9 +48,9 @@ public class ProducteurClass : MonoBehaviour
         this.production = production;
     }
 
-    public int getEmissionC02()
+    public int getEmissionCO2()
     {
-        return emissionC02;
+        return emissionCO2;
     }
 
 }

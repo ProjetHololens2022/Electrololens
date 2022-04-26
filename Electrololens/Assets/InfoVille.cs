@@ -1,52 +1,59 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Microsoft.MixedReality.Toolkit.UI;
+
 
 public class InfoVille : MonoBehaviour
 {
     [SerializeField]
-    private GameObject ProgressConso = null;
+    private GameObject progressConso = null;
     [SerializeField]
-    private GameObject ProgressApport = null;
+    private GameObject progressApport = null;
     [SerializeField]
-    private GameObject ProgressEmission = null;
+    private GameObject progressEmission = null;
 
-    private IProgressIndicator ProgressConsoLoadingBar;
-    private IProgressIndicator ProgressApportLoadingBar;
-    private IProgressIndicator ProgressEmissionLoadingBar;
+    private IProgressIndicator progressConsoLoadingBar;
+    private IProgressIndicator progressApportLoadingBar;
+    private IProgressIndicator progressEmissionLoadingBar;
     // private int 
 
 
-    void updateConso(float value)
-    {
-        ProgressConsoLoadingBar.Progress = value;
-    }
-
-    void updateApport(float value)
-    {
-        ProgressApportLoadingBar.Progress = value;
-    }
-
-    void updateEmission(float value)
-    {
-        ProgressEmissionLoadingBar.Progress = value;
-    }
-
     void Start()
     {
-        IProgressIndicator ProgressConsoLoadingBar = ProgressConso.GetComponent<IProgressIndicator>();
-        IProgressIndicator ProgressApportLoadingBar = ProgressApport.GetComponent<IProgressIndicator>();
-        IProgressIndicator ProgressEmissionLoadingBar = ProgressEmission.GetComponent<IProgressIndicator>();
-
-        this.updateConso(0.75f);
-        this.updateApport(0.35f);
-        this.updateEmission(0.15f);
-
+        IProgressIndicator progressConsoLoadingBar = progressConso.GetComponent<IProgressIndicator>();
+        IProgressIndicator progressApportLoadingBar = progressApport.GetComponent<IProgressIndicator>();
+        IProgressIndicator progressEmissionLoadingBar = progressEmission.GetComponent<IProgressIndicator>();
     }
     
     // Update is called once per frame
-    void Update()
+    public IProgressIndicator getProgressConsoLoadingBar()
     {
-        
+        return progressConsoLoadingBar;
     }
+
+    public IProgressIndicator getProgressApportLoadingBar()
+    {
+        return progressApportLoadingBar;
+    }
+
+    public IProgressIndicator getProgressEmissionLoadingBar()
+    {
+        return progressEmissionLoadingBar;
+    }
+
+
+
+    public async void updateLoadingBar(IProgressIndicator progressIndicator, float progress)
+    {
+        print("on est là");
+        if (progressIndicator != null)
+        {
+            progressIndicator.OpenAsync();
+            progressIndicator.Progress = progress;
+            progressIndicator.CloseAsync();
+
+        }
+    }
+
 }
