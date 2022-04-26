@@ -23,6 +23,11 @@ public class ForceEventTrigger : MonoBehaviour
         Debug.Log(selected.name);
     }
 
+    public void fireEvent()
+    {
+        // fire event
+    }
+
     public void NextItem()
     {
         GameObject gsoc = gameObject.transform.parent.gameObject;
