@@ -48,9 +48,11 @@ public class InfoVille : MonoBehaviour
     {
         if (progressIndicator != null)
         {
-            progressIndicator.OpenAsync();
+            await progressIndicator.AwaitTransitionAsync();
+
+            await progressIndicator.OpenAsync();
             progressIndicator.Progress = progress;
-            progressIndicator.CloseAsync();
+         
         }
     }
 
