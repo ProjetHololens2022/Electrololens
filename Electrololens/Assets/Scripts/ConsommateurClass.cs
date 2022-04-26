@@ -8,8 +8,12 @@ public class ConsommateurClass : MonoBehaviour
 {
     private string nom;
     private int consommation;
+    private int apportElectricite;
+    private int emissionCO2;
     private int tauxDeSatisfaction;
     private int nbHabitants;
+
+
 
     [SerializeField]
     private GameObject infoVilleGO;
@@ -59,12 +63,12 @@ public class ConsommateurClass : MonoBehaviour
     void randomizedCityData()
     {
         int randomConsommation = Random.Range(0, 100);
-        int randomTauxDeSatisfaction = Random.Range(0, 100);
-        int randomNbHabitants = Random.Range(0, 100);
+        int randomApportElectriciten = Random.Range(0, 100);
+        int randomEmissionCO2 = Random.Range(0, 100);
 
         consommation = randomConsommation;
-        tauxDeSatisfaction = randomTauxDeSatisfaction;
-        nbHabitants = randomNbHabitants;
+        apportElectricite = randomApportElectriciten;
+        emissionCO2 = randomEmissionCO2;
     }
 
     public void showInfo()
@@ -76,8 +80,8 @@ public class ConsommateurClass : MonoBehaviour
         print(infoVille);
 
         infoVille.updateLoadingBar(infoVille.getProgressConsoLoadingBar(), (float)consommation / 100);
-        infoVille.updateLoadingBar(infoVille.getProgressConsoLoadingBar(), (float)tauxDeSatisfaction / 100);
-        infoVille.updateLoadingBar(infoVille.getProgressEmissionLoadingBar(), (float)nbHabitants / 100);
+        infoVille.updateLoadingBar(infoVille.getProgressApportLoadingBar(), (float)apportElectricite / 100);
+        infoVille.updateLoadingBar(infoVille.getProgressEmissionLoadingBar(), (float)emissionCO2 / 100);
 
         infoVilleGO.SetActive(true);
     }
@@ -85,6 +89,29 @@ public class ConsommateurClass : MonoBehaviour
     public void ApplyEvent(string e)
     {
         Debug.Log(e + " pouet");
+
+        switch (e)
+        {
+            case "Event1":
+                consommation +=20;
+                emissionCO2 +=20;
+                tauxDeSatisfaction += 10;
+                nbHabitants += 10;  
+                break;
+            case "Event2":
+                apportElectricite -= 20;
+                emissionCO2 -= 20;
+                break;
+            case "Event3":
+                consommation += 10;
+                emissionCO2 += 10;
+                break;
+            case "Event4":
+                consommation += 15;
+                nbHabitants += 5;  
+                break;
+            
+        }
     }
 
     public void hideInfo()
