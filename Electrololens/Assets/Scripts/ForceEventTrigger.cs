@@ -14,19 +14,25 @@ public class ForceEventTrigger : MonoBehaviour
         Debug.Log("Index initialized : " + index);
     }
 
-    public void getDisplayedEvent()
+    public string getDisplayedEvent()
     {
         Debug.Log("display index : " + index);
         GameObject gsoc = gameObject.transform.parent.gameObject;
         ScrollingObjectCollection soc = gsoc.GetComponent<ScrollingObjectCollection>();
         GameObject ggoc = GameObject.Find("Container").gameObject.transform.GetChild(0).gameObject;
         GameObject selected = ggoc.transform.GetChild(index).gameObject;
-        Debug.Log(selected.name);
+
+        return selected.name;
     }
 
     public void fireEvent()
     {
-        // fire event
+        GameObject[] cities = GameObject.FindGameObjectsWithTag("City");
+        print(cities.Length);
+        foreach (var city in cities)
+        {
+            city.SendMessage("ApplyEvent", getDisplayedEvent());
+        }
     }
 
     public void NextItem()

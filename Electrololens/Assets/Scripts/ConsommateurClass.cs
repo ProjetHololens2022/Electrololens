@@ -82,6 +82,11 @@ public class ConsommateurClass : MonoBehaviour
         infoVilleGO.SetActive(true);
     }
 
+    public void ApplyEvent(string e)
+    {
+        Debug.Log(e + " pouet");
+    }
+
     public void hideInfo()
     {
         infoVilleGO.SetActive(false);
