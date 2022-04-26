@@ -10,6 +10,7 @@ public class ForceEventTrigger : MonoBehaviour
     private void Start()
     {
         index = 0;
+        nbItems = nbItems - 1;
         Debug.Log("Index initialized : " + index);
     }
 
@@ -41,7 +42,7 @@ public class ForceEventTrigger : MonoBehaviour
     {
         GameObject gsoc = gameObject.transform.parent.gameObject;
         ScrollingObjectCollection soc = gsoc.GetComponent<ScrollingObjectCollection>();
-        index = index > 0 ? --index : 0;
+        index = index > 0 ? --index : nbItems;
         soc.MoveToIndex(index);
         Debug.Log("prev index : " + index);
     }
