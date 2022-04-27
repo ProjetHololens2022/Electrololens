@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2870404905634734873}
   - component: {fileID: 499107175665075202}
-  - component: {fileID: 2680411758696220863}
+  - component: {fileID: 9043222504543234533}
   m_Layer: 0
   m_Name: InfoVille
   m_TagString: Untagged
@@ -48,7 +48,7 @@ MonoBehaviour:
   progressConso: {fileID: 1511161496843635811}
   progressApport: {fileID: 7024001058197606804}
   progressEmission: {fileID: 2793489235958789306}
---- !u!114 &2680411758696220863
+--- !u!114 &9043222504543234533
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
