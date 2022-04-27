@@ -48,11 +48,32 @@ public class InfoVille : MonoBehaviour
     {
         if (progressIndicator != null)
         {
+            Debug.Log("update : " + progressIndicator.State);
             await progressIndicator.AwaitTransitionAsync();
 
-            await progressIndicator.OpenAsync();
-            progressIndicator.Progress = progress;
-         
+            if (progressIndicator.State != ProgressIndicatorState.Open 
+                && progressIndicator.State != ProgressIndicatorState.Opening)
+            {
+                await progressIndicator.OpenAsync();
+                progressIndicator.Progress = progress;
+            }
+            Debug.Log("after update : " + progressIndicator.State);
+        }
+    }
+
+    public async void closeProgressAsync(IProgressIndicator progressIndicator)
+    {
+        if(progressIndicator != null)
+        {
+            Debug.Log("before close : " + progressIndicator.State);
+            await progressIndicator.AwaitTransitionAsync();
+
+            if(progressIndicator.State != ProgressIndicatorState.Closed 
+                && progressIndicator.State != ProgressIndicatorState.Closing)
+            {
+                await progressIndicator.CloseAsync();
+            }
+            Debug.Log("after close : " + progressIndicator.State);
         }
     }
 

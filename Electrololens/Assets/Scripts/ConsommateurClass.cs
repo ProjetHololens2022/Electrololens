@@ -71,19 +71,32 @@ public class ConsommateurClass : MonoBehaviour
         emissionCO2 = randomEmissionCO2;
     }
 
-    public void showInfo()
+    public void updateProgessValues()
     {
-        /*        Debug.Log("Nom : " + nom);
-                Debug.Log("Consommation : " + consommation);
-                Debug.Log("Taux de satisfaction : " + tauxDeSatisfaction);
-                Debug.Log("Nombre d'habitants : " + nbHabitants);*/
-        print(infoVille);
 
         infoVille.updateLoadingBar(infoVille.getProgressConsoLoadingBar(), (float)consommation / 100);
         infoVille.updateLoadingBar(infoVille.getProgressApportLoadingBar(), (float)apportElectricite / 100);
         infoVille.updateLoadingBar(infoVille.getProgressEmissionLoadingBar(), (float)emissionCO2 / 100);
+    }
 
+    public void closeProgressBar()
+    {
+
+        infoVille.closeProgressAsync(infoVille.getProgressConsoLoadingBar());
+        infoVille.closeProgressAsync(infoVille.getProgressApportLoadingBar());
+        infoVille.closeProgressAsync(infoVille.getProgressEmissionLoadingBar());
+    }
+
+    public void showInfo()
+    {
+        updateProgessValues();
         infoVilleGO.SetActive(true);
+    }
+
+    public void hideInfo()
+    {
+        infoVilleGO.SetActive(false);
+        closeProgressBar();
     }
 
     public void ApplyEvent(string e)
@@ -110,12 +123,7 @@ public class ConsommateurClass : MonoBehaviour
                 consommation += 15;
                 nbHabitants += 5;  
                 break;
-            
         }
     }
 
-    public void hideInfo()
-    {
-        infoVilleGO.SetActive(false);
-    }
 }

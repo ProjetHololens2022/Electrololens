@@ -472,6 +472,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2680411758696220863, guid: 8a2b95b98170b9843b906180f112b528, type: 3}
+      propertyPath: pivotAxis
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2870404905634734873, guid: 8a2b95b98170b9843b906180f112b528, type: 3}
       propertyPath: m_RootOrder
       value: 3
