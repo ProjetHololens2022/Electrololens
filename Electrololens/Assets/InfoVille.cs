@@ -21,12 +21,12 @@ public class InfoVille : MonoBehaviour
 
     void Start()
     {
+        Debug.LogWarning("start init infoville");
         progressConsoLoadingBar = progressConso.GetComponent<IProgressIndicator>();
         progressApportLoadingBar = progressApport.GetComponent<IProgressIndicator>();
         progressEmissionLoadingBar = progressEmission.GetComponent<IProgressIndicator>();
     }
     
-    // Update is called once per frame
     public IProgressIndicator getProgressConsoLoadingBar()
     {
         return progressConsoLoadingBar;
@@ -41,8 +41,6 @@ public class InfoVille : MonoBehaviour
     {
         return progressEmissionLoadingBar;
     }
-
-
 
     public async void updateLoadingBar(IProgressIndicator progressIndicator, float progress)
     {

@@ -56,6 +56,9 @@ public class ConsommateurClass : MonoBehaviour
 
     void Start()
     {
+        // TODO : On start infoville's ProgressBar should be init
+        // It's not done, and it's why on the first attempt the values are 50% everywhere.
+       
         infoVille = infoVilleGO.GetComponent<InfoVille>();
         randomizedCityData();
     }
@@ -73,18 +76,28 @@ public class ConsommateurClass : MonoBehaviour
 
     public void updateProgessValues()
     {
-
-        infoVille.updateLoadingBar(infoVille.getProgressConsoLoadingBar(), (float)consommation / 100);
-        infoVille.updateLoadingBar(infoVille.getProgressApportLoadingBar(), (float)apportElectricite / 100);
-        infoVille.updateLoadingBar(infoVille.getProgressEmissionLoadingBar(), (float)emissionCO2 / 100);
+        if (infoVille != null 
+            && infoVille.getProgressApportLoadingBar() != null
+                && infoVille.getProgressConsoLoadingBar() != null
+                    && infoVille.getProgressConsoLoadingBar() != null)
+        {
+            infoVille.updateLoadingBar(infoVille.getProgressConsoLoadingBar(), (float)consommation / 100);
+            infoVille.updateLoadingBar(infoVille.getProgressApportLoadingBar(), (float)apportElectricite / 100);
+            infoVille.updateLoadingBar(infoVille.getProgressEmissionLoadingBar(), (float)emissionCO2 / 100);
+        }
     }
 
     public void closeProgressBar()
     {
-
-        infoVille.closeProgressAsync(infoVille.getProgressConsoLoadingBar());
-        infoVille.closeProgressAsync(infoVille.getProgressApportLoadingBar());
-        infoVille.closeProgressAsync(infoVille.getProgressEmissionLoadingBar());
+        if (infoVille != null 
+            && infoVille.getProgressApportLoadingBar() != null
+                && infoVille.getProgressConsoLoadingBar() != null
+                    && infoVille.getProgressConsoLoadingBar() != null)
+        {
+            infoVille.closeProgressAsync(infoVille.getProgressConsoLoadingBar());
+            infoVille.closeProgressAsync(infoVille.getProgressApportLoadingBar());
+            infoVille.closeProgressAsync(infoVille.getProgressEmissionLoadingBar());
+        }
     }
 
     public void showInfo()
@@ -101,15 +114,13 @@ public class ConsommateurClass : MonoBehaviour
 
     public void ApplyEvent(string e)
     {
-        Debug.Log(e + " pouet");
-
         switch (e)
         {
             case "Event1":
-                consommation +=20;
-                emissionCO2 +=20;
+                consommation += 20;
+                emissionCO2 += 20;
                 tauxDeSatisfaction += 10;
-                nbHabitants += 10;  
+                nbHabitants += 10;
                 break;
             case "Event2":
                 apportElectricite -= 20;
@@ -121,7 +132,7 @@ public class ConsommateurClass : MonoBehaviour
                 break;
             case "Event4":
                 consommation += 15;
-                nbHabitants += 5;  
+                nbHabitants += 5;
                 break;
         }
     }
