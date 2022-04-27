@@ -21,12 +21,6 @@ public class VirtualObject : MonoBehaviour
     protected bool highlighted = false;
     protected bool useGravity = false;
 
-    public TextMeshPro textArbo = null;
-
-    [SerializeField]
-    protected GameObject accurateUIPrefab = null;
-    protected GameObject accurateUI = null;
-
     public void Start() {
         if(GetComponent<Renderer>() != null) {
             realMaterial = GetComponent<Renderer>().material;
@@ -188,23 +182,5 @@ public class VirtualObject : MonoBehaviour
     public bool isUsingGravity()
     {
         return useGravity;
-    }
-
-    /**
-     * Rewrite me in children classes
-     */ 
-    public virtual void HideAccurateUI() {
-        if(accurateUI == null) {
-            Debug.LogWarning("There is no AccurateUI.");
-            return;
-        }
-        Destroy(accurateUI);
-        accurateUI = null;
-    }
-
-    public bool isAccurateUI()
-    {
-        Debug.Log(accurateUI);
-        return (accurateUI != null);
     }
 }
