@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 6446690328457684111}
   m_Layer: 0
   m_Name: CentraleNucleairePrefab
-  m_TagString: Untagged
+  m_TagString: CentraleNucleaire
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

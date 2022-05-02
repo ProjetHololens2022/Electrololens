@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4672878061763059724}
   - component: {fileID: 2304062281537324235}
   - component: {fileID: 8836113929324880951}
+  - component: {fileID: 210025371017943051}
   m_Layer: 0
   m_Name: UsineCharbonPrefabPanier
   m_TagString: Untagged
@@ -172,3 +173,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   autoConstraintSelection: 1
   selectedConstraints: []
+--- !u!114 &210025371017943051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2658830338614815400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a8ea3181925bd841855e3709dccf028, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabPanier: {fileID: 2658830338614815400}

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2738198524128372046}
   - component: {fileID: 2606559528435884722}
   - component: {fileID: 8649543896165464260}
+  - component: {fileID: 5067097271835881126}
   m_Layer: 0
   m_Name: CentraleNucleairePrefabPanier
   m_TagString: Untagged
@@ -134,7 +135,19 @@ MonoBehaviour:
       m_Calls: []
   onManipulationEnded:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5067097271835881126}
+        m_TargetAssemblyTypeName: CreateSiteProd, Assembly-CSharp
+        m_MethodName: UnholdPrefabPanier
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onHoverEntered:
     m_PersistentCalls:
       m_Calls: []
@@ -169,3 +182,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   autoConstraintSelection: 1
   selectedConstraints: []
+--- !u!114 &5067097271835881126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 506657874716124142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a8ea3181925bd841855e3709dccf028, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabPanier: {fileID: 506657874716124142}
