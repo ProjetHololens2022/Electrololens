@@ -118,7 +118,7 @@ public class ConsommateurClass : MonoBehaviour
         switch (e)
         {
             case "Event1":
-                consommation += 20;
+                consommation += 20.0;
                 emissionCO2 += 20;
                 tauxDeSatisfaction += 10;
                 nbHabitants += 10;
@@ -128,7 +128,7 @@ public class ConsommateurClass : MonoBehaviour
                 emissionCO2 -= 20;
                 break;
             case "Event3":
-                consommation += 10;
+                consommation += 10.0;
                 emissionCO2 += 10;
                 break;
             case "Event4":
