@@ -19,7 +19,7 @@ public class ProducteurClass : MonoBehaviour
 
     private string nom;
     private Type type;
-    private int production;
+    private double production;
     private int emissionCO2;
 
 
@@ -38,12 +38,12 @@ public class ProducteurClass : MonoBehaviour
         return type;
     }
 
-    public int getProduction()
+    public double getProduction()
     {
         return production;
     }
 
-    public void setProduction(int production)
+    public void setProduction(double production)
     {
         this.production = production;
     }
