@@ -21,7 +21,6 @@ public class InfoVille : MonoBehaviour
 
     void Start()
     {
-        Debug.LogWarning("start init infoville");
         progressConsoLoadingBar = progressConso.GetComponent<IProgressIndicator>();
         progressApportLoadingBar = progressApport.GetComponent<IProgressIndicator>();
         progressEmissionLoadingBar = progressEmission.GetComponent<IProgressIndicator>();
@@ -42,20 +41,18 @@ public class InfoVille : MonoBehaviour
         return progressEmissionLoadingBar;
     }
 
-    public async void updateLoadingBar(IProgressIndicator progressIndicator, float progress)
+    public async void updateLoadingBar(IProgressIndicator progressIndicator, double progress)
     {
         if (progressIndicator != null)
         {
-            Debug.Log("update : " + progressIndicator.State);
             await progressIndicator.AwaitTransitionAsync();
 
             if (progressIndicator.State != ProgressIndicatorState.Open 
                 && progressIndicator.State != ProgressIndicatorState.Opening)
             {
                 await progressIndicator.OpenAsync();
-                progressIndicator.Progress = progress;
+                progressIndicator.Progress = (float) progress;
             }
-            Debug.Log("after update : " + progressIndicator.State);
         }
     }
 
@@ -63,7 +60,6 @@ public class InfoVille : MonoBehaviour
     {
         if(progressIndicator != null)
         {
-            Debug.Log("before close : " + progressIndicator.State);
             await progressIndicator.AwaitTransitionAsync();
 
             if(progressIndicator.State != ProgressIndicatorState.Closed 
@@ -71,7 +67,6 @@ public class InfoVille : MonoBehaviour
             {
                 await progressIndicator.CloseAsync();
             }
-            Debug.Log("after close : " + progressIndicator.State);
         }
     }
 
