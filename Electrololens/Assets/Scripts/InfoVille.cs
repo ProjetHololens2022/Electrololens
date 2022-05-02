@@ -21,12 +21,12 @@ public class InfoVille : MonoBehaviour
 
     void Start()
     {
+        Debug.LogWarning("start init infoville");
         progressConsoLoadingBar = progressConso.GetComponent<IProgressIndicator>();
         progressApportLoadingBar = progressApport.GetComponent<IProgressIndicator>();
         progressEmissionLoadingBar = progressEmission.GetComponent<IProgressIndicator>();
     }
     
-    // Update is called once per frame
     public IProgressIndicator getProgressConsoLoadingBar()
     {
         return progressConsoLoadingBar;
@@ -42,17 +42,36 @@ public class InfoVille : MonoBehaviour
         return progressEmissionLoadingBar;
     }
 
-
-
     public async void updateLoadingBar(IProgressIndicator progressIndicator, float progress)
     {
         if (progressIndicator != null)
         {
+            Debug.Log("update : " + progressIndicator.State);
             await progressIndicator.AwaitTransitionAsync();
 
-            await progressIndicator.OpenAsync();
-            progressIndicator.Progress = progress;
-         
+            if (progressIndicator.State != ProgressIndicatorState.Open 
+                && progressIndicator.State != ProgressIndicatorState.Opening)
+            {
+                await progressIndicator.OpenAsync();
+                progressIndicator.Progress = progress;
+            }
+            Debug.Log("after update : " + progressIndicator.State);
+        }
+    }
+
+    public async void closeProgressAsync(IProgressIndicator progressIndicator)
+    {
+        if(progressIndicator != null)
+        {
+            Debug.Log("before close : " + progressIndicator.State);
+            await progressIndicator.AwaitTransitionAsync();
+
+            if(progressIndicator.State != ProgressIndicatorState.Closed 
+                && progressIndicator.State != ProgressIndicatorState.Closing)
+            {
+                await progressIndicator.CloseAsync();
+            }
+            Debug.Log("after close : " + progressIndicator.State);
         }
     }
 
