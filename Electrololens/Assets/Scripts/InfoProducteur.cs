@@ -4,26 +4,26 @@ using UnityEngine;
 using Microsoft.MixedReality.Toolkit.UI;
 using System.Threading.Tasks;
 
-public class InfoVille : MonoBehaviour
+public class InfoProducteur : MonoBehaviour
 {
     [SerializeField]
     private GameObject progressConso = null;
     [SerializeField]
-    private GameObject progressApport = null;
-    [SerializeField]
     private GameObject progressEmission = null;
+    [SerializeField]
+    private GameObject progressEtat = null;
 
     private IProgressIndicator progressConsoLoadingBar;
-    private IProgressIndicator progressApportLoadingBar;
     private IProgressIndicator progressEmissionLoadingBar;
-    // private int 
+    private IProgressIndicator progressEtatLoadingBar;
 
 
     void Start()
     {
+        Debug.LogWarning("start init infoProducteur");
         progressConsoLoadingBar = progressConso.GetComponent<IProgressIndicator>();
-        progressApportLoadingBar = progressApport.GetComponent<IProgressIndicator>();
         progressEmissionLoadingBar = progressEmission.GetComponent<IProgressIndicator>();
+        progressEtatLoadingBar = progressEtat.GetComponent<IProgressIndicator>();
     }
     
     public IProgressIndicator getProgressConsoLoadingBar()
@@ -31,20 +31,21 @@ public class InfoVille : MonoBehaviour
         return progressConsoLoadingBar;
     }
 
-    public IProgressIndicator getProgressApportLoadingBar()
-    {
-        return progressApportLoadingBar;
-    }
-
     public IProgressIndicator getProgressEmissionLoadingBar()
     {
         return progressEmissionLoadingBar;
+    }
+
+    public IProgressIndicator getProgressEtatLoadingBar()
+    {
+        return progressEtatLoadingBar;
     }
 
     public async void updateLoadingBar(IProgressIndicator progressIndicator, double progress)
     {
         if (progressIndicator != null)
         {
+            Debug.Log("update : " + progressIndicator.State);
             await progressIndicator.AwaitTransitionAsync();
 
             if (progressIndicator.State != ProgressIndicatorState.Open 
@@ -53,6 +54,7 @@ public class InfoVille : MonoBehaviour
                 await progressIndicator.OpenAsync();
                 progressIndicator.Progress = (float) progress;
             }
+            Debug.Log("after update : " + progressIndicator.State);
         }
     }
 
@@ -60,6 +62,7 @@ public class InfoVille : MonoBehaviour
     {
         if(progressIndicator != null)
         {
+            Debug.Log("before close : " + progressIndicator.State);
             await progressIndicator.AwaitTransitionAsync();
 
             if(progressIndicator.State != ProgressIndicatorState.Closed 
@@ -67,6 +70,7 @@ public class InfoVille : MonoBehaviour
             {
                 await progressIndicator.CloseAsync();
             }
+            Debug.Log("after close : " + progressIndicator.State);
         }
     }
 
