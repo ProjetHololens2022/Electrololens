@@ -15,4 +15,14 @@ public class ApplyEvent : MonoBehaviour
     {
         
     }
+
+    public void fireEvent()
+    {
+        GameObject[] cities = GameObject.FindGameObjectsWithTag("City");
+        print(cities.Length);
+        foreach (var city in cities)
+        {
+            city.SendMessage("ApplyEvent", "");
+        }
+    }
 }

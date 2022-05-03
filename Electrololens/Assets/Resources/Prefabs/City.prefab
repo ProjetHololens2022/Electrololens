@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 8390265860866573019}
   m_Layer: 0
   m_Name: City
-  m_TagString: City
+  m_TagString: Consumer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

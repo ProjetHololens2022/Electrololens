@@ -22,6 +22,7 @@ namespace Microsoft.MixedReality.Toolkit.Experimental.UI
         [SerializeField]
         [Tooltip("The object that is currently docked in this position (can be null).")]
         private NoRotationDockable dockedObject = null;
+        private bool sent = false;
 
         /// <summary>
         /// The object that is currently docked in this position (can be null).
@@ -60,6 +61,38 @@ namespace Microsoft.MixedReality.Toolkit.Experimental.UI
             // a RigidBody attached to it.
             var rigidBody = gameObject.EnsureComponent<Rigidbody>();
             rigidBody.isKinematic = true;
+        }
+
+        private void Update()
+        {
+            if(this.GetComponentInParent<NoRotationDock>().isVertical)
+            {
+                if(IsOccupied && !sent)
+                {
+                    if(dockedObject.GetComponent<EventDockable>().type.Equals(TypeAgent.CONSUMER))
+                    {
+                        GameObject[] consumer = GameObject.FindGameObjectsWithTag("Consumer");
+                        foreach (var cons in consumer)
+                        {
+                            cons.SendMessage("ApplyEvent", dockedObject.name);
+                        }
+                    }
+                    else
+                    {
+                        GameObject[] producers = GameObject.FindGameObjectsWithTag("Producer");
+                        foreach (var prod in producers)
+                        {
+                            prod.SendMessage("ApplyEvent", dockedObject.name);
+                        }
+                    }
+                    sent = true;
+                }
+
+                if(!IsOccupied)
+                {
+                    sent = false;
+                }
+            }
         }
 
         /// <summary>

@@ -52,7 +52,7 @@ GameObject:
   - component: {fileID: 5458059749727694628}
   m_Layer: 0
   m_Name: UsineCharbonPrefab
-  m_TagString: Untagged
+  m_TagString: Producer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -310,7 +310,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   infoProducteurGO: {fileID: 1428672648390811440}
-  caca: {fileID: 2673552605051517129, guid: 7490065cf5cd66146a1944e106eac24a, type: 3}
 --- !u!1001 &1655379619813323203
 PrefabInstance:
   m_ObjectHideFlags: 0

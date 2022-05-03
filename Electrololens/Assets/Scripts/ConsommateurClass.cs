@@ -115,7 +115,7 @@ public class ConsommateurClass : MonoBehaviour
 
     public void ApplyEvent(string e)
     {
-        switch (e)
+/*        switch (e)
         {
             case "Event1":
                 consommation += 20.0;
@@ -136,6 +136,10 @@ public class ConsommateurClass : MonoBehaviour
                 nbHabitants += 5;
                 break;
         }
+        */
+
+        Debug.Log(e);
+
     }
 
 }

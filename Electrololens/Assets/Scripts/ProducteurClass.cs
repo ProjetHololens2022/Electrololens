@@ -97,4 +97,9 @@ public class ProducteurClass : MonoBehaviour
     }
 
 
+    public void ApplyEvent(string e)
+    {
+        Debug.Log(e);
+    }
+
 }
