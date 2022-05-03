@@ -6,10 +6,6 @@ TagManager:
   tags:
   - Plateforme
   - City
-  - CentraleNucleaire
-  - Eolienne
-  - PanneauSolaire
-  - UsineCharbon
   layers:
   - Default
   - TransparentFX
