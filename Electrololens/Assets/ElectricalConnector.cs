@@ -15,4 +15,8 @@ public class ElectricalConnector : MonoBehaviour
     {
         
     }
+
+    public void OnDrag(){
+        Debug.Log("dragged");
+    }
 }
