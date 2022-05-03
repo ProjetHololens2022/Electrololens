@@ -23,7 +23,7 @@ public class CreateSiteProd : MonoBehaviour
         GameObject go = (GameObject)Instantiate(prefabPanier, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
         go.transform.parent = prefabPanier.transform.parent;
         go.transform.localPosition = coordBase;
-        Vector3 scale = platform.transform.GetChild(0).localScale;
+        Vector3 scale = prefabPanier.transform.localScale;
         go.transform.localScale = scale;
     }
 
