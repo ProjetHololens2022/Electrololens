@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7751722777723509174}
   - component: {fileID: 4034901521610738399}
   - component: {fileID: 5969955025946944098}
+  - component: {fileID: 7575425309466249504}
   m_Layer: 0
   m_Name: ConnectToolRed
   m_TagString: Untagged
@@ -104,6 +105,20 @@ MonoBehaviour:
   onHoverExited:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7575425309466249504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8793720965879785199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5afd5316c63705643b3daba5a6e923bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTetherWhenManipulating: 0
+  IsBoundsHandles: 0
 --- !u!1001 &7424732492632285623
 PrefabInstance:
   m_ObjectHideFlags: 0

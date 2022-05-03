@@ -223,7 +223,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   platform: {fileID: 2591894381661478341}
-  panier: {fileID: 0}
+  panier: {fileID: 1252712825984936051}
+  tools: {fileID: 6790760796018879828}
 --- !u!1 &2591894381661478341
 GameObject:
   m_ObjectHideFlags: 0
@@ -522,6 +523,11 @@ PrefabInstance:
 --- !u!4 &4442767002094820112 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3954122751959791633, guid: 0eb1f66b026cc834f936256304ca2af7, type: 3}
+  m_PrefabInstance: {fileID: 826477317817246465}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1252712825984936051 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1881021472999361394, guid: 0eb1f66b026cc834f936256304ca2af7, type: 3}
   m_PrefabInstance: {fileID: 826477317817246465}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1545057423076566685
