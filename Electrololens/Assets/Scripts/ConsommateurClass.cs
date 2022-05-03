@@ -8,9 +8,9 @@ public class ConsommateurClass : MonoBehaviour
 {
     private string nom;
     private double consommation;
-    private int apportElectricite;
-    private int emissionCO2;
-    private int tauxDeSatisfaction;
+    private double apportElectricite;
+    private double emissionCO2;
+    private double tauxDeSatisfaction;
     private int nbHabitants;
 
 
@@ -34,12 +34,12 @@ public class ConsommateurClass : MonoBehaviour
         this.consommation = consommation;
     }
 
-    public int getTauxDeSatisfaction()
+    public double getTauxDeSatisfaction()
     {
         return tauxDeSatisfaction;
     }
 
-    public void setTauxDeSatisfaction(int tauxDeSatisfaction)
+    public void setTauxDeSatisfaction(double tauxDeSatisfaction)
     {
         this.tauxDeSatisfaction = tauxDeSatisfaction;
     }
@@ -61,13 +61,14 @@ public class ConsommateurClass : MonoBehaviour
        
         infoVille = infoVilleGO.GetComponent<InfoVille>();
         randomizedCityData();
+        updateProgessValues();
     }
 
     void randomizedCityData()
     {
-        double randomConsommation = Random.value * 100.0;
-        int randomApportElectriciten = Random.Range(0, 100);
-        int randomEmissionCO2 = Random.Range(0, 100);
+        double randomConsommation = Random.Range(0, 100);
+        double randomApportElectriciten = Random.Range(0, 100);
+        double randomEmissionCO2 = Random.Range(0, 100);
 
         consommation = randomConsommation;
         apportElectricite = randomApportElectriciten;
@@ -81,9 +82,9 @@ public class ConsommateurClass : MonoBehaviour
                 && infoVille.getProgressConsoLoadingBar() != null
                     && infoVille.getProgressConsoLoadingBar() != null)
         {
-            infoVille.updateLoadingBar(infoVille.getProgressConsoLoadingBar(), (float)consommation / 100);
-            infoVille.updateLoadingBar(infoVille.getProgressApportLoadingBar(), (float)apportElectricite / 100);
-            infoVille.updateLoadingBar(infoVille.getProgressEmissionLoadingBar(), (float)emissionCO2 / 100);
+            infoVille.updateLoadingBar(infoVille.getProgressConsoLoadingBar(), consommation / 100);
+            infoVille.updateLoadingBar(infoVille.getProgressApportLoadingBar(), apportElectricite / 100);
+            infoVille.updateLoadingBar(infoVille.getProgressEmissionLoadingBar(), emissionCO2 / 100);
         }
     }
 

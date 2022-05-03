@@ -7,21 +7,29 @@ public class GameArea : MonoBehaviour
 
     [SerializeField]
     private GameObject platform;
+    [SerializeField]
+    private GameObject panier;
 
     void Start(){
         platform.SetActive(false);
+        panier.SetActive(false);
     }
 
     public void LockPlace(){
         gameObject.GetComponent<Microsoft.MixedReality.Toolkit.UI.ObjectManipulator>().enabled = false;
         gameObject.GetComponent<BoxCollider>().enabled = false;
         platform.SetActive(true);
+        panier.SetActive(true);
         for(int i = 0; i < platform.transform.childCount; ++i){
-            StartCoroutine(popPuns(platform.transform.GetChild(i)));
+            StartCoroutine(popPunsPlatform(platform.transform.GetChild(i)));
+        }
+        for (int i = 0; i < panier.transform.childCount; ++i)
+        {
+            StartCoroutine(popPunsPanier(panier.transform.GetChild(i)));
         }
     }
 
-    IEnumerator popPuns(Transform child){
+    IEnumerator popPunsPlatform(Transform child){
         float scale = 0.0f;
         float time = 0.5f;
         float rotation = 0.0f;
@@ -34,6 +42,30 @@ public class GameArea : MonoBehaviour
             rotation += (360.0f/time) * Time.deltaTime;
             Mathf.Clamp(scale,0.0f,1.0f);
             Mathf.Clamp(rotation,0.0f,360.0f);
+        }
+    }
+
+    IEnumerator popPunsPanier(Transform child)
+    {
+        float scalex = 0.0f;
+        float scaley = 0.0f;
+        float scalez = 0.0f;
+        float time = 0.5f;
+        float rotation = 0.0f;
+        float baseAngle = child.eulerAngles.y;
+        while (scalex < 0.16675f && scaley < 0.4 && scalez < 0.25)
+        {
+            child.localScale = new Vector3(scalex, scaley, scalez);
+            child.rotation = Quaternion.Euler(0, rotation + baseAngle, 0);
+            yield return 0;
+            scalex += (0.16675f / time) * Time.deltaTime;
+            scaley += (0.4f / time) * Time.deltaTime;
+            scalez += (0.25f / time) * Time.deltaTime;
+            rotation += (360.0f / time) * Time.deltaTime;
+            Mathf.Clamp(scalex, 0.0f, 0.16675f);
+            Mathf.Clamp(scaley, 0.0f, 0.4f);
+            Mathf.Clamp(scalez, 0.0f, 0.25f);
+            Mathf.Clamp(rotation, 0.0f, 360.0f);
         }
     }
 }
