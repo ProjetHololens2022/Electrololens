@@ -39,7 +39,7 @@ namespace Microsoft.MixedReality.Toolkit.Experimental.UI
         /// </summary>
         public bool IsOccupied => dockedObject != null;
 
-        public NoRotationDockable triggeredEvent = new NoRotationDockable();
+        public NoRotationDockable triggeredEvent;
 
         /// <summary>
         /// Ensure this object has a triggering collider, and ensure that

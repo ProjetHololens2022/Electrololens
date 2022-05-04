@@ -155,11 +155,34 @@ public class ProducteurClass : MonoBehaviour
     {
         TypeEvent te = e.GetComponent<EventDockable>().typeEvent;
 
+        
         switch (te)
         {
             case TypeEvent.CENTRALEHS:
                 production -= 15;
                 emissionCO2 += 5;
+                break;
+            case TypeEvent.PENURIEURANIUM:
+                production = 0;
+                etat -= 25;
+                emissionCO2 = 0;
+                break;
+            case TypeEvent.PENURIECHARBON:
+                production -= 15;
+                emissionCO2 = 0;
+                break;
+            case TypeEvent.PENURIESOLEIL:
+                production -= 50;
+                break;
+            case TypeEvent.PENURIEVENT:
+                production -= 50;
+                emissionCO2 = 0;
+                etat -= 10;
+                break;
+            case TypeEvent.CANICULE:
+                production -= 45;
+                emissionCO2 = 0;
+                etat -= 20;
                 break;
         }
     }
