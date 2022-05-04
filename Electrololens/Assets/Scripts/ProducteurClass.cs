@@ -107,7 +107,6 @@ public class ProducteurClass : MonoBehaviour
                 && infoProducteur.getProgressConsoLoadingBar() != null
                     && infoProducteur.getProgressEmissionLoadingBar() != null)
         {
-            Debug.Log("UpdateBar");
             infoProducteur.updateLoadingBar(infoProducteur.getProgressConsoLoadingBar(), production / 100.0);
             infoProducteur.updateLoadingBar(infoProducteur.getProgressEtatLoadingBar(), etat / 100.0);
             infoProducteur.updateLoadingBar(infoProducteur.getProgressEmissionLoadingBar(), emissionCO2 / 100.0);
@@ -143,7 +142,7 @@ public class ProducteurClass : MonoBehaviour
 
     public void ApplyEvent(string e)
     {
-        Debug.Log("Producteur : " + e);
+        // Debug.Log("Producteur : " + e);
     }
 
 }

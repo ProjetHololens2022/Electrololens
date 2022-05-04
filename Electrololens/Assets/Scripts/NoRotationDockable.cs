@@ -218,7 +218,7 @@ namespace Microsoft.MixedReality.Toolkit.Experimental.UI
                 return;
             }
 
-            Debug.Log($"Docking object {gameObject.name} on position {position.gameObject.name}");
+            // Debug.Log($"Docking object {gameObject.name} on position {position.gameObject.name}");
 
             dockedPosition = position;
             dockedPosition.DockedObject = this;
@@ -245,7 +245,7 @@ namespace Microsoft.MixedReality.Toolkit.Experimental.UI
                 return;
             }
 
-            Debug.Log($"Undocking object {gameObject.name} from position {dockedPosition.gameObject.name}");
+            // Debug.Log($"Undocking object {gameObject.name} from position {dockedPosition.gameObject.name}");
 
             dockedPosition.DockedObject = null;
             dockedPosition = null;

@@ -44,7 +44,6 @@ public class InfoProducteur : MonoBehaviour
     {
         if (progressIndicator != null)
         {
-            Debug.Log("update : " + progressIndicator.State);
             await progressIndicator.AwaitTransitionAsync();
 
             if (progressIndicator.State != ProgressIndicatorState.Open 
@@ -53,7 +52,6 @@ public class InfoProducteur : MonoBehaviour
                 await progressIndicator.OpenAsync();
                 progressIndicator.Progress = (float) progress;
             }
-            Debug.Log("after update : " + progressIndicator.State);
         }
     }
 
@@ -61,7 +59,6 @@ public class InfoProducteur : MonoBehaviour
     {
         if(progressIndicator != null)
         {
-            Debug.Log("before close : " + progressIndicator.State);
             await progressIndicator.AwaitTransitionAsync();
 
             if(progressIndicator.State != ProgressIndicatorState.Closed 
@@ -69,7 +66,6 @@ public class InfoProducteur : MonoBehaviour
             {
                 await progressIndicator.CloseAsync();
             }
-            Debug.Log("after close : " + progressIndicator.State);
         }
     }
 
