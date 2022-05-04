@@ -43,10 +43,15 @@ public class ElectricalConnector : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        GameObject go = other.gameObject;
         GameObject otherGo = otherConnector.GetComponent<ElectricalConnector>().GetConnectedObject();
+        print(go.name);
+        if(go.name == "Sphere"){
+            go = go.transform.parent.gameObject;
+        }
         typeObject otherType = otherConnector.GetComponent<ElectricalConnector>().GetTypeObject();
-        if(other.gameObject.GetComponent<ElectricalNetwork>() != null){
-            this.goConnected = other.gameObject;
+        if(go.GetComponent<ElectricalNetwork>() != null){
+            this.goConnected = go;
             this.typeGo = typeObject.ElectricalCenter;
             if(otherGo != null){
                 goConnected.GetComponent<ElectricalNetwork>().addBuilding(otherGo);
@@ -54,8 +59,8 @@ public class ElectricalConnector : MonoBehaviour
                 //otherConnector.GetComponent<ElectricalConnector>().Replace();
             }
         }
-        if(other.gameObject.GetComponent<ConsommateurClass>() != null){
-            this.goConnected = other.gameObject;
+        if(go.GetComponent<ConsommateurClass>() != null){
+            this.goConnected = go;
             this.typeGo = typeObject.Consumer;
             if(otherGo != null){
                 if(otherType == typeObject.ElectricalCenter){
@@ -65,8 +70,8 @@ public class ElectricalConnector : MonoBehaviour
                 }
             }
         }
-        if(other.gameObject.GetComponent<ProducteurClass>() != null){
-            this.goConnected = other.gameObject;
+        if(go.GetComponent<ProducteurClass>() != null){
+            this.goConnected = go;
             this.typeGo = typeObject.Producer;
             if(otherGo != null){
                 if(otherType == typeObject.ElectricalCenter){
