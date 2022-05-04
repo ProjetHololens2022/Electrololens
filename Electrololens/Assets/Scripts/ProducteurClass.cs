@@ -55,9 +55,10 @@ public class ProducteurClass : MonoBehaviour
     {
         if(etat > 50){
             this.transform.Find("Sphere").GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0.0f,1.0f,0.0f,1.0f)*10.0f);
+            production = MaxProduction();
         } else if(etat <= 50 && etat > 20) {
             this.transform.Find("Sphere").GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0.742f,0.742f,0.0f,1.0f)*10.0f);
-            production = production/2.0;
+            production = MaxProduction()/2.0;
         } else if(etat <= 20) {
             this.transform.Find("Sphere").GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(1.0f,0.0f,0.0f,1.0f)*10.0f);
             production = 0.0;
@@ -81,6 +82,21 @@ public class ProducteurClass : MonoBehaviour
     public Type getType()
     {
         return type;
+    }
+
+    public double MaxProduction(){
+        switch (type)
+        {
+            case Type.Nucléaire:
+                return 150.0;
+            case Type.Eolien:
+                return 80.0;
+            case Type.Charbon:
+                return 100.0;
+            case Type.Solaire:
+                return 60.0;
+        }
+        return 0.0;
     }
 
     public double getProduction()
