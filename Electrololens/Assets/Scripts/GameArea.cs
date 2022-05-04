@@ -26,6 +26,11 @@ public class GameArea : MonoBehaviour
         tools.SetActive(true);
         for(int i = 0; i < platform.transform.childCount; ++i){
             StartCoroutine(popPunsPlatform(platform.transform.GetChild(i)));
+            if(platform.transform.GetChild(i).GetComponent<ProducteurClass>() != null)
+            {
+                platform.transform.GetChild(i).GetComponent<ProducteurClass>().startDegradation();
+            }
+            
         }
         for(int i = 0; i < tools.transform.childCount; ++i){
             StartCoroutine(popPunsPlatform(tools.transform.GetChild(i)));
