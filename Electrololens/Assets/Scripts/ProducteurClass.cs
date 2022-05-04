@@ -27,6 +27,16 @@ public class ProducteurClass : MonoBehaviour
     private GameObject infoProducteurGO;
     private InfoProducteur infoProducteur;
 
+    public void Start()
+    {
+        etat = 100;
+        production = 50;
+        emissionCO2 = 0;
+        infoProducteur = infoProducteurGO.GetComponent<InfoProducteur>();
+        updateProgessValues();
+        closeProgressBar();
+    }
+
     public string getNom()
     {
         return nom;
@@ -57,13 +67,47 @@ public class ProducteurClass : MonoBehaviour
         return emissionCO2;
     }
 
+    public void startDegradation()
+    {
+        StartCoroutine("degradationEtat");
+
+    }
+
+    IEnumerator degradationEtat()
+    {
+        while(true)
+        {
+            double randomDegrad = Random.Range(0, 10);
+            etat -= randomDegrad;
+            Debug.Log(etat);
+            if(etat <= 50)
+            {
+                //Attention, jaune, reduction de production
+            }
+            if(etat <= 20)
+            {
+                //Danger, arret du systéme 
+            }
+            yield return new WaitForSeconds(10);
+        }
+        
+    }
+
+    public void reparationEtat()
+    {
+
+    }
+
     public void updateProgessValues()
     {
+        Debug.Log(infoProducteur);
+        Debug.Log(infoProducteur.getProgressEtatLoadingBar());
         if (infoProducteur != null 
             && infoProducteur.getProgressEtatLoadingBar() != null
                 && infoProducteur.getProgressConsoLoadingBar() != null
-                    && infoProducteur.getProgressConsoLoadingBar() != null)
+                    && infoProducteur.getProgressEmissionLoadingBar() != null)
         {
+            Debug.Log("UpdateBar");
             infoProducteur.updateLoadingBar(infoProducteur.getProgressConsoLoadingBar(), production / 100.0);
             infoProducteur.updateLoadingBar(infoProducteur.getProgressEtatLoadingBar(), etat / 100.0);
             infoProducteur.updateLoadingBar(infoProducteur.getProgressEmissionLoadingBar(), emissionCO2 / 100.0);

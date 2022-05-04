@@ -20,7 +20,6 @@ public class InfoProducteur : MonoBehaviour
 
     void Start()
     {
-        Debug.LogWarning("start init infoProducteur");
         progressConsoLoadingBar = progressConso.GetComponent<IProgressIndicator>();
         progressEmissionLoadingBar = progressEmission.GetComponent<IProgressIndicator>();
         progressEtatLoadingBar = progressEtat.GetComponent<IProgressIndicator>();
