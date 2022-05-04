@@ -14,7 +14,6 @@ public class LineConnector : MonoBehaviour
     {
         gameObject.AddComponent<LineRenderer>();
         lr = gameObject.GetComponent<LineRenderer>();
-        lr.widthMultiplier = 0.002f;
         lr.alignment = LineAlignment.View;
         lr.loop = false;
     }

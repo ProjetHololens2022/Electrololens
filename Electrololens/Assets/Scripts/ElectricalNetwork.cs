@@ -27,8 +27,8 @@ public class ElectricalNetwork : MonoBehaviour
                 print("ajout d'un consommateur.");
                 GameObject line = Instantiate(linePrefab, new Vector3(0.0f,0.0f,0.0f), Quaternion.identity);
                 line.transform.parent = this.transform;
-                line.GetComponent<LineConnector>().SetStart(go.transform.Find("Sphere"));
-                line.GetComponent<LineConnector>().SetEnd(this.transform.Find("Sphere"));
+                line.GetComponent<LineConnector>().SetStart(this.transform.Find("Sphere"));
+                line.GetComponent<LineConnector>().SetEnd(go.transform.Find("Sphere"));
             }
         }
     }
