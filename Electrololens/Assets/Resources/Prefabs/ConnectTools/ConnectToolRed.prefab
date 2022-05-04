@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 4034901521610738399}
   - component: {fileID: 5969955025946944098}
   - component: {fileID: 7575425309466249504}
+  - component: {fileID: 1731675812019469755}
+  - component: {fileID: 2277506019651545487}
   m_Layer: 0
   m_Name: ConnectToolRed
   m_TagString: Untagged
@@ -43,7 +45,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8793720965879785199}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.1180241, y: 1.0273986, z: 5.6105137}
@@ -119,6 +121,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTetherWhenManipulating: 0
   IsBoundsHandles: 0
+--- !u!114 &1731675812019469755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8793720965879785199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2b36e0886e73e34591529cacbabe15c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  otherConnector: {fileID: 0}
+--- !u!54 &2277506019651545487
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8793720965879785199}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &7424732492632285623
 PrefabInstance:
   m_ObjectHideFlags: 0
