@@ -21,7 +21,7 @@ public class ProducteurClass : MonoBehaviour
     private Type type;
     private double production;
     private double emissionCO2;
-    private double etat; 
+    private double etat;
 
     [SerializeField]
     private GameObject infoProducteurGO;
@@ -95,7 +95,19 @@ public class ProducteurClass : MonoBehaviour
 
     public void reparationEtat()
     {
-
+        etat += 10;
+        if(etat > 100)
+        {
+            etat = 100;
+        }
+        if (etat > 50)
+        {
+            //Tout redevient vert, tout est ok
+        }
+        if (etat > 20 && etat <= 50)
+        {
+            //Attention, jaune, reduction de production
+        }
     }
 
     public void updateProgessValues()
