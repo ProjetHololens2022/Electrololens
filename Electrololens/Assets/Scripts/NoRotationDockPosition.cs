@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace Microsoft.MixedReality.Toolkit.Experimental.UI
 {
@@ -37,6 +38,8 @@ namespace Microsoft.MixedReality.Toolkit.Experimental.UI
         /// True if this position is occupied, false otherwise.
         /// </summary>
         public bool IsOccupied => dockedObject != null;
+
+        public NoRotationDockable triggeredEvent = new NoRotationDockable();
 
         /// <summary>
         /// Ensure this object has a triggering collider, and ensure that
@@ -85,12 +88,34 @@ namespace Microsoft.MixedReality.Toolkit.Experimental.UI
                             prod.SendMessage("ApplyEvent", dockedObject.name);
                         }
                     }
+                    triggeredEvent = dockedObject;
                     sent = true;
                 }
 
                 if(!IsOccupied)
                 {
                     sent = false;
+
+                    if(triggeredEvent != null)
+                    {
+                        if (triggeredEvent.GetComponent<EventDockable>().type.Equals(TypeAgent.CONSUMER))
+                        {
+                            GameObject[] consumer = GameObject.FindGameObjectsWithTag("Consumer");
+                            foreach (var cons in consumer)
+                            {
+                                cons.SendMessage("RemoveEvent", triggeredEvent.name);
+                            }
+                        }
+                        else
+                        {
+                            GameObject[] producers = GameObject.FindGameObjectsWithTag("Producer");
+                            foreach (var prod in producers)
+                            {
+                                prod.SendMessage("RemoveEvent", triggeredEvent.name);
+                            }
+                        }
+                        triggeredEvent = null;
+                    }
                 }
             }
         }
