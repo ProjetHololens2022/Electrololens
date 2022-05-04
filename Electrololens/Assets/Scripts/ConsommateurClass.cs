@@ -7,12 +7,14 @@ using Microsoft.MixedReality.Toolkit.Experimental.UI;
 public class ConsommateurClass : MonoBehaviour
 {
     private string nom;
-    private double consommation;
-    private double apportElectricite;
+    private double consommation; //Besoin
+    private double apportElectricite; //Reçu
     private double emissionCO2;
     private double tauxDeSatisfaction;
     private int nbHabitants;
 
+    public bool isConnected = false;
+    public GameObject electricalNetwork = null;
 
 
     [SerializeField]
@@ -32,6 +34,14 @@ public class ConsommateurClass : MonoBehaviour
     public void setConsommation(double consommation)
     {
         this.consommation = consommation;
+    }
+
+    public double GetApportElectricite(){
+        return apportElectricite;
+    }
+
+    public void SetApportElectricite(double apportElectricite){
+        this.apportElectricite = apportElectricite;
     }
 
     public double getTauxDeSatisfaction()
@@ -62,6 +72,15 @@ public class ConsommateurClass : MonoBehaviour
         infoVille = infoVilleGO.GetComponent<InfoVille>();
         randomizedCityData();
         updateProgessValues();
+    }
+
+    void Update()
+    {
+        if(!isConnected || apportElectricite < consommation){
+            this.transform.Find("Sphere").GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(1.0f,0.0f,0.0f,1.0f)*10.0f);
+        } else {
+            this.transform.Find("Sphere").GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0.0f,1.0f,0.0f,1.0f)*10.0f);
+        }
     }
 
     void randomizedCityData()

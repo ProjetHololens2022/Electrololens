@@ -24,6 +24,9 @@ public class ProducteurClass : MonoBehaviour
     private double emissionCO2;
     private double etat;
 
+    public bool isConnected;
+    public GameObject electricalNetwork;
+
     [SerializeField]
     private GameObject infoProducteurGO;
     private InfoProducteur infoProducteur;
@@ -37,7 +40,7 @@ public class ProducteurClass : MonoBehaviour
     public void Start()
     {
         etat = 100;
-        production = 1;
+        production = 75;
         emissionCO2 = 0;
         beforeetat = etat;
         beforeprod = production;
@@ -46,6 +49,23 @@ public class ProducteurClass : MonoBehaviour
         infoProducteur = infoProducteurGO.GetComponent<InfoProducteur>();
         updateProgessValues();
         closeProgressBar();
+    }
+
+    void Update()
+    {
+        if(etat > 50){
+            this.transform.Find("Sphere").GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0.0f,1.0f,0.0f,1.0f)*10.0f);
+        } else if(etat <= 50 && etat > 20) {
+            this.transform.Find("Sphere").GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0.742f,0.742f,0.0f,1.0f)*10.0f);
+            production = production/2.0;
+        } else if(etat <= 20) {
+            this.transform.Find("Sphere").GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(1.0f,0.0f,0.0f,1.0f)*10.0f);
+            production = 0.0;
+        }
+
+        if(!isConnected){
+            this.transform.Find("Sphere").GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0.5f,0.5f,0.5f,1.0f)*10.0f);
+        }
     }
 
     public string getNom()
@@ -91,14 +111,6 @@ public class ProducteurClass : MonoBehaviour
             double randomDegrad = Random.Range(0, 10);
             etat -= randomDegrad;
             calculPollution();
-            if (etat <= 50)
-            {
-                //Attention, jaune, reduction de production
-            }
-            if (etat <= 20)
-            {
-                //Danger, arret du systéme 
-            }
             yield return new WaitForSeconds(10);
         }
     }
@@ -116,14 +128,6 @@ public class ProducteurClass : MonoBehaviour
             etat = 100;
         }
         calculPollution();
-        if (etat > 50)
-        {
-            //Tout redevient vert, tout est ok
-        }
-        if (etat > 20 && etat <= 50)
-        {
-            //Attention, jaune, reduction de production
-        }
     }
 
     public void calculPollution()

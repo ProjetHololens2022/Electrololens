@@ -61,10 +61,10 @@ Shader "Unlit/Wire"
                 if(modulo < 0.0){
                     modulo += 0.2;
                 }
-                if(modulo < 0.1){
-                    col = half4(0.925,0.957,0.25,1.0);
+                if(modulo < 0.125){
+                    col = half4(0.0,1.0,1.0,1.0);
                 } else {
-                    col = half4(0.957,0.652,0.199,1.0);
+                    col = half4(0.01,0.645,1.0,1.0);
                 }
                 return col;
             }

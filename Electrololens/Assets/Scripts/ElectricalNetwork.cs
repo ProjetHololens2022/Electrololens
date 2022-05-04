@@ -10,6 +10,27 @@ public class ElectricalNetwork : MonoBehaviour
     [SerializeField]
     private GameObject linePrefab;
 
+    void Start()
+    {
+        this.transform.Find("Sphere").GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0.0f,0.586f,0.742f,1.0f)*10.0f);
+    }
+
+    void Update()
+    {
+        double apport = getProduction();
+        consumers.Sort((c1,c2)=>c1.GetComponent<ConsommateurClass>().getNbHabitants().CompareTo(c2.GetComponent<ConsommateurClass>().getNbHabitants()));
+        for(int i = 0; i < consumers.Count; ++i){
+            ConsommateurClass cons = consumers[i].GetComponent<ConsommateurClass>();
+            if(cons.getConsommation() <= apport){
+                cons.SetApportElectricite(cons.getConsommation());
+                apport -= cons.getConsommation();
+            } else {
+                cons.SetApportElectricite(apport);
+                apport = 0.0;
+            }
+        }
+    }
+
     public void addBuilding(GameObject go){
         if(go.GetComponent<ProducteurClass>() != null){
             if(!producers.Contains(go)){
@@ -19,6 +40,8 @@ public class ElectricalNetwork : MonoBehaviour
                 line.transform.parent = this.transform;
                 line.GetComponent<LineConnector>().SetStart(go.transform.Find("Sphere"));
                 line.GetComponent<LineConnector>().SetEnd(this.transform.Find("Sphere"));
+                go.GetComponent<ProducteurClass>().electricalNetwork = this.gameObject;
+                go.GetComponent<ProducteurClass>().isConnected = true;
             }
         }
         if(go.GetComponent<ConsommateurClass>() != null){
@@ -29,6 +52,8 @@ public class ElectricalNetwork : MonoBehaviour
                 line.transform.parent = this.transform;
                 line.GetComponent<LineConnector>().SetStart(this.transform.Find("Sphere"));
                 line.GetComponent<LineConnector>().SetEnd(go.transform.Find("Sphere"));
+                go.GetComponent<ConsommateurClass>().electricalNetwork = this.gameObject;
+                go.GetComponent<ConsommateurClass>().isConnected = true;
             }
         }
     }
