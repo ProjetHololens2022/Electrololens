@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Microsoft.MixedReality.Toolkit.UI;
-
+using Microsoft.MixedReality.Toolkit.Experimental.UI;
 
 public enum Type
 {
@@ -18,6 +18,7 @@ public class ProducteurClass : MonoBehaviour
 
 
     private string nom;
+    [SerializeField]
     private Type type;
     private double production;
     private double emissionCO2;
@@ -27,10 +28,12 @@ public class ProducteurClass : MonoBehaviour
     private GameObject infoProducteurGO;
     private InfoProducteur infoProducteur;
 
+    private double pollution = 0;
+
     public void Start()
     {
         etat = 100;
-        production = 50;
+        production = 1;
         emissionCO2 = 0;
         infoProducteur = infoProducteurGO.GetComponent<InfoProducteur>();
         updateProgessValues();
@@ -79,7 +82,7 @@ public class ProducteurClass : MonoBehaviour
         {
             double randomDegrad = Random.Range(0, 10);
             etat -= randomDegrad;
-            Debug.Log(etat);
+            calculPollution();
             if(etat <= 50)
             {
                 //Attention, jaune, reduction de production
@@ -90,7 +93,6 @@ public class ProducteurClass : MonoBehaviour
             }
             yield return new WaitForSeconds(10);
         }
-        
     }
 
     public void OnSliderUpdated(SliderEventData eventData)
@@ -105,6 +107,7 @@ public class ProducteurClass : MonoBehaviour
         {
             etat = 100;
         }
+        calculPollution();
         if (etat > 50)
         {
             //Tout redevient vert, tout est ok
@@ -115,10 +118,71 @@ public class ProducteurClass : MonoBehaviour
         }
     }
 
+    public void calculPollution()
+    {
+        Type typeProd = type;
+        switch (typeProd)
+        {
+            case Type.Nucléaire:
+                if (etat != 100)
+                {
+                    pollution = ((100 - etat) * 12) + 12;
+
+                }
+                else
+                {
+                    pollution = 12;
+                }
+                break;
+            case Type.Eolien:
+                if (etat != 100)
+                {
+                    pollution = ((100 - etat) * 11) + 11;
+
+                }
+                else
+                {
+                    pollution = 11;
+                }
+                break;
+            case Type.Charbon:
+                if (etat != 100)
+                {
+                    pollution = ((100 - etat) * 852) + 852;
+
+                }
+                else
+                {
+                    pollution = 852;
+                }
+                break;
+            case Type.Solaire:
+                if (etat != 100)
+                {
+                    pollution = ((100 - etat) * 44) + 44;
+
+                }
+                else
+                {
+                    pollution = 44;
+                }
+                break;
+        }
+    }
+
+    public void setProduction()
+    {
+
+        Debug.Log("Hello");
+        Debug.Log(production);
+        Debug.Log(pollution);
+        emissionCO2 = (production/100) * pollution;
+        // Regler la production
+    }
+
     public void updateProgessValues()
     {
-        Debug.Log(infoProducteur);
-        Debug.Log(infoProducteur.getProgressEtatLoadingBar());
+        setProduction();
         if (infoProducteur != null 
             && infoProducteur.getProgressEtatLoadingBar() != null
                 && infoProducteur.getProgressConsoLoadingBar() != null
@@ -156,10 +220,30 @@ public class ProducteurClass : MonoBehaviour
         closeProgressBar();
     }
 
-
-    public void ApplyEvent(string e)
+    public void ApplyEvent(NoRotationDockable e)
     {
-        // Debug.Log("Producteur : " + e);
+        TypeEvent te = e.GetComponent<EventDockable>().typeEvent;
+
+        switch (te)
+        {
+            case TypeEvent.CENTRALEHS:
+                production -= 15;
+                emissionCO2 += 5;
+                break;
+        }
+    }
+
+    public void RemoveEvent(NoRotationDockable e)
+    {
+        TypeEvent te = e.GetComponent<EventDockable>().typeEvent;
+
+        switch (te)
+        {
+            case TypeEvent.CENTRALEHS:
+                production += 15;
+                emissionCO2 -= 5;
+                break;
+        }
     }
 
 }
