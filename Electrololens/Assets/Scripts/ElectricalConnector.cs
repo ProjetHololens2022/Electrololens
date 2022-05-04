@@ -20,12 +20,25 @@ public class ElectricalConnector : MonoBehaviour
 
     private typeObject typeGo = typeObject.None;
 
+    private Vector3 startPos;
+    private Quaternion startRotation;
+
+    void Start(){
+        startPos = this.transform.position;
+        startRotation = this.transform.rotation;
+    }
+
     public GameObject GetConnectedObject(){
         return goConnected;
     }
 
     public typeObject GetTypeObject(){
         return typeGo;
+    }
+
+    public void Replace(){
+        this.transform.position = startPos;
+        this.transform.rotation = startRotation;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -37,6 +50,8 @@ public class ElectricalConnector : MonoBehaviour
             this.typeGo = typeObject.ElectricalCenter;
             if(otherGo != null){
                 goConnected.GetComponent<ElectricalNetwork>().addBuilding(otherGo);
+                //Replace();
+                //otherConnector.GetComponent<ElectricalConnector>().Replace();
             }
         }
         if(other.gameObject.GetComponent<ConsommateurClass>() != null){
@@ -45,6 +60,8 @@ public class ElectricalConnector : MonoBehaviour
             if(otherGo != null){
                 if(otherType == typeObject.ElectricalCenter){
                     otherGo.GetComponent<ElectricalNetwork>().addBuilding(goConnected);
+                    //Replace();
+                    //otherConnector.GetComponent<ElectricalConnector>().Replace();
                 }
             }
         }
@@ -54,6 +71,8 @@ public class ElectricalConnector : MonoBehaviour
             if(otherGo != null){
                 if(otherType == typeObject.ElectricalCenter){
                     otherGo.GetComponent<ElectricalNetwork>().addBuilding(goConnected);
+                    //Replace();
+                    //otherConnector.GetComponent<ElectricalConnector>().Replace();
                 }
             }
         }

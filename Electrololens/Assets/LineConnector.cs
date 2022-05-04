@@ -29,7 +29,6 @@ public class LineConnector : MonoBehaviour
         lr.positionCount = 10;
         Vector3[] positions = new Vector3[10];
         for(int i = 0; i < 10; ++i){
-            Debug.Log(i);
             float t = ((float) i) / 9.0f;
             Vector3 lerp12 = Vector3.Lerp(pos1,pos2,t);
             Vector3 lerp23 = Vector3.Lerp(pos2,pos3,t);
