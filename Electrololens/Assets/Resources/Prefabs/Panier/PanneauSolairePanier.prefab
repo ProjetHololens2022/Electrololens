@@ -253,4 +253,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabPanier: {fileID: 7034057967842326162}
-  prefabPlatform: {fileID: 2658830338614815400, guid: 63ff3466eaadc014d82f49d6f3e97edb, type: 3}
+  prefabPlatform: {fileID: 2658830338614815400, guid: f8ed6fcb7d55ab8459b430a2609600dd, type: 3}
