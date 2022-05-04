@@ -115,9 +115,11 @@ public class ConsommateurClass : MonoBehaviour
 
     public void ApplyEvent(string e)
     {
-/*        switch (e)
+        Debug.Log("Consomateur : " + e);
+
+        switch (e)
         {
-            case "Event1":
+            case "CDMEvent":
                 consommation += 20.0;
                 emissionCO2 += 20;
                 tauxDeSatisfaction += 10;
@@ -136,9 +138,7 @@ public class ConsommateurClass : MonoBehaviour
                 nbHabitants += 5;
                 break;
         }
-        */
-
-        Debug.Log(e);
+        
 
     }
 
