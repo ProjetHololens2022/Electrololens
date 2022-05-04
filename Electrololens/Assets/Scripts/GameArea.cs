@@ -9,10 +9,13 @@ public class GameArea : MonoBehaviour
     private GameObject platform;
     [SerializeField]
     private GameObject panier;
+    [SerializeField]
+    private GameObject tools;
 
     void Start(){
         platform.SetActive(false);
         panier.SetActive(false);
+        tools.SetActive(false);
     }
 
     public void LockPlace(){
@@ -20,8 +23,12 @@ public class GameArea : MonoBehaviour
         gameObject.GetComponent<BoxCollider>().enabled = false;
         platform.SetActive(true);
         panier.SetActive(true);
+        tools.SetActive(true);
         for(int i = 0; i < platform.transform.childCount; ++i){
             StartCoroutine(popPunsPlatform(platform.transform.GetChild(i)));
+        }
+        for(int i = 0; i < tools.transform.childCount; ++i){
+            StartCoroutine(popPunsPlatform(tools.transform.GetChild(i)));
         }
         for (int i = 0; i < panier.transform.childCount; ++i)
         {
