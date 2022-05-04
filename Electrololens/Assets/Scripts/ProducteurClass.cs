@@ -30,11 +30,19 @@ public class ProducteurClass : MonoBehaviour
 
     private double pollution = 0;
 
+    private double beforeEmissionC02;
+    private double beforeetat;
+    private double beforeprod;
+
     public void Start()
     {
         etat = 100;
         production = 1;
         emissionCO2 = 0;
+        beforeetat = etat;
+        beforeprod = production;
+        beforeEmissionC02 = emissionCO2;
+
         infoProducteur = infoProducteurGO.GetComponent<InfoProducteur>();
         updateProgessValues();
         closeProgressBar();
@@ -78,16 +86,16 @@ public class ProducteurClass : MonoBehaviour
 
     IEnumerator degradationEtat()
     {
-        while(true)
+        while (true)
         {
             double randomDegrad = Random.Range(0, 10);
             etat -= randomDegrad;
             calculPollution();
-            if(etat <= 50)
+            if (etat <= 50)
             {
                 //Attention, jaune, reduction de production
             }
-            if(etat <= 20)
+            if (etat <= 20)
             {
                 //Danger, arret du systéme 
             }
@@ -98,7 +106,7 @@ public class ProducteurClass : MonoBehaviour
     public void reparationEtat()
     {
         etat += 10;
-        if(etat > 100)
+        if (etat > 100)
         {
             etat = 100;
         }
@@ -171,14 +179,14 @@ public class ProducteurClass : MonoBehaviour
         Debug.Log("Hello");
         Debug.Log(production);
         Debug.Log(pollution);
-        emissionCO2 = (production/100) * pollution;
+        emissionCO2 = (production / 100) * pollution;
         // Regler la production
     }
 
     public void updateProgessValues()
     {
         setProduction();
-        if (infoProducteur != null 
+        if (infoProducteur != null
             && infoProducteur.getProgressEtatLoadingBar() != null
                 && infoProducteur.getProgressConsoLoadingBar() != null
                     && infoProducteur.getProgressEmissionLoadingBar() != null)
@@ -192,7 +200,7 @@ public class ProducteurClass : MonoBehaviour
 
     public void closeProgressBar()
     {
-        if (infoProducteur != null 
+        if (infoProducteur != null
             && infoProducteur.getProgressEtatLoadingBar() != null
                 && infoProducteur.getProgressConsoLoadingBar() != null
                     && infoProducteur.getProgressConsoLoadingBar() != null)
@@ -217,50 +225,113 @@ public class ProducteurClass : MonoBehaviour
 
     public void ApplyEvent(NoRotationDockable e)
     {
-        TypeEvent te = e.GetComponent<EventDockable>().typeEvent;
-
         
-        switch (te)
+        TypeEvent te = e.GetComponent<EventDockable>().typeEvent;
+        Debug.Log(te);
+
+        beforeEmissionC02 = emissionCO2;
+        beforeetat = etat;
+        beforeprod = production;
+
+        if (type == Type.Charbon)
         {
-            case TypeEvent.CENTRALEHS:
+            if (te == TypeEvent.PENURIECHARBON)
+            {
+                production -= 15;
+                emissionCO2 = 0;
+            }
+            if (te == TypeEvent.CENTRALEHS)
+            {
                 production -= 15;
                 emissionCO2 += 5;
-                break;
-            case TypeEvent.PENURIEURANIUM:
-                production = 0;
-                etat -= 25;
-                emissionCO2 = 0;
-                break;
-            case TypeEvent.PENURIECHARBON:
-                production -= 15;
-                emissionCO2 = 0;
-                break;
-            case TypeEvent.PENURIESOLEIL:
-                production -= 50;
-                break;
-            case TypeEvent.PENURIEVENT:
-                production -= 50;
-                emissionCO2 = 0;
-                etat -= 10;
-                break;
-            case TypeEvent.CANICULE:
-                production -= 45;
-                emissionCO2 = 0;
-                etat -= 20;
-                break;
+            }
+        }
+        
+        if (type == Type.Nucléaire)
+        {
+            if (te == TypeEvent.CENTRALEHS)
+            {
+                    production -= 15;
+                    emissionCO2 += 5;
+            }
+            if (te == TypeEvent.PENURIEURANIUM)
+            {
+                    production = 0;
+                    etat -= 25;
+                    emissionCO2 = 0;
+            }
+            if (te == TypeEvent.CANICULE)
+            {
+                    production -= 45;
+                    emissionCO2 = 0;
+                    etat -= 20;
+            }
+        }
+        if (type == Type.Solaire && te == TypeEvent.PENURIESOLEIL)
+        {
+            production -= 50;
+        }
+        if (type == Type.Eolien && te == TypeEvent.PENURIEVENT)
+        {
+            production -= 50;
+            emissionCO2 = 0;
+            etat -= 10;
+        }
+
+        if(te == TypeEvent.TDT)
+        {
+            etat -= 25;
         }
     }
+
 
     public void RemoveEvent(NoRotationDockable e)
     {
         TypeEvent te = e.GetComponent<EventDockable>().typeEvent;
 
-        switch (te)
+        if (type == Type.Charbon)
         {
-            case TypeEvent.CENTRALEHS:
+            if (te == TypeEvent.PENURIECHARBON)
+            {
+                production += 15;
+                emissionCO2 = beforeEmissionC02;
+            }
+            if (te == TypeEvent.CENTRALEHS)
+            {
+                production += 15;
+                    emissionCO2 -= 5;
+            }
+        }
+        if(type == Type.Nucléaire)
+        {
+            if (te == TypeEvent.CENTRALEHS)
+            {
                 production += 15;
                 emissionCO2 -= 5;
-                break;
+            }
+            if (te == TypeEvent.PENURIEURANIUM)
+            {
+                production = beforeprod;
+                etat += 25;
+                emissionCO2 = 0;
+
+            }
+            if (te == TypeEvent.CANICULE)
+            {
+                production += 45;
+                emissionCO2 = beforeEmissionC02;
+                etat += 20;
+            }
+        }
+        if(type == Type.Solaire && te == TypeEvent.PENURIESOLEIL)
+        {
+            production += 50;
+        }
+        if(type == Type.Eolien && te == TypeEvent.PENURIEVENT)
+        {
+            production += 50;
+            emissionCO2 = beforeEmissionC02;
+            etat += 10;
         }
     }
 

@@ -104,8 +104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10876f33bb9d984489cb5f370252b824, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dockedObject: {fileID: 331958602348001447}
-  triggeredEvent: {fileID: 0}
+  dockedObject: {fileID: 331958603688545518}
 --- !u!1 &681654156954885328
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,8 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10876f33bb9d984489cb5f370252b824, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dockedObject: {fileID: 331958603233057874}
-  triggeredEvent: {fileID: 0}
+  dockedObject: {fileID: 331958602419599907}
 --- !u!1 &681654157222395677
 GameObject:
   m_ObjectHideFlags: 0
@@ -387,8 +385,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10876f33bb9d984489cb5f370252b824, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dockedObject: {fileID: 331958603190918865}
-  triggeredEvent: {fileID: 0}
+  dockedObject: {fileID: 331958603209320565}
 --- !u!1 &681654157776608755
 GameObject:
   m_ObjectHideFlags: 0
@@ -464,8 +461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10876f33bb9d984489cb5f370252b824, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dockedObject: {fileID: 331958603688545518}
-  triggeredEvent: {fileID: 0}
+  dockedObject: {fileID: 331958602348001447}
 --- !u!1 &681654158221081562
 GameObject:
   m_ObjectHideFlags: 0
@@ -542,7 +538,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dockedObject: {fileID: 6549515502739962616}
-  triggeredEvent: {fileID: 0}
 --- !u!1 &1012212015935445103
 GameObject:
   m_ObjectHideFlags: 0
@@ -804,8 +799,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10876f33bb9d984489cb5f370252b824, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dockedObject: {fileID: 331958602419599907}
-  triggeredEvent: {fileID: 0}
+  dockedObject: {fileID: 5573498915779452509}
 --- !u!1 &2175615490928657686
 GameObject:
   m_ObjectHideFlags: 0
@@ -991,8 +985,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10876f33bb9d984489cb5f370252b824, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dockedObject: {fileID: 331958603209320565}
-  triggeredEvent: {fileID: 0}
+  dockedObject: {fileID: 331958603190918865}
 --- !u!1 &3468825511360227877
 GameObject:
   m_ObjectHideFlags: 0
@@ -1428,7 +1421,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dockedObject: {fileID: 0}
-  triggeredEvent: {fileID: 0}
 --- !u!1 &3988535345531710898
 GameObject:
   m_ObjectHideFlags: 0
@@ -1505,7 +1497,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dockedObject: {fileID: 0}
-  triggeredEvent: {fileID: 0}
 --- !u!1 &3988535345892364619
 GameObject:
   m_ObjectHideFlags: 0
@@ -1675,21 +1666,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dockedObject: {fileID: 0}
-  triggeredEvent: {fileID: 0}
---- !u!114 &7416760164864054400
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4238614296494747035}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d0f438b1b428cf4d9c38bc463645eb9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 1
-  typeEvent: 4
 --- !u!114 &5573498915779452509
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1705,6 +1681,20 @@ MonoBehaviour:
   dockingState: 0
   moveLerpTime: 0.1
   moveLerpTimeWhenDocked: 0.05
+--- !u!114 &7416760164864054400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4238614296494747035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d0f438b1b428cf4d9c38bc463645eb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
+  typeEvent: 4
 --- !u!1 &4270846284798071134
 GameObject:
   m_ObjectHideFlags: 0
@@ -1781,7 +1771,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dockedObject: {fileID: 331958602857074080}
-  triggeredEvent: {fileID: 0}
 --- !u!1 &5080985914703941796
 GameObject:
   m_ObjectHideFlags: 0
@@ -3097,8 +3086,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10876f33bb9d984489cb5f370252b824, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dockedObject: {fileID: 331958602857074080}
-  triggeredEvent: {fileID: 0}
+  dockedObject: {fileID: 331958603233057874}
 --- !u!1001 &200889915463764013
 PrefabInstance:
   m_ObjectHideFlags: 0
