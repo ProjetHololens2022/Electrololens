@@ -19,7 +19,7 @@ public class LineConnector : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         Vector3 pos1 = start.position;
         Vector3 pos3 = end.position;
