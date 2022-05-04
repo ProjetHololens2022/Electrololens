@@ -45,4 +45,10 @@ public class ElectricalNetwork : MonoBehaviour
         return getProduction()/(double)consumers.Count;
     }
 
+
+    public void disconnect(GameObject other)
+    {
+        // Todo
+    }
+
 }
