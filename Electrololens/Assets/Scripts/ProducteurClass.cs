@@ -93,6 +93,11 @@ public class ProducteurClass : MonoBehaviour
         
     }
 
+    public void OnSliderUpdated(SliderEventData eventData)
+    {
+        print(eventData.NewValue);
+    }
+
     public void reparationEtat()
     {
         etat += 10;
