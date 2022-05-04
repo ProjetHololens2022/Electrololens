@@ -406,6 +406,34 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8171858518957429431, guid: 23e38153dd604ec41a9deb554f45f90f, type: 3}
+      propertyPath: OnValueUpdated.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8171858518957429431, guid: 23e38153dd604ec41a9deb554f45f90f, type: 3}
+      propertyPath: OnValueUpdated.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8171858518957429431, guid: 23e38153dd604ec41a9deb554f45f90f, type: 3}
+      propertyPath: OnValueUpdated.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5458059749727694628}
+    - target: {fileID: 8171858518957429431, guid: 23e38153dd604ec41a9deb554f45f90f, type: 3}
+      propertyPath: OnValueUpdated.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8171858518957429431, guid: 23e38153dd604ec41a9deb554f45f90f, type: 3}
+      propertyPath: OnValueUpdated.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnSliderUpdated
+      objectReference: {fileID: 0}
+    - target: {fileID: 8171858518957429431, guid: 23e38153dd604ec41a9deb554f45f90f, type: 3}
+      propertyPath: OnValueUpdated.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ProducteurClass, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8171858518957429431, guid: 23e38153dd604ec41a9deb554f45f90f, type: 3}
+      propertyPath: OnValueUpdated.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 23e38153dd604ec41a9deb554f45f90f, type: 3}
 --- !u!1 &1428672648390811440 stripped
