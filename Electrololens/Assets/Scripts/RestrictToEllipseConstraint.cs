@@ -25,7 +25,10 @@ public class RestrictToEllipseConstraint : TransformConstraint
         const float long_diameter = 0.28f;
         const float small_diameter = 0.18f;
         Vector3 localDir = transform.Position-ellipse.position; //Angle 0
+        Debug.Log(localDir);
         localDir = Quaternion.Euler(0, ellipse.eulerAngles.y, 0) * localDir; //Angle X
+        Debug.Log(localDir);
+        Debug.Log(ellipse.eulerAngles.y);
         float equation = Mathf.Pow(localDir.x,2.0f)/Mathf.Pow(long_diameter,2.0f) + Mathf.Pow(localDir.z,2.0f)/Mathf.Pow(small_diameter,2.0f);
         if(equation > 1.0f){
             localDir = Vector3.Normalize(localDir);
