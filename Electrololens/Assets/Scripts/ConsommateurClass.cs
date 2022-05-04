@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Microsoft.MixedReality.Toolkit.UI;
-
+using Microsoft.MixedReality.Toolkit.Experimental.UI;
 
 public class ConsommateurClass : MonoBehaviour
 {
@@ -113,56 +113,48 @@ public class ConsommateurClass : MonoBehaviour
         closeProgressBar();
     }
 
-    public void ApplyEvent(string e)
+    public void ApplyEvent(NoRotationDockable e)
     {
-        Debug.Log("Apply consomateur : " + e);
+        TypeEvent te = e.GetComponent<EventDockable>().typeEvent;
 
-        switch (e)
+        switch (te)
         {
-            case "CDMEvent":
+            case TypeEvent.CDM:
                 consommation += 20.0;
                 emissionCO2 += 20;
                 tauxDeSatisfaction += 10;
                 nbHabitants += 10;
                 break;
-            case "Event2":
+            case TypeEvent.HEUREPOINTE:
                 apportElectricite -= 20;
                 emissionCO2 -= 20;
                 break;
-            case "Event3":
-                consommation += 10.0;
-                emissionCO2 += 10;
-                break;
-            case "Event4":
+            case TypeEvent.EUROVISION:
                 consommation += 15;
                 nbHabitants += 5;
                 break;
         }
     }
 
-    public void RemoveEvent(string e)
+    public void RemoveEvent(NoRotationDockable e)
     {
-        Debug.Log("Remove consomateur : " + e);
+        TypeEvent te = e.GetComponent<EventDockable>().typeEvent;
 
-        switch (e)
+        switch (te)
         {
-            case "CDMEvent":
+            case TypeEvent.CDM:
                 consommation -= 20.0;
                 emissionCO2 -= 20;
                 tauxDeSatisfaction -= 10;
                 nbHabitants -= 10;
                 break;
-            case "Event2":
-                apportElectricite -= 20;
-                emissionCO2 -= 20;
+            case TypeEvent.HEUREPOINTE:
+                apportElectricite += 20;
+                emissionCO2 += 20;
                 break;
-            case "Event3":
-                consommation += 10.0;
-                emissionCO2 += 10;
-                break;
-            case "Event4":
-                consommation += 15;
-                nbHabitants += 5;
+            case TypeEvent.EUROVISION:
+                consommation -= 15;
+                nbHabitants -= 5;
                 break;
         }
     }
