@@ -118,6 +118,7 @@ public class ProducteurClass : MonoBehaviour
     public void OnSliderUpdated(SliderEventData eventData)
     {
         print(eventData.NewValue);
+        production = eventData.NewValue*100;
     }
 
     public void reparationEtat()
@@ -185,9 +186,9 @@ public class ProducteurClass : MonoBehaviour
     public void setProduction()
     {
 
-        Debug.Log("Hello");
-        Debug.Log(production);
-        Debug.Log(pollution);
+        // Debug.Log("Hello");
+        // Debug.Log(production);
+        // Debug.Log(pollution);
         emissionCO2 = (production / 100) * pollution;
         // Regler la production
     }
