@@ -70,7 +70,7 @@ public class GameArea : MonoBehaviour
             child.localScale = new Vector3(scalex, scaley, scalez);
             child.rotation = Quaternion.Euler(0, rotation + baseAngle, 0);
             yield return 0;
-            scalex += (0.1111666667f / time) * Time.deltaTime;
+            scalex += (0.1334f / time) * Time.deltaTime;
             scaley += (0.4f / time) * Time.deltaTime;
             scalez += (0.25f / time) * Time.deltaTime;
             rotation += (360.0f / time) * Time.deltaTime;

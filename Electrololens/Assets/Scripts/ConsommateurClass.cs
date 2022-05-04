@@ -115,13 +115,42 @@ public class ConsommateurClass : MonoBehaviour
 
     public void ApplyEvent(string e)
     {
+        Debug.Log("Apply consomateur : " + e);
+
         switch (e)
         {
-            case "Event1":
+            case "CDMEvent":
                 consommation += 20.0;
                 emissionCO2 += 20;
                 tauxDeSatisfaction += 10;
                 nbHabitants += 10;
+                break;
+            case "Event2":
+                apportElectricite -= 20;
+                emissionCO2 -= 20;
+                break;
+            case "Event3":
+                consommation += 10.0;
+                emissionCO2 += 10;
+                break;
+            case "Event4":
+                consommation += 15;
+                nbHabitants += 5;
+                break;
+        }
+    }
+
+    public void RemoveEvent(string e)
+    {
+        Debug.Log("Remove consomateur : " + e);
+
+        switch (e)
+        {
+            case "CDMEvent":
+                consommation -= 20.0;
+                emissionCO2 -= 20;
+                tauxDeSatisfaction -= 10;
+                nbHabitants -= 10;
                 break;
             case "Event2":
                 apportElectricite -= 20;
