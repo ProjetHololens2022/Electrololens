@@ -77,7 +77,7 @@ namespace Microsoft.MixedReality.Toolkit.Experimental.UI
                         GameObject[] consumer = GameObject.FindGameObjectsWithTag("Consumer");
                         foreach (var cons in consumer)
                         {
-                            cons.SendMessage("ApplyEvent", dockedObject.name);
+                            cons.SendMessage("ApplyEvent", dockedObject);
                         }
                     }
                     else
@@ -85,7 +85,7 @@ namespace Microsoft.MixedReality.Toolkit.Experimental.UI
                         GameObject[] producers = GameObject.FindGameObjectsWithTag("Producer");
                         foreach (var prod in producers)
                         {
-                            prod.SendMessage("ApplyEvent", dockedObject.name);
+                            prod.SendMessage("ApplyEvent", dockedObject);
                         }
                     }
                     triggeredEvent = dockedObject;
@@ -103,7 +103,7 @@ namespace Microsoft.MixedReality.Toolkit.Experimental.UI
                             GameObject[] consumer = GameObject.FindGameObjectsWithTag("Consumer");
                             foreach (var cons in consumer)
                             {
-                                cons.SendMessage("RemoveEvent", triggeredEvent.name);
+                                cons.SendMessage("RemoveEvent", triggeredEvent);
                             }
                         }
                         else
@@ -111,7 +111,7 @@ namespace Microsoft.MixedReality.Toolkit.Experimental.UI
                             GameObject[] producers = GameObject.FindGameObjectsWithTag("Producer");
                             foreach (var prod in producers)
                             {
-                                prod.SendMessage("RemoveEvent", triggeredEvent.name);
+                                prod.SendMessage("RemoveEvent", triggeredEvent);
                             }
                         }
                         triggeredEvent = null;

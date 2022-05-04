@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Microsoft.MixedReality.Toolkit.UI;
-
+using Microsoft.MixedReality.Toolkit.Experimental.UI;
 
 public enum Type
 {
@@ -139,10 +139,30 @@ public class ProducteurClass : MonoBehaviour
         closeProgressBar();
     }
 
-
-    public void ApplyEvent(string e)
+    public void ApplyEvent(NoRotationDockable e)
     {
-        // Debug.Log("Producteur : " + e);
+        TypeEvent te = e.GetComponent<EventDockable>().typeEvent;
+
+        switch (te)
+        {
+            case TypeEvent.CENTRALEHS:
+                production -= 15;
+                emissionCO2 += 5;
+                break;
+        }
+    }
+
+    public void RemoveEvent(NoRotationDockable e)
+    {
+        TypeEvent te = e.GetComponent<EventDockable>().typeEvent;
+
+        switch (te)
+        {
+            case TypeEvent.CENTRALEHS:
+                production += 15;
+                emissionCO2 -= 5;
+                break;
+        }
     }
 
 }
