@@ -107,11 +107,10 @@ public class ConsommateurClass : MonoBehaviour
     void randomizedCityData()
     {
         double randomConsommation = Random.Range(0, 100);
-        double randomApportElectriciten = Random.Range(0, 100);
         double randomEmissionCO2 = Random.Range(0, 100);
 
+        apportElectricite = 0.0;
         consommation = randomConsommation;
-        apportElectricite = randomApportElectriciten;
         emissionCO2 = randomEmissionCO2;
     }
 
