@@ -41,7 +41,7 @@ public class ElectricalNetwork : MonoBehaviour
                 line.transform.parent = this.transform;
                 line.GetComponent<LineConnector>().SetStart(go.transform.Find("Sphere"));
                 line.GetComponent<LineConnector>().SetEnd(this.transform.Find("Sphere"));
-                this.objLines.Add(go, line);
+                this.objLines[go] = line;
                 go.GetComponent<ProducteurClass>().electricalNetwork = this.gameObject;
                 go.GetComponent<ProducteurClass>().isConnected = true;
             }
@@ -54,7 +54,7 @@ public class ElectricalNetwork : MonoBehaviour
                 line.transform.parent = this.transform;
                 line.GetComponent<LineConnector>().SetStart(this.transform.Find("Sphere"));
                 line.GetComponent<LineConnector>().SetEnd(go.transform.Find("Sphere"));
-                this.objLines.Add(go, line);
+                this.objLines[go] = line;
                 go.GetComponent<ConsommateurClass>().electricalNetwork = this.gameObject;
                 go.GetComponent<ConsommateurClass>().isConnected = true;
             }
@@ -96,6 +96,7 @@ public class ElectricalNetwork : MonoBehaviour
         GameObject line = this.findLine(other);
         if (line != null)
         {
+            this.objLines.Remove(line);
             Destroy(line);
         }
     }
