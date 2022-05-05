@@ -33,7 +33,7 @@ public class ConnectorCutter : MonoBehaviour
                 if (this.lastGameObject.GetComponent<ElectricalNetwork>() != null)
                 {
                     // On deconnecte l'obj touche
-                    this.lastGameObject.disconnect(other);
+                    this.lastGameObject.GetComponent<ElectricalNetwork>().disconnect(other.gameObject);
                 }
                 this.lastGameObject = other.gameObject;
             }
@@ -43,7 +43,7 @@ public class ConnectorCutter : MonoBehaviour
             {
                 if (this.lastGameObject.GetComponent<ElectricalNetwork>() != null)
                 {
-                    this.lastGameObject.disconnect(other);
+                    this.lastGameObject.GetComponent<ElectricalNetwork>().disconnect(other.gameObject);
                 }
                 this.lastGameObject = other.gameObject;
             }
@@ -54,7 +54,7 @@ public class ConnectorCutter : MonoBehaviour
                 // Si on avait deja touche un obj, on le deco du BigElectricPole
                 if (this.lastGameObject != null)
                 {
-                    other.disconnect(this.lastGameObject);
+                    other.gameObject.GetComponent<ElectricalNetwork>().disconnect(this.lastGameObject);
                 }
                 this.lastGameObject = other.gameObject;
             }
