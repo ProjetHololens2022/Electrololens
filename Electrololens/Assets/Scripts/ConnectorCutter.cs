@@ -6,9 +6,6 @@ public class ConnectorCutter : MonoBehaviour
 {
 
 
-    private GameObject lastGameObject = null;
-
-
     // Start is called before the first frame update
     void Start()
     {
@@ -27,36 +24,18 @@ public class ConnectorCutter : MonoBehaviour
         if (other != null)
         {
             // Si on touche un Consumer
-            if (other.gameObject.GetComponent<ConsommateurClass>() != null)
+            if (other.gameObject.GetComponent<ConsommateurClass>() != null
+                && other.gameObject.GetComponent<ConsommateurClass>().electricalNetwork != null)
             {
-                // Si le dernier obj est un BigElectricPole
-                if (this.lastGameObject != null && this.lastGameObject.GetComponent<ElectricalNetwork>() != null)
-                {
-                    // On deconnecte l'obj touche
-                    this.lastGameObject.GetComponent<ElectricalNetwork>().disconnect(other.gameObject);
-                }
-                this.lastGameObject = other.gameObject;
+
+                other.gameObject.GetComponent<ConsommateurClass>().electricalNetwork.GetComponent<ElectricalNetwork>().disconnect(other.gameObject);
             }
 
             // Si on touche un Producteur
-            if (other.gameObject.GetComponent<ProducteurClass>() != null)
+            if (other.gameObject.GetComponent<ProducteurClass>() != null
+                && other.gameObject.GetComponent<ProducteurClass>().electricalNetwork != null)
             {
-                if (this.lastGameObject != null && this.lastGameObject.GetComponent<ElectricalNetwork>() != null)
-                {
-                    this.lastGameObject.GetComponent<ElectricalNetwork>().disconnect(other.gameObject);
-                }
-                this.lastGameObject = other.gameObject;
-            }
-
-            // Si on touche un BigElectricPole
-            if (other.gameObject.GetComponent<ElectricalNetwork>() != null)
-            {
-                // Si on avait deja touche un obj, on le deco du BigElectricPole
-                if (this.lastGameObject != null)
-                {
-                    other.gameObject.GetComponent<ElectricalNetwork>().disconnect(this.lastGameObject);
-                }
-                this.lastGameObject = other.gameObject;
+                other.gameObject.GetComponent<ProducteurClass>().electricalNetwork.GetComponent<ElectricalNetwork>().disconnect(other.gameObject);
             }
         }
     }
