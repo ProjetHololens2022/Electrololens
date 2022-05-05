@@ -13,6 +13,14 @@ public class ConsommateurClass : MonoBehaviour
     private double tauxDeSatisfaction;
     private int nbHabitants;
 
+    private double consommationEvent = 0.0; 
+    private double apportElectriciteEvent = 0.0;
+    private double emissionCO2Event = 0.0;
+    private double tauxDeSatisfactionEvent = 0.0;
+    private int nbHabitantsEvent = 0;
+
+
+
     public bool isConnected = false;
     public GameObject electricalNetwork = null;
 
@@ -28,7 +36,7 @@ public class ConsommateurClass : MonoBehaviour
 
     public double getConsommation()
     {
-        return consommation;
+        return consommation + consommationEvent > 0.0 ? consommation + consommationEvent : 0.0;
     }
 
     public void setConsommation(double consommation)
@@ -37,7 +45,7 @@ public class ConsommateurClass : MonoBehaviour
     }
 
     public double GetApportElectricite(){
-        return apportElectricite;
+        return  apportElectricite + apportElectriciteEvent > 0.0 ? apportElectricite + apportElectriciteEvent : 0.0;
     }
 
     public void SetApportElectricite(double apportElectricite){
@@ -46,7 +54,7 @@ public class ConsommateurClass : MonoBehaviour
 
     public double getTauxDeSatisfaction()
     {
-        return tauxDeSatisfaction;
+        return tauxDeSatisfaction + tauxDeSatisfactionEvent > 0.0 ? tauxDeSatisfaction + tauxDeSatisfactionEvent : 0.0;
     }
 
     public void setTauxDeSatisfaction(double tauxDeSatisfaction)
@@ -56,12 +64,21 @@ public class ConsommateurClass : MonoBehaviour
 
     public int getNbHabitants()
     {
-        return nbHabitants;
+        return nbHabitants + nbHabitantsEvent > 0 ? nbHabitants + nbHabitantsEvent : 0;
     }
 
     public void setNbHabitants(int nbHabitants)
     {
         this.nbHabitants = nbHabitants;
+    }
+
+    public double getEmissionCO2(){
+        return emissionCO2 + emissionCO2Event > 0 ? emissionCO2 + emissionCO2Event : 0;
+    }
+
+    public void setNbHabitants(double emissionCO2)
+    {
+        this.emissionCO2 = emissionCO2;
     }
 
     void Start()
@@ -72,11 +89,15 @@ public class ConsommateurClass : MonoBehaviour
         infoVille = infoVilleGO.GetComponent<InfoVille>();
         randomizedCityData();
         updateProgessValues();
+        List<NoRotationDockable> events = GameObject.FindGameObjectWithTag("EventManager").GetComponent<EventManager>().GetEvents();
+        foreach(NoRotationDockable e in events){
+            ApplyEvent(e);
+        }
     }
 
     void Update()
     {
-        if(!isConnected || apportElectricite < consommation){
+        if(!isConnected || GetApportElectricite() < getConsommation()){
             this.transform.Find("Sphere").GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(1.0f,0.0f,0.0f,1.0f)*10.0f);
         } else {
             this.transform.Find("Sphere").GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0.0f,1.0f,0.0f,1.0f)*10.0f);
@@ -101,9 +122,9 @@ public class ConsommateurClass : MonoBehaviour
                 && infoVille.getProgressConsoLoadingBar() != null
                     && infoVille.getProgressConsoLoadingBar() != null)
         {
-            infoVille.updateLoadingBar(infoVille.getProgressConsoLoadingBar(), consommation / 100);
-            infoVille.updateLoadingBar(infoVille.getProgressApportLoadingBar(), apportElectricite / 100);
-            infoVille.updateLoadingBar(infoVille.getProgressEmissionLoadingBar(), emissionCO2 / 100);
+            infoVille.updateLoadingBar(infoVille.getProgressConsoLoadingBar(), getConsommation() / 100);
+            infoVille.updateLoadingBar(infoVille.getProgressApportLoadingBar(), GetApportElectricite() / 100);
+            infoVille.updateLoadingBar(infoVille.getProgressEmissionLoadingBar(), getEmissionCO2() / 100);
         }
     }
 
@@ -134,23 +155,25 @@ public class ConsommateurClass : MonoBehaviour
 
     public void ApplyEvent(NoRotationDockable e)
     {
+        print("consommateur");
+
         TypeEvent te = e.GetComponent<EventDockable>().typeEvent;
 
         switch (te)
         {
             case TypeEvent.CDM:
-                consommation += 20.0;
-                emissionCO2 += 20;
-                tauxDeSatisfaction += 10;
-                nbHabitants += 10;
+                consommationEvent += 20.0;
+                emissionCO2Event += 20.0;
+                tauxDeSatisfactionEvent += 10.0;
+                nbHabitantsEvent += 10;
                 break;
             case TypeEvent.HEUREPOINTE:
-                apportElectricite -= 20;
-                emissionCO2 -= 20;
+                apportElectriciteEvent -= 20.0;
+                emissionCO2Event -= 20.0;
                 break;
             case TypeEvent.EUROVISION:
-                consommation += 15;
-                nbHabitants += 5;
+                consommationEvent += 15.0;
+                nbHabitantsEvent += 5;
                 break;
         }
     }
@@ -162,18 +185,18 @@ public class ConsommateurClass : MonoBehaviour
         switch (te)
         {
             case TypeEvent.CDM:
-                consommation -= 20.0;
-                emissionCO2 -= 20;
-                tauxDeSatisfaction -= 10;
-                nbHabitants -= 10;
+                consommationEvent -= 20.0;
+                emissionCO2Event -= 20.0;
+                tauxDeSatisfactionEvent -= 10.0;
+                nbHabitantsEvent -= 10;
                 break;
             case TypeEvent.HEUREPOINTE:
-                apportElectricite += 20;
-                emissionCO2 += 20;
+                apportElectriciteEvent += 20.0;
+                emissionCO2Event += 20.0;
                 break;
             case TypeEvent.EUROVISION:
-                consommation -= 15;
-                nbHabitants -= 5;
+                consommationEvent -= 15.0;
+                nbHabitantsEvent -= 5;
                 break;
         }
     }

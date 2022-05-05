@@ -72,48 +72,16 @@ namespace Microsoft.MixedReality.Toolkit.Experimental.UI
             {
                 if(IsOccupied && !sent)
                 {
-                    if(dockedObject.GetComponent<EventDockable>().type.Equals(TypeAgent.CONSUMER))
-                    {
-                        GameObject[] consumer = GameObject.FindGameObjectsWithTag("Consumer");
-                        foreach (var cons in consumer)
-                        {
-                            cons.SendMessage("ApplyEvent", dockedObject);
-                        }
-                    }
-                    else
-                    {
-                        GameObject[] producers = GameObject.FindGameObjectsWithTag("Producer");
-                        foreach (var prod in producers)
-                        {
-                            prod.SendMessage("ApplyEvent", dockedObject);
-                        }
-                    }
+                    GameObject.FindGameObjectWithTag("EventManager").SendMessage("AddEvent",dockedObject);
                     triggeredEvent = dockedObject;
                     sent = true;
                 }
-
                 if(!IsOccupied)
                 {
                     sent = false;
-
                     if(triggeredEvent != null)
                     {
-                        if (triggeredEvent.GetComponent<EventDockable>().type.Equals(TypeAgent.CONSUMER))
-                        {
-                            GameObject[] consumer = GameObject.FindGameObjectsWithTag("Consumer");
-                            foreach (var cons in consumer)
-                            {
-                                cons.SendMessage("RemoveEvent", triggeredEvent);
-                            }
-                        }
-                        else
-                        {
-                            GameObject[] producers = GameObject.FindGameObjectsWithTag("Producer");
-                            foreach (var prod in producers)
-                            {
-                                prod.SendMessage("RemoveEvent", triggeredEvent);
-                            }
-                        }
+                        GameObject.FindGameObjectWithTag("EventManager").SendMessage("RemoveEvent",triggeredEvent);
                         triggeredEvent = null;
                     }
                 }
