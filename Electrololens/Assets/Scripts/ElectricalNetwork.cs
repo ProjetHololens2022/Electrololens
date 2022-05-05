@@ -6,6 +6,7 @@ public class ElectricalNetwork : MonoBehaviour
 {
     List<GameObject> producers = new List<GameObject>();
     List<GameObject> consumers = new List<GameObject>();
+    private Hashtable objLines = new Hashtable();
 
     [SerializeField]
     private GameObject linePrefab;
@@ -40,6 +41,7 @@ public class ElectricalNetwork : MonoBehaviour
                 line.transform.parent = this.transform;
                 line.GetComponent<LineConnector>().SetStart(go.transform.Find("Sphere"));
                 line.GetComponent<LineConnector>().SetEnd(this.transform.Find("Sphere"));
+                this.objLines.Add(go, line);
                 go.GetComponent<ProducteurClass>().electricalNetwork = this.gameObject;
                 go.GetComponent<ProducteurClass>().isConnected = true;
             }
@@ -52,6 +54,7 @@ public class ElectricalNetwork : MonoBehaviour
                 line.transform.parent = this.transform;
                 line.GetComponent<LineConnector>().SetStart(this.transform.Find("Sphere"));
                 line.GetComponent<LineConnector>().SetEnd(go.transform.Find("Sphere"));
+                this.objLines.Add(go, line);
                 go.GetComponent<ConsommateurClass>().electricalNetwork = this.gameObject;
                 go.GetComponent<ConsommateurClass>().isConnected = true;
             }
@@ -68,6 +71,41 @@ public class ElectricalNetwork : MonoBehaviour
 
     public double getConsumption(){
         return getProduction()/(double)consumers.Count;
+    }
+
+    /**
+     * Deconnecte un obj du resaux electrique et suprimme
+     */
+    public void disconnect(GameObject other)
+    {
+        if (this.producers.Contains(other))
+        {
+            this.producers.Remove(other);
+        }
+
+        if (this.consumers.Contains(other))
+        {
+            this.consumers.Remove(other);
+        }
+
+        // On detruit la ligne reliant le resaux et l'obj.
+        GameObject line = this.findLine(other);
+        if (line != null)
+        {
+            Destroy(line);
+        }
+    }
+
+    /**
+     * Renvoie la ligne qui connecte vers un object, si cette ligne existe et est connectee
+     */
+    private GameObject findLine(GameObject other)
+    {
+        if (this.objLines.ContainsKey(other))
+        {
+            return (GameObject) this.objLines[other];
+        }
+        return null;
     }
 
 }
