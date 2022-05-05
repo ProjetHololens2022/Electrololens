@@ -44,4 +44,16 @@ public class LineConnector : MonoBehaviour
     public void SetEnd(Transform end){
         this.end = end;
     }
+
+
+    public Transform getStart()
+    {
+        return this.start;
+    }
+
+
+    public Transform getEnd()
+    {
+        return this.end;
+    }
 }

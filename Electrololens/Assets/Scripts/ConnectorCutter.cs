@@ -30,7 +30,7 @@ public class ConnectorCutter : MonoBehaviour
             if (other.gameObject.GetComponent<ConsommateurClass>() != null)
             {
                 // Si le dernier obj est un BigElectricPole
-                if (this.lastGameObject.GetComponent<ElectricalNetwork>() != null)
+                if (this.lastGameObject != null && this.lastGameObject.GetComponent<ElectricalNetwork>() != null)
                 {
                     // On deconnecte l'obj touche
                     this.lastGameObject.GetComponent<ElectricalNetwork>().disconnect(other.gameObject);
@@ -41,7 +41,7 @@ public class ConnectorCutter : MonoBehaviour
             // Si on touche un Producteur
             if (other.gameObject.GetComponent<ProducteurClass>() != null)
             {
-                if (this.lastGameObject.GetComponent<ElectricalNetwork>() != null)
+                if (this.lastGameObject != null && this.lastGameObject.GetComponent<ElectricalNetwork>() != null)
                 {
                     this.lastGameObject.GetComponent<ElectricalNetwork>().disconnect(other.gameObject);
                 }
