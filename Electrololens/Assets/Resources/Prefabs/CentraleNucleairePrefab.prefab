@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 6129165135253015641}
   m_Layer: 0
   m_Name: CentraleNucleairePrefab
-  m_TagString: Untagged
+  m_TagString: Producer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -276,6 +276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09d24e9dfae92a04ab551eb7405574f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
   infoProducteurGO: {fileID: 4764481099214662851}
 --- !u!1 &8514073359432797600
 GameObject:
@@ -463,6 +464,54 @@ PrefabInstance:
     - target: {fileID: 7926205472416465545, guid: 23e38153dd604ec41a9deb554f45f90f, type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8171858518957429431, guid: 23e38153dd604ec41a9deb554f45f90f, type: 3}
+      propertyPath: OnValueUpdated.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8171858518957429431, guid: 23e38153dd604ec41a9deb554f45f90f, type: 3}
+      propertyPath: OnInteractionEnded.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8171858518957429431, guid: 23e38153dd604ec41a9deb554f45f90f, type: 3}
+      propertyPath: OnValueUpdated.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8171858518957429431, guid: 23e38153dd604ec41a9deb554f45f90f, type: 3}
+      propertyPath: OnValueUpdated.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6129165135253015641}
+    - target: {fileID: 8171858518957429431, guid: 23e38153dd604ec41a9deb554f45f90f, type: 3}
+      propertyPath: OnInteractionEnded.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8171858518957429431, guid: 23e38153dd604ec41a9deb554f45f90f, type: 3}
+      propertyPath: OnValueUpdated.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8171858518957429431, guid: 23e38153dd604ec41a9deb554f45f90f, type: 3}
+      propertyPath: OnInteractionEnded.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6129165135253015641}
+    - target: {fileID: 8171858518957429431, guid: 23e38153dd604ec41a9deb554f45f90f, type: 3}
+      propertyPath: OnValueUpdated.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnSliderUpdated
+      objectReference: {fileID: 0}
+    - target: {fileID: 8171858518957429431, guid: 23e38153dd604ec41a9deb554f45f90f, type: 3}
+      propertyPath: OnInteractionEnded.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: updateProgessValues
+      objectReference: {fileID: 0}
+    - target: {fileID: 8171858518957429431, guid: 23e38153dd604ec41a9deb554f45f90f, type: 3}
+      propertyPath: OnValueUpdated.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ProducteurClass, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8171858518957429431, guid: 23e38153dd604ec41a9deb554f45f90f, type: 3}
+      propertyPath: OnInteractionEnded.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ProducteurClass, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8171858518957429431, guid: 23e38153dd604ec41a9deb554f45f90f, type: 3}
+      propertyPath: OnValueUpdated.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 23e38153dd604ec41a9deb554f45f90f, type: 3}

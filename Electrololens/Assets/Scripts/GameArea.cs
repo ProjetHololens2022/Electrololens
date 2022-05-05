@@ -26,6 +26,11 @@ public class GameArea : MonoBehaviour
         tools.SetActive(true);
         for(int i = 0; i < platform.transform.childCount; ++i){
             StartCoroutine(popPunsPlatform(platform.transform.GetChild(i)));
+            if(platform.transform.GetChild(i).GetComponent<ProducteurClass>() != null)
+            {
+                platform.transform.GetChild(i).GetComponent<ProducteurClass>().startDegradation();
+            }
+            
         }
         for(int i = 0; i < tools.transform.childCount; ++i){
             StartCoroutine(popPunsPlatform(tools.transform.GetChild(i)));
@@ -60,12 +65,12 @@ public class GameArea : MonoBehaviour
         float time = 0.5f;
         float rotation = 0.0f;
         float baseAngle = child.eulerAngles.y;
-        while (scalex < 0.16675f && scaley < 0.4 && scalez < 0.25)
+        while (scalex < 0.1334f && scaley < 0.4 && scalez < 0.25)
         {
             child.localScale = new Vector3(scalex, scaley, scalez);
             child.rotation = Quaternion.Euler(0, rotation + baseAngle, 0);
             yield return 0;
-            scalex += (0.16675f / time) * Time.deltaTime;
+            scalex += (0.1334f / time) * Time.deltaTime;
             scaley += (0.4f / time) * Time.deltaTime;
             scalez += (0.25f / time) * Time.deltaTime;
             rotation += (360.0f / time) * Time.deltaTime;

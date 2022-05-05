@@ -2,17 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Microsoft.MixedReality.Toolkit.UI;
-
+using Microsoft.MixedReality.Toolkit.Experimental.UI;
 
 public class ConsommateurClass : MonoBehaviour
 {
     private string nom;
-    private double consommation;
-    private double apportElectricite;
+    private double consommation; //Besoin
+    private double apportElectricite; //Reçu
     private double emissionCO2;
     private double tauxDeSatisfaction;
     private int nbHabitants;
 
+    public bool isConnected = false;
+    public GameObject electricalNetwork = null;
 
 
     [SerializeField]
@@ -32,6 +34,14 @@ public class ConsommateurClass : MonoBehaviour
     public void setConsommation(double consommation)
     {
         this.consommation = consommation;
+    }
+
+    public double GetApportElectricite(){
+        return apportElectricite;
+    }
+
+    public void SetApportElectricite(double apportElectricite){
+        this.apportElectricite = apportElectricite;
     }
 
     public double getTauxDeSatisfaction()
@@ -62,6 +72,15 @@ public class ConsommateurClass : MonoBehaviour
         infoVille = infoVilleGO.GetComponent<InfoVille>();
         randomizedCityData();
         updateProgessValues();
+    }
+
+    void Update()
+    {
+        if(!isConnected || apportElectricite < consommation){
+            this.transform.Find("Sphere").GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(1.0f,0.0f,0.0f,1.0f)*10.0f);
+        } else {
+            this.transform.Find("Sphere").GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0.0f,1.0f,0.0f,1.0f)*10.0f);
+        }
     }
 
     void randomizedCityData()
@@ -113,27 +132,48 @@ public class ConsommateurClass : MonoBehaviour
         closeProgressBar();
     }
 
-    public void ApplyEvent(string e)
+    public void ApplyEvent(NoRotationDockable e)
     {
-        switch (e)
+        TypeEvent te = e.GetComponent<EventDockable>().typeEvent;
+
+        switch (te)
         {
-            case "Event1":
+            case TypeEvent.CDM:
                 consommation += 20.0;
                 emissionCO2 += 20;
                 tauxDeSatisfaction += 10;
                 nbHabitants += 10;
                 break;
-            case "Event2":
+            case TypeEvent.HEUREPOINTE:
                 apportElectricite -= 20;
                 emissionCO2 -= 20;
                 break;
-            case "Event3":
-                consommation += 10.0;
-                emissionCO2 += 10;
-                break;
-            case "Event4":
+            case TypeEvent.EUROVISION:
                 consommation += 15;
                 nbHabitants += 5;
+                break;
+        }
+    }
+
+    public void RemoveEvent(NoRotationDockable e)
+    {
+        TypeEvent te = e.GetComponent<EventDockable>().typeEvent;
+
+        switch (te)
+        {
+            case TypeEvent.CDM:
+                consommation -= 20.0;
+                emissionCO2 -= 20;
+                tauxDeSatisfaction -= 10;
+                nbHabitants -= 10;
+                break;
+            case TypeEvent.HEUREPOINTE:
+                apportElectricite += 20;
+                emissionCO2 += 20;
+                break;
+            case TypeEvent.EUROVISION:
+                consommation -= 15;
+                nbHabitants -= 5;
                 break;
         }
     }
