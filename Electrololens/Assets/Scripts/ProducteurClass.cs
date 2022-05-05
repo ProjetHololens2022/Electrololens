@@ -126,6 +126,10 @@ public class ProducteurClass : MonoBehaviour
         {
             double randomDegrad = Random.Range(0, 10);
             etat -= randomDegrad;
+            if (etat < 0)
+            {
+                etat = 0;
+            }
             calculPollution();
             yield return new WaitForSeconds(10);
         }
@@ -201,10 +205,6 @@ public class ProducteurClass : MonoBehaviour
 
     public void setProduction()
     {
-
-        // Debug.Log("Hello");
-        // Debug.Log(production);
-        // Debug.Log(pollution);
         emissionCO2 = (production / 100) * pollution;
         // Regler la production
     }

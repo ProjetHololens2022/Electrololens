@@ -46,7 +46,11 @@ public class CreateSiteProd : MonoBehaviour
             Debug.Log(go.transform.localPosition);
             Vector3 scale = platform.transform.GetChild(0).localScale;
             go.transform.localScale = scale;
-            go.GetComponent<ProducteurClass>().startDegradation();
+            if(go.GetComponent<ProducteurClass>() != null)
+            {
+                go.GetComponent<ProducteurClass>().startDegradation();
+            }
+            
         }
         Destroy(prefabPanier);
     }
