@@ -7,27 +7,27 @@ using System.Threading.Tasks;
 public class InfoProducteur : MonoBehaviour
 {
     [SerializeField]
-    private GameObject progressConso = null;
+    private GameObject progressProd = null;
     [SerializeField]
     private GameObject progressEmission = null;
     [SerializeField]
     private GameObject progressEtat = null;
 
-    private IProgressIndicator progressConsoLoadingBar;
+    private IProgressIndicator progressProdLoadingBar;
     private IProgressIndicator progressEmissionLoadingBar;
     private IProgressIndicator progressEtatLoadingBar;
 
 
     void Start()
     {
-        progressConsoLoadingBar = progressConso.GetComponent<IProgressIndicator>();
+        progressProdLoadingBar = progressProd.GetComponent<IProgressIndicator>();
         progressEmissionLoadingBar = progressEmission.GetComponent<IProgressIndicator>();
         progressEtatLoadingBar = progressEtat.GetComponent<IProgressIndicator>();
     }
     
-    public IProgressIndicator getProgressConsoLoadingBar()
+    public IProgressIndicator getProgressProdLoadingBar()
     {
-        return progressConsoLoadingBar;
+        return progressProdLoadingBar;
     }
 
     public IProgressIndicator getProgressEmissionLoadingBar()
