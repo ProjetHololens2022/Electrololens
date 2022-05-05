@@ -226,6 +226,7 @@ MonoBehaviour:
   platform: {fileID: 2591894381661478341}
   panier: {fileID: 1252712825984936051}
   tools: {fileID: 6790760796018879828}
+  dock: {fileID: 26471584723357294}
 --- !u!1 &2591894381661478341
 GameObject:
   m_ObjectHideFlags: 0
@@ -1271,6 +1272,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 93a2ad73ce2b78a4abc9fc144fe5f5f9, type: 3}
+--- !u!1 &26471584723357294 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7335054658989028585, guid: 93a2ad73ce2b78a4abc9fc144fe5f5f9, type: 3}
+  m_PrefabInstance: {fileID: 7319847605252307591}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6924890999545226256 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400667748549516951, guid: 93a2ad73ce2b78a4abc9fc144fe5f5f9, type: 3}
