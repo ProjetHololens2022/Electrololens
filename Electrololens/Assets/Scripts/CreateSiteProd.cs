@@ -22,11 +22,23 @@ public class CreateSiteProd : MonoBehaviour
 
     public void holdPrefabPanier()
     {
+        int nbVille = 0;
+        for (int i = 0; i < platform.transform.childCount; ++i)
+        { 
+            if (platform.transform.GetChild(i).GetComponent<ConsommateurClass>() != null)
+            {
+                nbVille++;
+            }
+        }
         GameObject go = (GameObject)Instantiate(prefabPanier, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.Euler(0, ellipse.eulerAngles.y, 0));
         go.transform.parent = prefabPanier.transform.parent;
         go.transform.localPosition = coordBase;
         Vector3 scale = prefabPanier.transform.localScale;
         go.transform.localScale = scale;
+        if (prefabPanier.tag == "Nucleaire" && nbVille < 5)
+        {
+            Destroy(prefabPanier);
+        }
     }
 
     public void UnholdPrefabPanier()
