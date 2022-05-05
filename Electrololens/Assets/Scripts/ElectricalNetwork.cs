@@ -80,11 +80,15 @@ public class ElectricalNetwork : MonoBehaviour
     {
         if (this.producers.Contains(other))
         {
+            other.GetComponent<ProducteurClass>().isConnected = false;
+            other.GetComponent<ProducteurClass>().electricalNetwork = null;
             this.producers.Remove(other);
         }
 
         if (this.consumers.Contains(other))
         {
+            other.GetComponent<ConsommateurClass>().isConnected = false;
+            other.GetComponent<ConsommateurClass>().electricalNetwork = null;
             this.consumers.Remove(other);
         }
 

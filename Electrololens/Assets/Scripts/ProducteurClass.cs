@@ -124,14 +124,16 @@ public class ProducteurClass : MonoBehaviour
     {
         while (true)
         {
-            double randomDegrad = Random.Range(0, 10);
-            etat -= randomDegrad;
-            if (etat < 0)
-            {
-                etat = 0;
+            if(isConnected){
+                double randomDegrad = Random.Range(0, 5);
+                etat -= randomDegrad;
+                if (etat < 0)
+                {
+                    etat = 0;
+                }
             }
             calculPollution();
-            yield return new WaitForSeconds(10);
+            yield return new WaitForSeconds(5.0f);
         }
     }
 
