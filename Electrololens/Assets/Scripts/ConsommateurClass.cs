@@ -200,4 +200,11 @@ public class ConsommateurClass : MonoBehaviour
         }
     }
 
+    public void Delete(){
+        if(isConnected){
+            this.electricalNetwork.GetComponent<ElectricalNetwork>().disconnect(this.gameObject);
+        }
+        Destroy(this.gameObject);
+    }
+
 }
