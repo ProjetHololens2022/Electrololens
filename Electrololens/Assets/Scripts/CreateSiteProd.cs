@@ -8,20 +8,22 @@ public class CreateSiteProd : MonoBehaviour
     private GameObject prefabPanier;
     [SerializeField]
     private GameObject prefabPlatform;
-    private Vector3 coordBase = new Vector3(0.0f, 0.0f, 0.0f);
+    [SerializeField]
+    private GameObject prefabProjection;
     private GameObject platform;
-    private Transform ellipse;
-    //private Transform ellipse = null;
+    private Vector3 coordBase = new Vector3(0.0f, 0.0f, 0.0f);
+
+    private GameObject prefabPlatformProjection = null;
 
     public void Start()
     {
         coordBase = prefabPanier.transform.localPosition;
-        platform = GameObject.FindGameObjectsWithTag("Plateforme")[0].transform.GetChild(1).gameObject;
-        ellipse = transform.parent.parent.gameObject.transform.GetChild(1);
+        platform = GameObject.FindGameObjectsWithTag("Plateforme")[1].gameObject;
     }
 
     public void holdPrefabPanier()
     {
+        //On prend un des éléments du panier
         int nbVille = 0;
         for (int i = 0; i < platform.transform.childCount; ++i)
         { 
@@ -30,7 +32,8 @@ public class CreateSiteProd : MonoBehaviour
                 nbVille++;
             }
         }
-        GameObject go = (GameObject)Instantiate(prefabPanier, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.Euler(0, ellipse.eulerAngles.y, 0));
+        Debug.Log(nbVille);
+        GameObject go = (GameObject)Instantiate(prefabPanier, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.Euler(0, platform.transform.eulerAngles.y, 0));
         go.transform.parent = prefabPanier.transform.parent;
         go.transform.localPosition = coordBase;
         Vector3 scale = prefabPanier.transform.localScale;
@@ -39,23 +42,56 @@ public class CreateSiteProd : MonoBehaviour
         {
             Destroy(prefabPanier);
         }
+        else
+        {
+            Debug.Log("En avant la coroutine");
+            StartCoroutine("ProjectionPrefabPanier");
+        }
+    }
+
+    IEnumerator ProjectionPrefabPanier()
+    {
+        
+        while (true)
+        {
+            float prefabpanierX = prefabPanier.transform.position.x;
+            float prefabpanierZ = prefabPanier.transform.position.z;
+            if (isInsinePlatform(prefabPanier.transform.position) && prefabProjection.activeSelf == false)
+            {
+                prefabProjection.transform.position = new Vector3(prefabpanierX, platform.transform.position.y, prefabpanierZ);
+                prefabProjection.SetActive(true);
+                prefabProjection.transform.GetChild(0).transform.gameObject.GetComponent<MeshRenderer>().material.color = new Color(1f, 1f, 1f, 0.5f);
+                                                                           /*prefabProjection.transform.GetChild(0).transform.gameObject.GetComponent<MeshRenderer>().material.color.r,
+                                                                            prefabProjection.transform.GetChild(0).transform.gameObject.GetComponent<MeshRenderer>().material.color.g,
+                                                                            prefabProjection.transform.GetChild(0).transform.gameObject.GetComponent<MeshRenderer>().material.color.b, 0f);*/
+                Debug.Log(prefabProjection.transform.GetChild(0).transform.gameObject.GetComponent<MeshRenderer>().material.color);
+            }
+            else if (isInsinePlatform(prefabPanier.transform.position) && prefabProjection.activeSelf == true)
+            {
+                prefabProjection.transform.position = new Vector3(prefabpanierX, platform.transform.position.y, prefabpanierZ);
+            }
+            else if (prefabProjection.activeSelf == true)
+            {
+                prefabProjection.SetActive(false);
+            }
+            yield return 0;
+        }
+
+        
     }
 
     public void UnholdPrefabPanier()
     {
+        StopCoroutine("ProjectionPrefabPanier");
         float prefabpanierX = prefabPanier.transform.position.x;
         float prefabpanierZ = prefabPanier.transform.position.z;
         //Si le prefab est dans la gamezone.platform
         if (isInsinePlatform(prefabPanier.transform.position))
         {
-            Debug.Log("Instantiation");
             GameObject go = (GameObject)Instantiate(prefabPlatform, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
             go.transform.parent = platform.transform;
-            //go.transform.position = Quaternion.Euler(0, ellipse.eulerAngles.y, 0) * go.transform.position;
             go.transform.localPosition = new Vector3((prefabpanierX-platform.transform.position.x)*50.0f, 0.0f, (prefabpanierZ-platform.transform.position.z)*50.0f);
-            Debug.Log(go.transform.localPosition);
-            go.transform.localPosition = Quaternion.Euler(0, ellipse.eulerAngles.y, 0) * go.transform.localPosition;
-            Debug.Log(go.transform.localPosition);
+            go.transform.localPosition = Quaternion.Euler(0, platform.transform.eulerAngles.y, 0) * go.transform.localPosition;
             Vector3 scale = platform.transform.GetChild(0).localScale;
             go.transform.localScale = scale;
             if(go.GetComponent<ProducteurClass>() != null)
@@ -69,27 +105,20 @@ public class CreateSiteProd : MonoBehaviour
 
     public bool isInsinePlatform(Vector3 pointToTest)
     {
-        Debug.Log("Debut du test");
-        if (ellipse == null)
+        if (platform.transform == null)
         {
             Debug.Log("Ellipse null");
             return false;
         }
         const float long_diameter = 0.3f;
         const float small_diameter = 0.2f;
-        pointToTest = pointToTest - ellipse.position; //Angle 0
-        Debug.Log(pointToTest);
-        Debug.Log(ellipse.eulerAngles.y);
-        pointToTest = Quaternion.Euler(0, ellipse.eulerAngles.y, 0) * pointToTest; //Angle X
-        Debug.Log(pointToTest);
+        pointToTest = pointToTest - platform.transform.position; //Angle 0
+        pointToTest = Quaternion.Euler(0, platform.transform.eulerAngles.y, 0) * pointToTest; //Angle X
         float equation = Mathf.Pow(pointToTest.x, 2.0f) / Mathf.Pow(long_diameter, 2.0f) + Mathf.Pow(pointToTest.z, 2.0f) / Mathf.Pow(small_diameter, 2.0f);
-        Debug.Log(equation);
         if (equation <= 1.0f)
         {
-            Debug.Log("True");
             return true;
         }
-        Debug.Log("False");
         return false;
     }
 }
