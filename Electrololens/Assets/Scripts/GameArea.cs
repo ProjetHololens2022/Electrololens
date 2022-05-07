@@ -11,11 +11,17 @@ public class GameArea : MonoBehaviour
     private GameObject panier;
     [SerializeField]
     private GameObject tools;
+    [SerializeField]
+    private GameObject dock;
+    [SerializeField]
+    private GameObject infopanel;
 
     void Start(){
         platform.SetActive(false);
         panier.SetActive(false);
         tools.SetActive(false);
+        dock.SetActive(false);
+        infopanel.SetActive(false);
     }
 
     public void LockPlace(){
@@ -24,6 +30,8 @@ public class GameArea : MonoBehaviour
         platform.SetActive(true);
         panier.SetActive(true);
         tools.SetActive(true);
+        dock.SetActive(true);
+        infopanel.SetActive(true);
         for(int i = 0; i < platform.transform.childCount; ++i){
             StartCoroutine(popPunsPlatform(platform.transform.GetChild(i)));
             if(platform.transform.GetChild(i).GetComponent<ProducteurClass>() != null)

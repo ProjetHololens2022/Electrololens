@@ -216,10 +216,10 @@ public class ProducteurClass : MonoBehaviour
         setProduction();
         if (infoProducteur != null
             && infoProducteur.getProgressEtatLoadingBar() != null
-                && infoProducteur.getProgressConsoLoadingBar() != null
+                && infoProducteur.getProgressProdLoadingBar() != null
                     && infoProducteur.getProgressEmissionLoadingBar() != null)
         {
-            infoProducteur.updateLoadingBar(infoProducteur.getProgressConsoLoadingBar(), production / 100.0);
+            infoProducteur.updateLoadingBar(infoProducteur.getProgressProdLoadingBar(), production / 100.0);
             infoProducteur.updateLoadingBar(infoProducteur.getProgressEtatLoadingBar(), etat / 100.0);
             infoProducteur.updateLoadingBar(infoProducteur.getProgressEmissionLoadingBar(), emissionCO2 / 100.0);
         }
@@ -230,10 +230,10 @@ public class ProducteurClass : MonoBehaviour
     {
         if (infoProducteur != null
             && infoProducteur.getProgressEtatLoadingBar() != null
-                && infoProducteur.getProgressConsoLoadingBar() != null
-                    && infoProducteur.getProgressConsoLoadingBar() != null)
+                && infoProducteur.getProgressProdLoadingBar() != null
+                    && infoProducteur.getProgressProdLoadingBar() != null)
         {
-            infoProducteur.closeProgressAsync(infoProducteur.getProgressConsoLoadingBar());
+            infoProducteur.closeProgressAsync(infoProducteur.getProgressProdLoadingBar());
             infoProducteur.closeProgressAsync(infoProducteur.getProgressEtatLoadingBar());
             infoProducteur.closeProgressAsync(infoProducteur.getProgressEmissionLoadingBar());
         }
