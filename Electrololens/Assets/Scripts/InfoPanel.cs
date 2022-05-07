@@ -16,10 +16,11 @@ public class InfoPanel : MonoBehaviour
 
     private int maxPol = 1500;
 
-    void getAllAgents()
+    int getAllAgents()
     {
         cons = GameObject.FindGameObjectsWithTag("Consumer");
         prod = GameObject.FindGameObjectsWithTag("Producer");
+        return cons.Length + prod.Length;
     }
 
     double getPollutionCons(GameObject c)
@@ -34,20 +35,21 @@ public class InfoPanel : MonoBehaviour
 
     public void getAllPollution()
     {
-        Debug.LogWarning("getall");
         double consPol = 0;
         double prodPol = 0;
         foreach (var c in cons)
         {
-           consPol = getPollutionCons(c);
+           consPol += getPollutionCons(c);
         }
         foreach (var p in prod)
         {
-            prodPol = getPollutionProd(p);
+            prodPol += getPollutionProd(p);
         }
 
         double percentPol = (consPol + prodPol / maxPol) * 100.0;
-        Debug.Log(percentPol);
+        Debug.Log("cons : " + consPol);
+        Debug.Log("prod : " + prodPol);
+        Debug.Log("total : " + (consPol + prodPol));
     }
 
 

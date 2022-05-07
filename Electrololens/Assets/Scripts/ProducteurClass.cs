@@ -33,18 +33,15 @@ public class ProducteurClass : MonoBehaviour
 
     private double pollution = 0;
 
-    private double beforeEmissionC02;
-    private double beforeetat;
-    private double beforeprod;
+    private double productionEvent = 0.0;
+    private double emissionCO2Event = 0.0;
+    private double etatEvent = 0.0;
 
     public void Start()
     {
         etat = 100;
         production = 75;
         emissionCO2 = 0;
-        beforeetat = etat;
-        beforeprod = production;
-        beforeEmissionC02 = emissionCO2;
 
         infoProducteur = infoProducteurGO.GetComponent<InfoProducteur>();
         updateProgessValues();
@@ -53,13 +50,13 @@ public class ProducteurClass : MonoBehaviour
 
     void Update()
     {
-        if(etat > 50){
+        if(getEtat() > 50){
             this.transform.Find("Sphere").GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0.0f,1.0f,0.0f,1.0f)*10.0f);
             production = MaxProduction();
-        } else if(etat <= 50 && etat > 20) {
+        } else if(getEtat() <= 50 && getEtat() > 20) {
             this.transform.Find("Sphere").GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0.742f,0.742f,0.0f,1.0f)*10.0f);
             production = MaxProduction()/2.0;
-        } else if(etat <= 20) {
+        } else if(getEtat() <= 20) {
             this.transform.Find("Sphere").GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(1.0f,0.0f,0.0f,1.0f)*10.0f);
             production = 0.0;
         }
@@ -84,6 +81,11 @@ public class ProducteurClass : MonoBehaviour
         return type;
     }
 
+    public double getEtat()
+    {
+        return etat + etatEvent > 0.0 ? etat + etatEvent : 0.0;
+    }
+
     public double MaxProduction(){
         switch (type)
         {
@@ -101,7 +103,7 @@ public class ProducteurClass : MonoBehaviour
 
     public double getProduction()
     {
-        return production;
+        return production + productionEvent > 0.0 ? production + productionEvent : 0.0;
     }
 
     public void setProduction(double production)
@@ -111,7 +113,7 @@ public class ProducteurClass : MonoBehaviour
 
     public double getEmissionCO2()
     {
-        return emissionCO2;
+        return emissionCO2 + emissionCO2Event > 0.0 ? emissionCO2 + emissionCO2Event : 0.0;
     }
 
     public void startDegradation()
@@ -127,7 +129,7 @@ public class ProducteurClass : MonoBehaviour
             if(isConnected){
                 double randomDegrad = Random.Range(0, 5);
                 etat -= randomDegrad;
-                if (etat < 0)
+                if (getEtat() < 0)
                 {
                     etat = 0;
                 }
@@ -146,7 +148,7 @@ public class ProducteurClass : MonoBehaviour
     public void reparationEtat()
     {
         etat += 10;
-        if (etat > 100)
+        if (getEtat() > 100)
         {
             etat = 100;
         }
@@ -159,9 +161,9 @@ public class ProducteurClass : MonoBehaviour
         switch (typeProd)
         {
             case Type.Nucléaire:
-                if (etat != 100)
+                if (getEtat() != 100)
                 {
-                    pollution = ((100 - etat) * 12) + 12;
+                    pollution = ((100 - getEtat()) * 12) + 12;
 
                 }
                 else
@@ -170,9 +172,9 @@ public class ProducteurClass : MonoBehaviour
                 }
                 break;
             case Type.Eolien:
-                if (etat != 100)
+                if (getEtat() != 100)
                 {
-                    pollution = ((100 - etat) * 11) + 11;
+                    pollution = ((100 - getEtat()) * 11) + 11;
 
                 }
                 else
@@ -181,9 +183,9 @@ public class ProducteurClass : MonoBehaviour
                 }
                 break;
             case Type.Charbon:
-                if (etat != 100)
+                if (getEtat() != 100)
                 {
-                    pollution = ((100 - etat) * 852) + 852;
+                    pollution = ((100 - getEtat()) * 852) + 852;
 
                 }
                 else
@@ -192,9 +194,9 @@ public class ProducteurClass : MonoBehaviour
                 }
                 break;
             case Type.Solaire:
-                if (etat != 100)
+                if (getEtat() != 100)
                 {
-                    pollution = ((100 - etat) * 44) + 44;
+                    pollution = ((100 - getEtat()) * 44) + 44;
 
                 }
                 else
@@ -207,7 +209,7 @@ public class ProducteurClass : MonoBehaviour
 
     public void setProduction()
     {
-        emissionCO2 = (production / 100) * pollution;
+        emissionCO2 = (getProduction() / 100) * pollution;
         // Regler la production
     }
 
@@ -257,21 +259,17 @@ public class ProducteurClass : MonoBehaviour
         TypeEvent te = e.GetComponent<EventDockable>().typeEvent;
         Debug.Log(te);
 
-        beforeEmissionC02 = emissionCO2;
-        beforeetat = etat;
-        beforeprod = production;
-
         if (type == Type.Charbon)
         {
             if (te == TypeEvent.PENURIECHARBON)
             {
-                production -= 15;
-                emissionCO2 = 0;
+                productionEvent -= 15;
+                emissionCO2Event = 0;
             }
             if (te == TypeEvent.CENTRALEHS)
             {
-                production -= 15;
-                emissionCO2 += 5;
+                productionEvent -= 15;
+                emissionCO2Event += 5;
             }
         }
         
@@ -279,30 +277,30 @@ public class ProducteurClass : MonoBehaviour
         {
             if (te == TypeEvent.CENTRALEHS)
             {
-                    production -= 15;
-                    emissionCO2 += 5;
+                    productionEvent -= 15;
+                    emissionCO2Event += 5;
             }
             if (te == TypeEvent.PENURIEURANIUM)
             {
-                    production = 0;
+                    productionEvent = 0;
                     etat -= 25;
-                    emissionCO2 = 0;
+                    emissionCO2Event = 0;
             }
             if (te == TypeEvent.CANICULE)
             {
-                    production -= 45;
-                    emissionCO2 = 0;
+                    productionEvent -= 45;
+                    emissionCO2Event = 0;
                     etat -= 20;
             }
         }
         if (type == Type.Solaire && te == TypeEvent.PENURIESOLEIL)
         {
-            production -= 50;
+            productionEvent -= 50;
         }
         if (type == Type.Eolien && te == TypeEvent.PENURIEVENT)
         {
-            production -= 50;
-            emissionCO2 = 0;
+            productionEvent -= 50;
+            emissionCO2Event = 0;
             etat -= 10;
         }
 
@@ -321,45 +319,45 @@ public class ProducteurClass : MonoBehaviour
         {
             if (te == TypeEvent.PENURIECHARBON)
             {
-                production += 15;
-                emissionCO2 = beforeEmissionC02;
+                productionEvent += 15;
+                emissionCO2Event = 0;
             }
             if (te == TypeEvent.CENTRALEHS)
             {
-                production += 15;
-                    emissionCO2 -= 5;
+                productionEvent += 15;
+                emissionCO2Event -= 5;
             }
         }
         if(type == Type.Nucléaire)
         {
             if (te == TypeEvent.CENTRALEHS)
             {
-                production += 15;
-                emissionCO2 -= 5;
+                productionEvent += 15;
+                emissionCO2Event -= 5;
             }
             if (te == TypeEvent.PENURIEURANIUM)
             {
-                production = beforeprod;
-                etat += 25;
-                emissionCO2 = 0;
+                productionEvent = 0;
+                etatEvent += 25;
+                emissionCO2Event = 0;
 
             }
             if (te == TypeEvent.CANICULE)
             {
-                production += 45;
-                emissionCO2 = beforeEmissionC02;
-                etat += 20;
+                productionEvent += 45;
+                emissionCO2Event = 0;
+                etatEvent += 20;
             }
         }
         if(type == Type.Solaire && te == TypeEvent.PENURIESOLEIL)
         {
-            production += 50;
+            productionEvent += 50;
         }
         if(type == Type.Eolien && te == TypeEvent.PENURIEVENT)
         {
-            production += 50;
-            emissionCO2 = beforeEmissionC02;
-            etat += 10;
+            productionEvent += 50;
+            emissionCO2Event = 0;
+            etatEvent += 10;
         }
     }
 

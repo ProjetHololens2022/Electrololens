@@ -32,6 +32,7 @@ public class GameArea : MonoBehaviour
         tools.SetActive(true);
         dock.SetActive(true);
         infopanel.SetActive(true);
+
         for(int i = 0; i < platform.transform.childCount; ++i){
             StartCoroutine(popPunsPlatform(platform.transform.GetChild(i)));
             if(platform.transform.GetChild(i).GetComponent<ProducteurClass>() != null)
