@@ -149,13 +149,11 @@ public class ConsommateurClass : MonoBehaviour
 
     public void hideInfo()
     {
-        infoVilleGO.SetActive(false);
         closeProgressBar();
     }
 
     public void ApplyEvent(NoRotationDockable e)
     {
-        print("consommateur");
 
         TypeEvent te = e.GetComponent<EventDockable>().typeEvent;
 

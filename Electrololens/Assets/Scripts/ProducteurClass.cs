@@ -266,7 +266,6 @@ void Update()
 
     public void hideInfo()
     {
-        infoProducteurGO.SetActive(false);
         closeProgressBar();
     }
 
