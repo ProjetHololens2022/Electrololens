@@ -39,7 +39,6 @@ public class GameArea : MonoBehaviour
             {
                 platform.transform.GetChild(i).GetComponent<ProducteurClass>().startDegradation();
             }
-            
         }
         for(int i = 0; i < tools.transform.childCount; ++i){
             StartCoroutine(popPunsPlatform(tools.transform.GetChild(i)));

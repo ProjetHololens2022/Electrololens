@@ -50,6 +50,7 @@ public class InfoPanel : MonoBehaviour
         Debug.Log("cons : " + consPol);
         Debug.Log("prod : " + prodPol);
         Debug.Log("total : " + (consPol + prodPol));
+        infoRegion.GetComponentInChildren<ModifyDiagram>().updateValue(consPol + prodPol);
     }
 
 

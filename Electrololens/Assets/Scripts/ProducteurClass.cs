@@ -20,9 +20,9 @@ public class ProducteurClass : MonoBehaviour
     private string nom;
     [SerializeField]
     private Type type;
-    private double production;
-    private double emissionCO2;
-    private double etat;
+    private double production = 75.0;
+    private double emissionCO2 = 0.0;
+    private double etat = 100.0;
 
     public bool isConnected;
     public GameObject electricalNetwork;
@@ -39,13 +39,8 @@ public class ProducteurClass : MonoBehaviour
 
     public void Start()
     {
-        etat = 100;
-        production = 75;
-        emissionCO2 = 0;
-
         infoProducteur = infoProducteurGO.GetComponent<InfoProducteur>();
-        updateProgessValues();
-        closeProgressBar();
+        Debug.Log("start : " + getEmissionCO2());
     }
 
     void Update()
@@ -119,7 +114,6 @@ public class ProducteurClass : MonoBehaviour
     public void startDegradation()
     {
         StartCoroutine("degradationEtat");
-
     }
 
     IEnumerator degradationEtat()
@@ -207,15 +201,15 @@ public class ProducteurClass : MonoBehaviour
         }
     }
 
-    public void setProduction()
+    public void setEmissionCO2()
     {
         emissionCO2 = (getProduction() / 100) * pollution;
-        // Regler la production
+        
     }
 
     public void updateProgessValues()
     {
-        setProduction();
+        setEmissionCO2();
         if (infoProducteur != null
             && infoProducteur.getProgressEtatLoadingBar() != null
                 && infoProducteur.getProgressProdLoadingBar() != null

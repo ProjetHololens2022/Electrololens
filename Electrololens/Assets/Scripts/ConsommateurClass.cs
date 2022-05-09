@@ -29,6 +29,30 @@ public class ConsommateurClass : MonoBehaviour
     private GameObject infoVilleGO;
     private InfoVille infoVille;
 
+    void Start()
+    {
+
+        infoVille = infoVilleGO.GetComponent<InfoVille>();
+        randomizedCityData();
+        List<NoRotationDockable> events = GameObject.FindGameObjectWithTag("EventManager").GetComponent<EventManager>().GetEvents();
+        foreach (NoRotationDockable e in events)
+        {
+            ApplyEvent(e);
+        }
+    }
+
+    void Update()
+    {
+        if (!isConnected || GetApportElectricite() < getConsommation())
+        {
+            this.transform.Find("Sphere").GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(1.0f, 0.0f, 0.0f, 1.0f) * 10.0f);
+        }
+        else
+        {
+            this.transform.Find("Sphere").GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0.0f, 1.0f, 0.0f, 1.0f) * 10.0f);
+        }
+    }
+
     public string getNom()
     {
         return nom;
@@ -81,28 +105,6 @@ public class ConsommateurClass : MonoBehaviour
         this.emissionCO2 = emissionCO2;
     }
 
-    void Start()
-    {
-        // TODO : On start infoville's ProgressBar should be init
-        // It's not done, and it's why on the first attempt the values are 50% everywhere.
-       
-        infoVille = infoVilleGO.GetComponent<InfoVille>();
-        randomizedCityData();
-        updateProgessValues();
-        List<NoRotationDockable> events = GameObject.FindGameObjectWithTag("EventManager").GetComponent<EventManager>().GetEvents();
-        foreach(NoRotationDockable e in events){
-            ApplyEvent(e);
-        }
-    }
-
-    void Update()
-    {
-        if(!isConnected || GetApportElectricite() < getConsommation()){
-            this.transform.Find("Sphere").GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(1.0f,0.0f,0.0f,1.0f)*10.0f);
-        } else {
-            this.transform.Find("Sphere").GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0.0f,1.0f,0.0f,1.0f)*10.0f);
-        }
-    }
 
     void randomizedCityData()
     {
