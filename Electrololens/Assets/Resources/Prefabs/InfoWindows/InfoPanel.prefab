@@ -538,6 +538,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Second Diagramme
       objectReference: {fileID: 0}
+    - target: {fileID: 8053145775036841624, guid: e15c43b9a2608384d98e072259fd2b8f, type: 3}
+      propertyPath: m_Positions.Array.data[1].x
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 8806765288787594242, guid: e15c43b9a2608384d98e072259fd2b8f, type: 3}
       propertyPath: m_Name
       value: Foreground
