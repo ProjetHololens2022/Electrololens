@@ -13,12 +13,18 @@ public class GameArea : MonoBehaviour
     private GameObject tools;
     [SerializeField]
     private GameObject dock;
+    [SerializeField]
+    private GameObject buttonSave;
+    [SerializeField]
+    private GameObject buttonLoad;
 
     void Start(){
         platform.SetActive(false);
         panier.SetActive(false);
         tools.SetActive(false);
         dock.SetActive(false);
+        buttonSave.SetActive(false);
+        buttonLoad.SetActive(false);
     }
 
     public void LockPlace(){
@@ -28,6 +34,8 @@ public class GameArea : MonoBehaviour
         panier.SetActive(true);
         tools.SetActive(true);
         dock.SetActive(true);
+        buttonSave.SetActive(true);
+        buttonLoad.SetActive(true);
         for(int i = 0; i < platform.transform.childCount; ++i){
             StartCoroutine(popPunsPlatform(platform.transform.GetChild(i)));
             if(platform.transform.GetChild(i).GetComponent<ProducteurClass>() != null)

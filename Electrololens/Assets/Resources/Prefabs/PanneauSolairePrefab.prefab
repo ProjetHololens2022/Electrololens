@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 1097710940837712768}
   - component: {fileID: 7668924363068235161}
   - component: {fileID: 5458059749727694628}
+  - component: {fileID: 2132360069086779447}
   m_Layer: 0
   m_Name: PanneauSolairePrefab
   m_TagString: Untagged
@@ -257,7 +258,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 3
+  isConnected: 0
+  electricalNetwork: {fileID: 0}
   infoProducteurGO: {fileID: 1428672648390811440}
+--- !u!114 &2132360069086779447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2658830338614815400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b02a73f4d0240424c873a5929023c87a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isSaveable: 1
 --- !u!1 &3885463259350492226
 GameObject:
   m_ObjectHideFlags: 0

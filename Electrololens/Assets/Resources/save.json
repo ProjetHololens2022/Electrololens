@@ -1,0 +1,158 @@
+{
+    "objects": [
+        {
+            "instanceID": -2336,
+            "path": "CentraleNucleairePrefab",
+            "name": "CentraleNucleairePrefab",
+            "position": {
+                "x": 0.04174027591943741,
+                "y": -0.3499999940395355,
+                "z": 1.008229374885559
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": 280.5489501953125,
+                "z": 0.0
+            },
+            "type": "Nucléaire",
+            "scale": {
+                "x": 0.9961480498313904,
+                "y": 0.9961480498313904,
+                "z": 0.9961480498313904
+            },
+            "electricalNetwork": -4088
+        },
+        {
+            "instanceID": -2610,
+            "path": "UsineCharbonPrefab",
+            "name": "UsineCharbonPrefab",
+            "position": {
+                "x": 0.12806394696235658,
+                "y": -0.3499999940395355,
+                "z": 1.055999994277954
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": 141.3121795654297,
+                "z": 0.0
+            },
+            "type": "Charbon",
+            "scale": {
+                "x": 0.9961480498313904,
+                "y": 0.9961480498313904,
+                "z": 0.9961480498313904
+            },
+            "electricalNetwork": 0
+        },
+        {
+            "instanceID": -2884,
+            "path": "UsineCharbonPrefab (1)",
+            "name": "UsineCharbonPrefab (1)",
+            "position": {
+                "x": -0.20469744503498078,
+                "y": -0.3499999940395355,
+                "z": 0.8819906115531921
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": 91.8746566772461,
+                "z": 0.0
+            },
+            "type": "Charbon",
+            "scale": {
+                "x": 0.9961480498313904,
+                "y": 0.9961480498313904,
+                "z": 0.9961480498313904
+            },
+            "electricalNetwork": 0
+        },
+        {
+            "instanceID": -3158,
+            "path": "Paris",
+            "name": "Paris",
+            "position": {
+                "x": 0.1602032333612442,
+                "y": -0.3499999940395355,
+                "z": 0.9080921411514282
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": 106.44727325439453,
+                "z": 0.0
+            },
+            "type": "ConsommateurClass",
+            "scale": {
+                "x": 0.9961480498313904,
+                "y": 0.9961480498313904,
+                "z": 0.9961480498313904
+            },
+            "electricalNetwork": 0
+        },
+        {
+            "instanceID": -3464,
+            "path": "Chambery",
+            "name": "Chambery",
+            "position": {
+                "x": 0.0015118069713935257,
+                "y": -0.3499999940395355,
+                "z": 0.8849858641624451
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": 318.55810546875,
+                "z": 0.0
+            },
+            "type": "ConsommateurClass",
+            "scale": {
+                "x": 0.9961480498313904,
+                "y": 0.9961480498313904,
+                "z": 0.9961480498313904
+            },
+            "electricalNetwork": -4088
+        },
+        {
+            "instanceID": -3770,
+            "path": "Tourcquoin",
+            "name": "Tourcquoin",
+            "position": {
+                "x": -0.003938284702599049,
+                "y": -0.3499999940395355,
+                "z": 1.1040897369384766
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": 69.36394500732422,
+                "z": 0.0
+            },
+            "type": "ConsommateurClass",
+            "scale": {
+                "x": 0.9961480498313904,
+                "y": 0.9961480498313904,
+                "z": 0.9961480498313904
+            },
+            "electricalNetwork": 0
+        },
+        {
+            "instanceID": -4088,
+            "path": "BigElectricPolePrefab",
+            "name": "BigElectricPolePrefab",
+            "position": {
+                "x": 0.03192911669611931,
+                "y": -0.3499999940395355,
+                "z": 0.9593542218208313
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": 358.6132507324219,
+                "z": 0.0
+            },
+            "type": "ElectricalNetwork",
+            "scale": {
+                "x": 0.9961480498313904,
+                "y": 0.9961480498313904,
+                "z": 0.9961480498313904
+            },
+            "electricalNetwork": 0
+        }
+    ]
+}

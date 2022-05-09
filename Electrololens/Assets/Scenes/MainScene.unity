@@ -951,6 +951,26 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 877172017285111941, guid: 9e20f04be40247f4ab40ac2809e598c3, type: 3}
+      propertyPath: city
+      value: 
+      objectReference: {fileID: 2673552605051517129, guid: 7490065cf5cd66146a1944e106eac24a, type: 3}
+    - target: {fileID: 877172017285111941, guid: 9e20f04be40247f4ab40ac2809e598c3, type: 3}
+      propertyPath: Eolien
+      value: 
+      objectReference: {fileID: 6503761634230612836, guid: 4d62969bde1924946a0611429b085b54, type: 3}
+    - target: {fileID: 877172017285111941, guid: 9e20f04be40247f4ab40ac2809e598c3, type: 3}
+      propertyPath: Charbon
+      value: 
+      objectReference: {fileID: 2658830338614815400, guid: 4c95a6eaabf83494199122e2e263ca1d, type: 3}
+    - target: {fileID: 877172017285111941, guid: 9e20f04be40247f4ab40ac2809e598c3, type: 3}
+      propertyPath: Solaire
+      value: 
+      objectReference: {fileID: 2658830338614815400, guid: f8ed6fcb7d55ab8459b430a2609600dd, type: 3}
+    - target: {fileID: 877172017285111941, guid: 9e20f04be40247f4ab40ac2809e598c3, type: 3}
+      propertyPath: "Nucl\xE9aire"
+      value: 
+      objectReference: {fileID: 506657874716124142, guid: adda42b160be4e04a8de9b8d76bd4376, type: 3}
     - target: {fileID: 978044574231017189, guid: 9e20f04be40247f4ab40ac2809e598c3, type: 3}
       propertyPath: m_Mesh
       value: 

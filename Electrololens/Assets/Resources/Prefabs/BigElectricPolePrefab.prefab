@@ -129,6 +129,7 @@ GameObject:
   - component: {fileID: 6821871398188725730}
   - component: {fileID: 1288351058287463102}
   - component: {fileID: 4578591752561351275}
+  - component: {fileID: 4644368315090303894}
   m_Layer: 0
   m_Name: BigElectricPolePrefab
   m_TagString: Untagged
@@ -313,6 +314,19 @@ MonoBehaviour:
   proximityType: 3
   constraintOnRotation: 5
   useLocalSpaceForConstraint: 0
+--- !u!114 &4644368315090303894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6535539084303725200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b02a73f4d0240424c873a5929023c87a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isSaveable: 1
 --- !u!1001 &6492817199499758279
 PrefabInstance:
   m_ObjectHideFlags: 0
