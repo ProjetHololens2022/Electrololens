@@ -9,6 +9,8 @@ TagManager:
   - Consumer
   - City
   - EventManager
+  - Nucleaire
+  - GraphManager
   layers:
   - Default
   - TransparentFX

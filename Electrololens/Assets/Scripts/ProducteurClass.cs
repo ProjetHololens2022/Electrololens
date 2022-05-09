@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Microsoft.MixedReality.Toolkit.UI;
 using Microsoft.MixedReality.Toolkit.Experimental.UI;
+using System.IO;
 
 public enum Type
 {
@@ -13,6 +14,19 @@ public enum Type
     Hydroélectrique
 }
 
+[System.Serializable]
+public struct donneesEmissionCo2
+{
+    public string name;
+    public string emission;
+}
+
+[System.Serializable]
+public struct ensembleDonnees
+{
+    public List<donneesEmissionCo2> emissionCO2;
+}
+
 public class ProducteurClass : MonoBehaviour
 {
 
@@ -20,9 +34,9 @@ public class ProducteurClass : MonoBehaviour
     private string nom;
     [SerializeField]
     private Type type;
-    private double production;
-    private double emissionCO2;
-    private double etat;
+    private double production = 75.0;
+    private double emissionCO2 = 0.0;
+    private double etat = 100.0;
 
     public bool isConnected;
     public GameObject electricalNetwork;
@@ -33,33 +47,29 @@ public class ProducteurClass : MonoBehaviour
 
     private double pollution = 0;
 
-    private double beforeEmissionC02;
-    private double beforeetat;
-    private double beforeprod;
+    private double productionEvent = 0.0;
+    private double emissionCO2Event = 0.0;
+    private double etatEvent = 0.0;
+
+    public string jsonString;
 
     public void Start()
     {
-        etat = 100;
-        production = 75;
-        emissionCO2 = 0;
-        beforeetat = etat;
-        beforeprod = production;
-        beforeEmissionC02 = emissionCO2;
-
         infoProducteur = infoProducteurGO.GetComponent<InfoProducteur>();
-        updateProgessValues();
-        closeProgressBar();
-    }
+        calculPollution();
+        setEmissionCO2();
+        Debug.Log("start : " + getEmissionCO2());
+}
 
-    void Update()
+void Update()
     {
-        if(etat > 50){
+        if(getEtat() > 50){
             this.transform.Find("Sphere").GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0.0f,1.0f,0.0f,1.0f)*10.0f);
             production = MaxProduction();
-        } else if(etat <= 50 && etat > 20) {
+        } else if(getEtat() <= 50 && getEtat() > 20) {
             this.transform.Find("Sphere").GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0.742f,0.742f,0.0f,1.0f)*10.0f);
             production = MaxProduction()/2.0;
-        } else if(etat <= 20) {
+        } else if(getEtat() <= 20) {
             this.transform.Find("Sphere").GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(1.0f,0.0f,0.0f,1.0f)*10.0f);
             production = 0.0;
         }
@@ -84,6 +94,12 @@ public class ProducteurClass : MonoBehaviour
         return type;
     }
 
+    public double getEtat()
+    {
+        return etat + etatEvent > 0.0 ? etat + etatEvent : 0.0;
+        
+    }
+
     public double MaxProduction(){
         switch (type)
         {
@@ -101,7 +117,7 @@ public class ProducteurClass : MonoBehaviour
 
     public double getProduction()
     {
-        return production;
+        return production + productionEvent > 0.0 ? production + productionEvent : 0.0;
     }
 
     public void setProduction(double production)
@@ -111,13 +127,12 @@ public class ProducteurClass : MonoBehaviour
 
     public double getEmissionCO2()
     {
-        return emissionCO2;
+        return emissionCO2 + emissionCO2Event > 0.0 ? emissionCO2 + emissionCO2Event : 0.0;
     }
 
     public void startDegradation()
     {
         StartCoroutine("degradationEtat");
-
     }
 
     public double getEtat()
@@ -137,7 +152,7 @@ public class ProducteurClass : MonoBehaviour
             if(isConnected){
                 double randomDegrad = Random.Range(0, 5);
                 etat -= randomDegrad;
-                if (etat < 0)
+                if (getEtat() < 0)
                 {
                     etat = 0;
                 }
@@ -156,7 +171,7 @@ public class ProducteurClass : MonoBehaviour
     public void reparationEtat()
     {
         etat += 10;
-        if (etat > 100)
+        if (getEtat() > 100)
         {
             etat = 100;
         }
@@ -166,59 +181,64 @@ public class ProducteurClass : MonoBehaviour
     public void calculPollution()
     {
         Type typeProd = type;
+        int pollutionSiteProd = 0;
         switch (typeProd)
         {
             case Type.Nucléaire:
-                if (etat != 100)
+                pollutionSiteProd = getEmissionCo2("Centrale nucléaire");
+                if (getEtat() != 100)
                 {
-                    pollution = ((100 - etat) * 12) + 12;
+                    pollution = ((100 - getEtat()) * pollutionSiteProd) + pollutionSiteProd;
 
                 }
                 else
                 {
-                    pollution = 12;
+                    pollution = pollutionSiteProd;
                 }
                 break;
             case Type.Eolien:
-                if (etat != 100)
+                pollutionSiteProd = getEmissionCo2("Eoliéenne");
+                if (getEtat() != 100)
                 {
-                    pollution = ((100 - etat) * 11) + 11;
+                    pollution = ((100 - getEtat()) * pollutionSiteProd) + pollutionSiteProd;
 
                 }
                 else
                 {
-                    pollution = 11;
+                    pollution = pollutionSiteProd;
                 }
                 break;
             case Type.Charbon:
-                if (etat != 100)
+                pollutionSiteProd = getEmissionCo2("Usine à charbon");
+                if (getEtat() != 100)
                 {
-                    pollution = ((100 - etat) * 852) + 852;
+                    Debug.Log(pollutionSiteProd);
+                    pollution = ((100 - getEtat()) * pollutionSiteProd) + pollutionSiteProd;
 
                 }
                 else
                 {
-                    pollution = 852;
+                    pollution = pollutionSiteProd;
                 }
                 break;
             case Type.Solaire:
-                if (etat != 100)
+                pollutionSiteProd = getEmissionCo2("Panneaux solaires");
+                if (getEtat() != 100)
                 {
-                    pollution = ((100 - etat) * 44) + 44;
+                    pollution = ((100 - getEtat()) * pollutionSiteProd) + pollutionSiteProd;
 
                 }
                 else
                 {
-                    pollution = 44;
+                    pollution = pollutionSiteProd;
                 }
                 break;
         }
     }
 
-    public void setProduction()
+    public void setEmissionCO2()
     {
-        emissionCO2 = (production / 100) * pollution;
-        // Regler la production
+        emissionCO2 = (getProduction() / 100) * pollution;
     }
 
     public void setVraiProduction(double production)
@@ -228,7 +248,7 @@ public class ProducteurClass : MonoBehaviour
 
     public void updateProgessValues()
     {
-        setProduction();
+        setEmissionCO2();
         if (infoProducteur != null
             && infoProducteur.getProgressEtatLoadingBar() != null
                 && infoProducteur.getProgressProdLoadingBar() != null
@@ -256,13 +276,11 @@ public class ProducteurClass : MonoBehaviour
 
     public void showInfo()
     {
-        updateProgessValues();
-        infoProducteurGO.SetActive(true);
+        GameObject.FindGameObjectWithTag("GraphManager").SendMessage("showDiag", TypeAgent.CONSUMER);
     }
 
     public void hideInfo()
     {
-        infoProducteurGO.SetActive(false);
         closeProgressBar();
     }
 
@@ -272,21 +290,17 @@ public class ProducteurClass : MonoBehaviour
         TypeEvent te = e.GetComponent<EventDockable>().typeEvent;
         Debug.Log(te);
 
-        beforeEmissionC02 = emissionCO2;
-        beforeetat = etat;
-        beforeprod = production;
-
         if (type == Type.Charbon)
         {
             if (te == TypeEvent.PENURIECHARBON)
             {
-                production -= 15;
-                emissionCO2 = 0;
+                productionEvent -= 15;
+                emissionCO2Event = 0;
             }
             if (te == TypeEvent.CENTRALEHS)
             {
-                production -= 15;
-                emissionCO2 += 5;
+                productionEvent -= 15;
+                emissionCO2Event += 5;
             }
         }
         
@@ -294,30 +308,30 @@ public class ProducteurClass : MonoBehaviour
         {
             if (te == TypeEvent.CENTRALEHS)
             {
-                    production -= 15;
-                    emissionCO2 += 5;
+                    productionEvent -= 15;
+                    emissionCO2Event += 5;
             }
             if (te == TypeEvent.PENURIEURANIUM)
             {
-                    production = 0;
+                    productionEvent = 0;
                     etat -= 25;
-                    emissionCO2 = 0;
+                    emissionCO2Event = 0;
             }
             if (te == TypeEvent.CANICULE)
             {
-                    production -= 45;
-                    emissionCO2 = 0;
+                    productionEvent -= 45;
+                    emissionCO2Event = 0;
                     etat -= 20;
             }
         }
         if (type == Type.Solaire && te == TypeEvent.PENURIESOLEIL)
         {
-            production -= 50;
+            productionEvent -= 50;
         }
         if (type == Type.Eolien && te == TypeEvent.PENURIEVENT)
         {
-            production -= 50;
-            emissionCO2 = 0;
+            productionEvent -= 50;
+            emissionCO2Event = 0;
             etat -= 10;
         }
 
@@ -336,46 +350,66 @@ public class ProducteurClass : MonoBehaviour
         {
             if (te == TypeEvent.PENURIECHARBON)
             {
-                production += 15;
-                emissionCO2 = beforeEmissionC02;
+                productionEvent += 15;
+                emissionCO2Event = 0;
             }
             if (te == TypeEvent.CENTRALEHS)
             {
-                production += 15;
-                    emissionCO2 -= 5;
+                productionEvent += 15;
+                emissionCO2Event -= 5;
             }
         }
         if(type == Type.Nucléaire)
         {
             if (te == TypeEvent.CENTRALEHS)
             {
-                production += 15;
-                emissionCO2 -= 5;
+                productionEvent += 15;
+                emissionCO2Event -= 5;
             }
             if (te == TypeEvent.PENURIEURANIUM)
             {
-                production = beforeprod;
-                etat += 25;
-                emissionCO2 = 0;
+                productionEvent = 0;
+                etatEvent += 25;
+                emissionCO2Event = 0;
 
             }
             if (te == TypeEvent.CANICULE)
             {
-                production += 45;
-                emissionCO2 = beforeEmissionC02;
-                etat += 20;
+                productionEvent += 45;
+                emissionCO2Event = 0;
+                etatEvent += 20;
             }
         }
         if(type == Type.Solaire && te == TypeEvent.PENURIESOLEIL)
         {
-            production += 50;
+            productionEvent += 50;
         }
         if(type == Type.Eolien && te == TypeEvent.PENURIEVENT)
         {
-            production += 50;
-            emissionCO2 = beforeEmissionC02;
-            etat += 10;
+            productionEvent += 50;
+            emissionCO2Event = 0;
+            etatEvent += 10;
         }
     }
 
+    public void Delete(){
+        if(isConnected){
+            this.electricalNetwork.GetComponent<ElectricalNetwork>().disconnect(this.gameObject);
+        }
+        Destroy(this.gameObject);
+    }
+
+    public int getEmissionCo2(string typeProd)
+    {
+        string json = File.ReadAllText(Application.dataPath + "/Resources/données.json");
+        ensembleDonnees s = JsonUtility.FromJson<ensembleDonnees>(json);
+        foreach (donneesEmissionCo2 donneeProd in s.emissionCO2)
+        {
+            if (typeProd == donneeProd.name)
+            {
+                return int.Parse(donneeProd.emission);
+            }
+        }
+        return 0;
+    }
 }

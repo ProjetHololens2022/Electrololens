@@ -17,6 +17,8 @@ public class GameArea : MonoBehaviour
     private GameObject buttonSave;
     [SerializeField]
     private GameObject buttonLoad;
+    [SerializeField]
+    private GameObject infopanel;
 
     void Start(){
         platform.SetActive(false);
@@ -36,13 +38,14 @@ public class GameArea : MonoBehaviour
         dock.SetActive(true);
         buttonSave.SetActive(true);
         buttonLoad.SetActive(true);
+        infopanel.SetActive(true);
+
         for(int i = 0; i < platform.transform.childCount; ++i){
             StartCoroutine(popPunsPlatform(platform.transform.GetChild(i)));
             if(platform.transform.GetChild(i).GetComponent<ProducteurClass>() != null)
             {
                 platform.transform.GetChild(i).GetComponent<ProducteurClass>().startDegradation();
             }
-            
         }
         for(int i = 0; i < tools.transform.childCount; ++i){
             StartCoroutine(popPunsPlatform(tools.transform.GetChild(i)));
@@ -58,7 +61,9 @@ public class GameArea : MonoBehaviour
         float time = 0.5f;
         float rotation = 0.0f;
         float baseAngle = child.eulerAngles.y;
-        while(scale < 1.0f){
+
+        while(scale < 1.0f)
+        {
             child.localScale = new Vector3(scale,scale,scale);
             child.rotation = Quaternion.Euler(0,rotation + baseAngle,0);
             yield return 0;
