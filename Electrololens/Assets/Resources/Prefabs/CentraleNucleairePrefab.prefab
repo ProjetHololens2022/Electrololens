@@ -277,7 +277,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
+  isConnected: 0
+  electricalNetwork: {fileID: 0}
   infoProducteurGO: {fileID: 4764481099214662851}
+  jsonString: 
 --- !u!1 &8514073359432797600
 GameObject:
   m_ObjectHideFlags: 0
