@@ -261,7 +261,7 @@ void Update()
 
     public void showInfo()
     {
-        GameObject.FindGameObjectWithTag("GraphManager").SendMessage("showDiag", TypeAgent.CONSUMER);
+        GameObject.FindGameObjectWithTag("GraphManager").SendMessage("showProducer", this);
     }
 
     public void hideInfo()

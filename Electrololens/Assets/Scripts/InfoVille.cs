@@ -16,6 +16,8 @@ public class InfoVille : MonoBehaviour
     private IProgressIndicator progressConsoLoadingBar;
     private IProgressIndicator progressApportLoadingBar;
     private IProgressIndicator progressEmissionLoadingBar;
+
+    public double consommation
     // private int 
 
 
@@ -68,6 +70,16 @@ public class InfoVille : MonoBehaviour
                 await progressIndicator.CloseAsync();
             }
         }
+    }
+
+    void modifyDiag(double val, string unit, ModifyDiagram modDiag)
+    {
+        modDiag.updateValue(val, unit);
+    }
+
+    void modifyForeground(double val, ModifyDiagram modDiag)
+    {
+        modDiag.updateForegroud(val);
     }
 
 }

@@ -16,6 +16,9 @@ public class InfoPanel : MonoBehaviour
     private GameObject diagInfoRegion;
     private GameObject[] cons, prod;
 
+    private ConsommateurClass lastConsumer;
+    private ProducteurClass lastProducer;
+    private ElectricalNetwork lastElectricalNetwork;
 
 
     public void getAllPollution()
@@ -31,7 +34,7 @@ public class InfoPanel : MonoBehaviour
             prodPol += getPollutionProd(p);
         }
 
-        modifyDiag(consPol + prodPol, " Kg/CO2", diagInfoRegion.transform.GetChild(0).GetComponentInChildren<ModifyDiagram>());
+        modifyDiag(consPol + prodPol, " kg/an", diagInfoRegion.transform.GetChild(0).GetComponentInChildren<ModifyDiagram>());
     }
 
     void getAllEnergieProd()
@@ -94,6 +97,7 @@ public class InfoPanel : MonoBehaviour
         getAllPollution();
         getAllEnergieProd();
         getAllEnergiePerdue();
+        majConsumer();
     }
 
     int getAllAgents()
@@ -127,18 +131,28 @@ public class InfoPanel : MonoBehaviour
         return p.GetComponent<ProducteurClass>().MaxProduction();
     }
 
-    void showDiag(TypeAgent type)
-    {
-        switch(type)
-        {
-            case TypeAgent.CONSUMER:
-                infoProducteur.SetActive(false);
-                infoConsomateur.SetActive(true);
-                break;
-            case TypeAgent.PRODUCER:
-                infoConsomateur.SetActive(false);
-                infoProducteur.SetActive(true);
-                break;
-        }
+    void majConsumer(){
+        double consommation = lastConsumer.getConsommation();
+        double apport = lastConsumer.GetApportElectricite();
+        double pollution = lastConsumer.getEmissionCO2();
+        int nbHabitants = lastConsumer.getNbHabitants();
+        double tauxSatisfaction = lastConsumer.getTauxDeSatisfaction();
+        Transform diagrams = infoConsomateur.transform.GetChild(0);
+        infoConsomateur.modifyDiag(consommation,'kWh',diagrams.GetChild(0).GetComponent<ModifyDrag>());
+        infoConsomateur.modifyDiag(100.0*apport/consommation,"%",diagrams.GetChild(1).GetComponent<ModifyDrag>());
+        infoConsomateur.modifyForeground(100.0*apport/consommation,diagrams.GetChild(1).GetComponent<ModifyDrag>());
+        infoConsomateur.modifyDiag(pollution,"kg/an",diagrams.GetChild(2).GetComponent<ModifyDrag>());
+        infoConsomateur.modifyDiag(nbHabitants,"k",diagrams.GetChild(3).GetComponent<ModifyDrag>());
+    }
+
+    void showConsumer(ConsommateurClass consumer){
+        infoProducteur.SetActive(false);
+        infoConsomateur.SetActive(true);
+        lastConsumer = consumer;
+    }
+
+    void showProducer(ProducteurClass producer){
+        infoProducteur.SetActive(true);
+        infoConsomateur.SetActive(false);
     }
 }
