@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Microsoft.MixedReality.Toolkit.UI;
 using Microsoft.MixedReality.Toolkit.Experimental.UI;
+using System.IO;
 
 public enum Type
 {
@@ -11,6 +12,19 @@ public enum Type
     Eolien,
     Solaire,
     Hydroélectrique
+}
+
+[System.Serializable]
+public struct donneesEmissionCo2
+{
+    public string name;
+    public string emission;
+}
+
+[System.Serializable]
+public struct ensembleDonnees
+{
+    public List<donneesEmissionCo2> emissionCO2;
 }
 
 public class ProducteurClass : MonoBehaviour
@@ -37,15 +51,17 @@ public class ProducteurClass : MonoBehaviour
     private double emissionCO2Event = 0.0;
     private double etatEvent = 0.0;
 
+    public string jsonString;
+
     public void Start()
     {
         infoProducteur = infoProducteurGO.GetComponent<InfoProducteur>();
         calculPollution();
         setEmissionCO2();
         Debug.Log("start : " + getEmissionCO2());
-    }
+}
 
-    void Update()
+void Update()
     {
         if(getEtat() > 50){
             this.transform.Find("Sphere").GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0.0f,1.0f,0.0f,1.0f)*10.0f);
@@ -81,6 +97,7 @@ public class ProducteurClass : MonoBehaviour
     public double getEtat()
     {
         return etat + etatEvent > 0.0 ? etat + etatEvent : 0.0;
+        
     }
 
     public double MaxProduction(){
@@ -154,50 +171,56 @@ public class ProducteurClass : MonoBehaviour
     public void calculPollution()
     {
         Type typeProd = type;
+        int pollutionSiteProd = 0;
         switch (typeProd)
         {
             case Type.Nucléaire:
+                pollutionSiteProd = getEmissionCo2("Centrale nucléaire");
                 if (getEtat() != 100)
                 {
-                    pollution = ((100 - getEtat()) * 12) + 12;
+                    pollution = ((100 - getEtat()) * pollutionSiteProd) + pollutionSiteProd;
 
                 }
                 else
                 {
-                    pollution = 12;
+                    pollution = pollutionSiteProd;
                 }
                 break;
             case Type.Eolien:
+                pollutionSiteProd = getEmissionCo2("Eoliéenne");
                 if (getEtat() != 100)
                 {
-                    pollution = ((100 - getEtat()) * 11) + 11;
+                    pollution = ((100 - getEtat()) * pollutionSiteProd) + pollutionSiteProd;
 
                 }
                 else
                 {
-                    pollution = 11;
+                    pollution = pollutionSiteProd;
                 }
                 break;
             case Type.Charbon:
+                pollutionSiteProd = getEmissionCo2("Usine à charbon");
                 if (getEtat() != 100)
                 {
-                    pollution = ((100 - getEtat()) * 852) + 852;
+                    Debug.Log(pollutionSiteProd);
+                    pollution = ((100 - getEtat()) * pollutionSiteProd) + pollutionSiteProd;
 
                 }
                 else
                 {
-                    pollution = 852;
+                    pollution = pollutionSiteProd;
                 }
                 break;
             case Type.Solaire:
+                pollutionSiteProd = getEmissionCo2("Panneaux solaires");
                 if (getEtat() != 100)
                 {
-                    pollution = ((100 - getEtat()) * 44) + 44;
+                    pollution = ((100 - getEtat()) * pollutionSiteProd) + pollutionSiteProd;
 
                 }
                 else
                 {
-                    pollution = 44;
+                    pollution = pollutionSiteProd;
                 }
                 break;
         }
@@ -363,4 +386,17 @@ public class ProducteurClass : MonoBehaviour
         Destroy(this.gameObject);
     }
 
+    public int getEmissionCo2(string typeProd)
+    {
+        string json = File.ReadAllText(Application.dataPath + "/Resources/données.json");
+        ensembleDonnees s = JsonUtility.FromJson<ensembleDonnees>(json);
+        foreach (donneesEmissionCo2 donneeProd in s.emissionCO2)
+        {
+            if (typeProd == donneeProd.name)
+            {
+                return int.Parse(donneeProd.emission);
+            }
+        }
+        return 0;
+    }
 }

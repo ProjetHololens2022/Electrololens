@@ -1,0 +1,21 @@
+{
+	"emissionCO2":
+	[
+		{
+			"name":"Centrale nucléaire",
+			"emission":"12"
+		},
+		{
+			"name":"Usine à charbon",
+			"emission":"852"
+		},
+		{
+			"name":"Panneaux solaires",
+			"emission":"44"
+		},
+		{
+			"name":"Eoliéenne",
+			"emission":"11"
+		}
+	]
+}
