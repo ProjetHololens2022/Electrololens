@@ -60,10 +60,7 @@ public class CreateSiteProd : MonoBehaviour
             {
                 prefabProjection.transform.position = new Vector3(prefabpanierX, platform.transform.position.y, prefabpanierZ);
                 prefabProjection.SetActive(true);
-                prefabProjection.transform.GetChild(0).transform.gameObject.GetComponent<MeshRenderer>().material.color = new Color(1f, 1f, 1f, 0.5f);
-                                                                           /*prefabProjection.transform.GetChild(0).transform.gameObject.GetComponent<MeshRenderer>().material.color.r,
-                                                                            prefabProjection.transform.GetChild(0).transform.gameObject.GetComponent<MeshRenderer>().material.color.g,
-                                                                            prefabProjection.transform.GetChild(0).transform.gameObject.GetComponent<MeshRenderer>().material.color.b, 0f);*/
+                                          
                 Debug.Log(prefabProjection.transform.GetChild(0).transform.gameObject.GetComponent<MeshRenderer>().material.color);
             }
             else if (isInsinePlatform(prefabPanier.transform.position) && prefabProjection.activeSelf == true)
@@ -76,8 +73,6 @@ public class CreateSiteProd : MonoBehaviour
             }
             yield return 0;
         }
-
-        
     }
 
     public void UnholdPrefabPanier()

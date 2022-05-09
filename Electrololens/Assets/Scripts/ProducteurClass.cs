@@ -40,6 +40,8 @@ public class ProducteurClass : MonoBehaviour
     public void Start()
     {
         infoProducteur = infoProducteurGO.GetComponent<InfoProducteur>();
+        calculPollution();
+        setEmissionCO2();
         Debug.Log("start : " + getEmissionCO2());
     }
 
@@ -204,7 +206,6 @@ public class ProducteurClass : MonoBehaviour
     public void setEmissionCO2()
     {
         emissionCO2 = (getProduction() / 100) * pollution;
-        
     }
 
     public void updateProgessValues()

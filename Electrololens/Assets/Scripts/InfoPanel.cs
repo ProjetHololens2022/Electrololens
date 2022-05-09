@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,9 +13,88 @@ public class InfoPanel : MonoBehaviour
     [SerializeField]
     private GameObject infoConsomateur;
 
+    private GameObject diagInfoRegion;
     private GameObject[] cons, prod;
 
-    private int maxPol = 1500;
+
+
+    public void getAllPollution()
+    {
+        double consPol = 0;
+        double prodPol = 0;
+        foreach (var c in cons)
+        {
+            consPol += getPollutionCons(c);
+        }
+        foreach (var p in prod)
+        {
+            prodPol += getPollutionProd(p);
+        }
+
+        modifyDiag(consPol + prodPol, " Kg/CO2", diagInfoRegion.transform.GetChild(0).GetComponentInChildren<ModifyDiagram>());
+    }
+
+    void getAllEnergieProd()
+    {
+        double prodEnergie = 0.0;
+        double prodMax = 0.0;
+        foreach (var p in prod)
+        {
+            prodEnergie += getProductionProd(p);
+            prodMax += getMaxProductionProd(p);
+        }
+        double percentage = (prodEnergie / prodMax) * 100.0;
+        double realPercentage = Math.Round(percentage, 2);
+        modifyDiag(realPercentage, "%", diagInfoRegion.transform.GetChild(1).GetComponentInChildren<ModifyDiagram>());
+        modifyForeground(realPercentage / 100, diagInfoRegion.transform.GetChild(1).GetComponentInChildren<ModifyDiagram>());
+    }
+
+    void getAllEnergiePerdue()
+    {
+        double consEnergie = 0.0;
+        double prodEnergie = 0.0;
+        foreach (var p in prod)
+        {
+            prodEnergie += getProductionProd(p);
+        }
+        foreach (var c in cons)
+        {
+            consEnergie += getConsommationCons(c);
+        }
+        Debug.Log(prodEnergie + " " + consEnergie);
+        double percentage = ((prodEnergie - consEnergie) / prodEnergie) * 100.0;
+        double realPercentage = percentage >= 0.0 ? Math.Round(percentage, 2) : 0.0;
+        modifyDiag(realPercentage, "%", diagInfoRegion.transform.GetChild(2).GetComponentInChildren<ModifyDiagram>());
+
+        modifyForeground(realPercentage / 100, diagInfoRegion.transform.GetChild(2).GetComponentInChildren<ModifyDiagram>());
+    }
+
+    void modifyDiag(double val, string unit, ModifyDiagram modDiag)
+    {
+        modDiag.updateValue(val, unit);
+    }
+
+    void modifyForeground(double val, ModifyDiagram modDiag)
+    {
+        modDiag.updateForegroud(val);
+    }
+
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        diagInfoRegion = infoRegion.transform.GetChild(0).gameObject;
+        getAllAgents();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        getAllAgents();
+        getAllPollution();
+        getAllEnergieProd();
+        getAllEnergiePerdue();
+    }
 
     int getAllAgents()
     {
@@ -27,46 +107,23 @@ public class InfoPanel : MonoBehaviour
     {
         return c.GetComponent<ConsommateurClass>().getEmissionCO2();
     }
+    double getConsommationCons(GameObject c)
+    {
+        return c.GetComponent<ConsommateurClass>().getConsommation();
+    }
 
     double getPollutionProd(GameObject p)
     {
         return p.GetComponent<ProducteurClass>().getEmissionCO2();
     }
 
-    public void getAllPollution()
+    double getProductionProd(GameObject p)
     {
-        double consPol = 0;
-        double prodPol = 0;
-        foreach (var c in cons)
-        {
-           consPol += getPollutionCons(c);
-        }
-        foreach (var p in prod)
-        {
-            prodPol += getPollutionProd(p);
-        }
-
-        double percentPol = (consPol + prodPol / maxPol) * 100.0;
-        Debug.Log("cons : " + consPol);
-        Debug.Log("prod : " + prodPol);
-        Debug.Log("total : " + (consPol + prodPol));
-        infoRegion.GetComponentInChildren<ModifyDiagram>().updateValue(consPol + prodPol);
+        return p.GetComponent<ProducteurClass>().getProduction();
     }
 
-
-
-    // Start is called before the first frame update
-    void Start()
+    double getMaxProductionProd(GameObject p)
     {
-        Debug.Log("start");
-        getAllAgents();
-        getAllPollution();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        getAllAgents();
-        getAllPollution();
+        return p.GetComponent<ProducteurClass>().MaxProduction();
     }
 }
