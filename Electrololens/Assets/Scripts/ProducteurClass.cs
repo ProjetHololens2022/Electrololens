@@ -261,8 +261,7 @@ void Update()
 
     public void showInfo()
     {
-        updateProgessValues();
-        infoProducteurGO.SetActive(true);
+        GameObject.FindGameObjectWithTag("GraphManager").SendMessage("showDiag", TypeAgent.CONSUMER);
     }
 
     public void hideInfo()

@@ -144,8 +144,7 @@ public class ConsommateurClass : MonoBehaviour
 
     public void showInfo()
     {
-        updateProgessValues();
-        infoVilleGO.SetActive(true);
+        GameObject.FindGameObjectWithTag("GraphManager").GetComponent<InfoPanel>().SendMessage("showDiag", TypeAgent.CONSUMER);
     }
 
     public void hideInfo()

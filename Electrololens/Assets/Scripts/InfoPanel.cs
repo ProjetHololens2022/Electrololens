@@ -126,4 +126,19 @@ public class InfoPanel : MonoBehaviour
     {
         return p.GetComponent<ProducteurClass>().MaxProduction();
     }
+
+    void showDiag(TypeAgent type)
+    {
+        switch(type)
+        {
+            case TypeAgent.CONSUMER:
+                infoProducteur.SetActive(false);
+                infoConsomateur.SetActive(true);
+                break;
+            case TypeAgent.PRODUCER:
+                infoConsomateur.SetActive(false);
+                infoProducteur.SetActive(true);
+                break;
+        }
+    }
 }
