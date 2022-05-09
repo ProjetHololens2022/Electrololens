@@ -14,6 +14,15 @@ public struct ObjetScene{
     public string type;
     public Vector3 scale;
     public int electricalNetwork;
+    
+    public double production;
+    public double etat;
+
+    public double emissionCO2Ville;
+    public double consommation; //Besoin
+    public double apportElectricite; //Reçu
+    public double tauxDeSatisfaction;
+    public int nbHabitants;
     // public 
 }
 
@@ -75,8 +84,15 @@ public class SavePlayground : MonoBehaviour
                     if (go.GetComponent<ProducteurClass>()){
                         os.type = go.GetComponent<ProducteurClass>().getType().ToString();
                         os.electricalNetwork = go.GetComponent<ProducteurClass>().electricalNetwork.GetInstanceID();
+                        os.production = go.GetComponent<ProducteurClass>().getProduction();
+                        os.etat = go.GetComponent<ProducteurClass>().getEtat();
                     }else if (go.GetComponent<ConsommateurClass>()){
                         os.type = "ConsommateurClass";
+                        os.consommation = go.GetComponent<ConsommateurClass>().getConsommation();
+                        os.apportElectricite = go.GetComponent<ConsommateurClass>().GetApportElectricite();
+                        os.emissionCO2Ville = go.GetComponent<ConsommateurClass>().getEmissionCO2();
+                        os.tauxDeSatisfaction = go.GetComponent<ConsommateurClass>().getTauxDeSatisfaction();
+                        os.nbHabitants = go.GetComponent<ConsommateurClass>().getNbHabitants();
                         os.electricalNetwork = go.GetComponent<ConsommateurClass>().electricalNetwork.GetInstanceID();
                     }else if (go.GetComponent<ElectricalNetwork>()){
                         os.type = "ElectricalNetwork";
@@ -140,27 +156,48 @@ public class SavePlayground : MonoBehaviour
 
                 case "ElectricalNetwork":
                 go = electricPole;
-                poleDict.Add(os.instanceID, go);
+                //poleDict.Add(os.instanceID, go);
                 break;
             }
-            if (os.electricalNetwork != 0) {
-                if(!connectedDict.ContainsKey(os.electricalNetwork)){
-                    connectedDict.Add(os.electricalNetwork, new List<GameObject>());
-                }
-                    connectedDict[os.electricalNetwork].Add(go);
-                
-            }
+
 
             GameObject go2 = Instantiate(go, os.position, Quaternion.Euler(os.rotation));
             go2.transform.parent = platform.transform;
             go2.transform.localScale = os.scale;
             go2.name = os.name;
+            if (go2.GetComponent<ProducteurClass>())
+            {
+                go2.GetComponent<ProducteurClass>().setEtat(os.etat);
+                go2.GetComponent<ProducteurClass>().setVraiProduction(os.production);
+            }
+            else if (go2.GetComponent<ConsommateurClass>())
+            {
+                go2.GetComponent<ConsommateurClass>().setConsommation(os.consommation);
+                go2.GetComponent<ConsommateurClass>().SetApportElectricite(os.apportElectricite);
+                go2.GetComponent<ConsommateurClass>().setTauxDeSatisfaction(os.tauxDeSatisfaction);
+                go2.GetComponent<ConsommateurClass>().setNbHabitants(os.nbHabitants);
+                go2.GetComponent<ConsommateurClass>().setEmissionCO2(os.emissionCO2Ville);
+            }
+            if (os.electricalNetwork != 0)
+            {
+                if (!connectedDict.ContainsKey(os.electricalNetwork))
+                {
+                    connectedDict.Add(os.electricalNetwork, new List<GameObject>());
+                }
+                connectedDict[os.electricalNetwork].Add(go2);
+
+            }
+            if (os.type == "ElectricalNetwork")
+            {
+                poleDict.Add(os.instanceID, go2);
+            }
         }
 
-        foreach(var item in connectedDict)
+        foreach (var item in connectedDict)
         {
             print(item);
-            foreach(GameObject go3 in item.Value){
+            foreach (GameObject go3 in item.Value)
+            {
                 print(go3);
                 if (go3.GetComponent<ProducteurClass>())
                 {

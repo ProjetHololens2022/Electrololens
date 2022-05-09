@@ -347,7 +347,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: fa419ab56051229449e3b813df8f295f, type: 2}
     - target: {fileID: 3100657284780859328, guid: 9fb4b0e36a7281e42b8172c323f67bc7, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3100657284780859328, guid: 9fb4b0e36a7281e42b8172c323f67bc7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -990,7 +990,7 @@ PrefabInstance:
     - target: {fileID: 877172017285111941, guid: 9e20f04be40247f4ab40ac2809e598c3, type: 3}
       propertyPath: electricPole
       value: 
-      objectReference: {fileID: 2885080229997076956, guid: 60c0869e825b10341a3421ca8af3c725, type: 3}
+      objectReference: {fileID: 6535539084303725200, guid: b978024ecfd602b4489c2dcfab338bae, type: 3}
     - target: {fileID: 978044574231017189, guid: 9e20f04be40247f4ab40ac2809e598c3, type: 3}
       propertyPath: m_Mesh
       value: 
