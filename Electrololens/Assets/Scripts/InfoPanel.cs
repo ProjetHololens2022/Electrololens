@@ -138,11 +138,11 @@ public class InfoPanel : MonoBehaviour
         int nbHabitants = lastConsumer.getNbHabitants();
         double tauxSatisfaction = lastConsumer.getTauxDeSatisfaction();
         Transform diagrams = infoConsomateur.transform.GetChild(0);
-        infoConsomateur.modifyDiag(consommation,'kWh',diagrams.GetChild(0).GetComponent<ModifyDrag>());
-        infoConsomateur.modifyDiag(100.0*apport/consommation,"%",diagrams.GetChild(1).GetComponent<ModifyDrag>());
-        infoConsomateur.modifyForeground(100.0*apport/consommation,diagrams.GetChild(1).GetComponent<ModifyDrag>());
-        infoConsomateur.modifyDiag(pollution,"kg/an",diagrams.GetChild(2).GetComponent<ModifyDrag>());
-        infoConsomateur.modifyDiag(nbHabitants,"k",diagrams.GetChild(3).GetComponent<ModifyDrag>());
+        modifyDiag(consommation,"kWh",diagrams.GetChild(0).GetComponent<ModifyDiagram>());
+        modifyDiag(100.0*apport/consommation,"%",diagrams.GetChild(1).GetComponent<ModifyDiagram>());
+        modifyForeground(apport/consommation,diagrams.GetChild(1).GetComponent<ModifyDiagram>());
+        modifyDiag(pollution,"kg/an",diagrams.GetChild(2).GetComponent<ModifyDiagram>());
+        modifyDiag(nbHabitants,"k",diagrams.GetChild(3).GetComponent<ModifyDiagram>());
     }
 
     void showConsumer(ConsommateurClass consumer){

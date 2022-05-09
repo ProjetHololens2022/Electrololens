@@ -16,8 +16,7 @@ public class InfoVille : MonoBehaviour
     private IProgressIndicator progressConsoLoadingBar;
     private IProgressIndicator progressApportLoadingBar;
     private IProgressIndicator progressEmissionLoadingBar;
-
-    public double consommation
+    
     // private int 
 
 

@@ -114,6 +114,7 @@ public class ConsommateurClass : MonoBehaviour
         apportElectricite = 0.0;
         consommation = randomConsommation;
         emissionCO2 = randomEmissionCO2;
+        nbHabitants = Random.Range(0, 100);
     }
 
     public void updateProgessValues()
