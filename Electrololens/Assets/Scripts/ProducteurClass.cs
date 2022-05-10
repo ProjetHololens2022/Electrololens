@@ -135,7 +135,7 @@ void Update()
         StartCoroutine("degradationEtat");
     }
 
-    public double getEtat()
+    public double getBaseEtat()
     {
         return etat;
     }
