@@ -8,12 +8,12 @@ using System.Linq;
 
 public class ConsommateurClass : MonoBehaviour
 {
-    private string nom = "Chambéry";
-    private double consommation = 0.0; //Besoin
-    private double apportElectricite = 0.0; //Reçu
-    private double emissionCO2 = 0.0;
-    private double tauxDeSatisfaction = 0.0;
-    private int nbHabitants = 0;
+    private string nom;
+    private double consommation; //Besoin
+    private double apportElectricite; //Reçu
+    private double emissionCO2;
+    private double tauxDeSatisfaction;
+    private int nbHabitants;
 
     private double consommationEvent = 0.0; 
     private double apportElectriciteEvent = 0.0;
