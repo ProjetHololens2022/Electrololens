@@ -114,7 +114,7 @@ public class CreateSiteProd : MonoBehaviour
         const float small_diameter = 0.2f;
         pointToTest = pointToTest - platform.transform.position; //Angle 0
         Debug.Log(pointToTest);
-        pointToTest = Quaternion.Euler(0, platform.transform.eulerAngles.y, 0) * pointToTest; //Angle X
+        pointToTest = Quaternion.Euler(0, -platform.transform.eulerAngles.y, 0) * pointToTest; //Angle X
         Debug.Log(pointToTest);
         float equation = Mathf.Pow(pointToTest.x, 2.0f) / Mathf.Pow(long_diameter, 2.0f) + Mathf.Pow(pointToTest.z, 2.0f) / Mathf.Pow(small_diameter, 2.0f);
         if (equation <= 1.0f)
