@@ -14,6 +14,10 @@ public class GameArea : MonoBehaviour
     [SerializeField]
     private GameObject dock;
     [SerializeField]
+    private GameObject buttonSave;
+    [SerializeField]
+    private GameObject buttonLoad;
+    [SerializeField]
     private GameObject infopanel;
 
     void Start(){
@@ -21,7 +25,8 @@ public class GameArea : MonoBehaviour
         panier.SetActive(false);
         tools.SetActive(false);
         dock.SetActive(false);
-        infopanel.SetActive(false);
+        buttonSave.SetActive(false);
+        buttonLoad.SetActive(false);
     }
 
     public void LockPlace(){
@@ -31,6 +36,8 @@ public class GameArea : MonoBehaviour
         panier.SetActive(true);
         tools.SetActive(true);
         dock.SetActive(true);
+        buttonSave.SetActive(true);
+        buttonLoad.SetActive(true);
         infopanel.SetActive(true);
 
         for(int i = 0; i < platform.transform.childCount; ++i){

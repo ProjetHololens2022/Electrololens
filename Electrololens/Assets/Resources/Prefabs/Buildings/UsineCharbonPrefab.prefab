@@ -51,6 +51,7 @@ GameObject:
   - component: {fileID: 7668924363068235161}
   - component: {fileID: 5458059749727694628}
   - component: {fileID: 4500581056555518378}
+  - component: {fileID: 1580368258055526769}
   m_Layer: 0
   m_Name: UsineCharbonPrefab
   m_TagString: Producer
@@ -321,6 +322,19 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &1580368258055526769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2658830338614815400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b02a73f4d0240424c873a5929023c87a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isSaveable: 1
 --- !u!1001 &1655379619813323203
 PrefabInstance:
   m_ObjectHideFlags: 0

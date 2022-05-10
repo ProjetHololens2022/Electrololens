@@ -100,7 +100,7 @@ public class ConsommateurClass : MonoBehaviour
         return emissionCO2 + emissionCO2Event > 0 ? emissionCO2 + emissionCO2Event : 0;
     }
 
-    public void setNbHabitants(double emissionCO2)
+    public void setEmissionCO2(double emissionCO2)
     {
         this.emissionCO2 = emissionCO2;
     }

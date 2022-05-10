@@ -34,7 +34,7 @@ public class CreateSiteProd : MonoBehaviour
                 nbVille++;
             }
         }
-        Debug.Log(nbVille);
+        Debug.Log(prefabPanier);
         GameObject go = (GameObject)Instantiate(prefabPanier, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.Euler(0, platform.transform.eulerAngles.y, 0));
         go.transform.parent = prefabPanier.transform.parent;
         go.transform.localPosition = coordBase;
@@ -62,8 +62,6 @@ public class CreateSiteProd : MonoBehaviour
             {
                 prefabProjection.transform.position = new Vector3(prefabpanierX, platform.transform.position.y, prefabpanierZ);
                 prefabProjection.SetActive(true);
-                                          
-                Debug.Log(prefabProjection.transform.GetChild(0).transform.gameObject.GetComponent<MeshRenderer>().material.color);
             }
             else if (isInsinePlatform(prefabPanier.transform.position) && prefabProjection.activeSelf == true)
             {
@@ -89,11 +87,11 @@ public class CreateSiteProd : MonoBehaviour
             GameObject go = (GameObject)Instantiate(prefabPlatform, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
             go.transform.parent = platform.transform;
 
-            prefabPanierPoint = Vector3.Normalize(prefabPanierPoint);
-            prefabPanierPoint = Quaternion.Euler(0, -2.0f * platform.transform.eulerAngles.y, 0) * prefabPanierPoint; //Angle -X
+            /*prefabPanierPoint = Vector3.Normalize(prefabPanierPoint);
+            prefabPanierPoint = Quaternion.Euler(0, -2.0f * platform.transform.eulerAngles.y, 0) * prefabPanierPoint; //Angle -X*/
 
-            /*go.transform.localPosition = new Vector3((prefabpanierX-platform.transform.position.x)*50.0f, 0.0f, (prefabpanierZ-platform.transform.position.z)*50.0f);
-            go.transform.localPosition = Quaternion.Euler(0, platform.transform.eulerAngles.y, 0) * go.transform.localPosition;*/
+            go.transform.localPosition = new Vector3((prefabpanierX-platform.transform.position.x)*50.0f, 0.0f, (prefabpanierZ-platform.transform.position.z)*50.0f);
+            go.transform.localPosition = Quaternion.Euler(0, platform.transform.eulerAngles.y, 0) * go.transform.localPosition;
             Vector3 scale = platform.transform.GetChild(0).localScale;
             go.transform.localScale = scale;
             if(go.GetComponent<ProducteurClass>() != null)

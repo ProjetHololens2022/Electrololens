@@ -135,6 +135,16 @@ public class ProducteurClass : MonoBehaviour
         StartCoroutine("degradationEtat");
     }
 
+    public double getBaseEtat()
+    {
+        return etat;
+    }
+
+    public void setEtat(double etat)
+    {
+        this.etat = etat;
+    }
+
     IEnumerator degradationEtat()
     {
         while (true)
@@ -229,6 +239,11 @@ public class ProducteurClass : MonoBehaviour
     public void setEmissionCO2()
     {
         emissionCO2 = (getProduction() / 100) * pollution;
+    }
+
+    public void setVraiProduction(double production)
+    {
+        production = production;
     }
 
     public void updateProgessValues()
