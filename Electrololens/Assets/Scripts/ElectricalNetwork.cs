@@ -11,9 +11,13 @@ public class ElectricalNetwork : MonoBehaviour
     [SerializeField]
     private GameObject linePrefab;
 
+    private double[] dataProd = new double[11] {0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0};
+    private double[] dataCons = new double[11] {0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0};
+
     void Start()
     {
         this.transform.Find("Sphere").GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0.0f,0.586f,0.742f,1.0f)*10.0f);
+        StartCoroutine(fillHistory());
     }
 
     void Update()
@@ -30,6 +34,32 @@ public class ElectricalNetwork : MonoBehaviour
                 apport = 0.0;
             }
         }
+    }
+
+    void OnEnable(){
+        StartCoroutine(fillHistory());
+    }
+
+    IEnumerator fillHistory(){
+        while(true){
+            for(int i = 0; i < 10; ++i){
+                dataProd[i] = dataProd[i+1];
+                dataCons[i] = dataCons[i+1];
+            }
+            dataProd[10] = getProduction();
+            print(getProduction());
+            dataCons[10] = getConsumption();
+            print(getConsumption());
+            yield return new WaitForSeconds(10.0f);
+        }
+    }
+
+    public double[] GetProd(){
+        return dataProd;
+    }
+
+    public double[] GetCons(){
+        return dataCons;
     }
 
     public void addBuilding(GameObject go){
@@ -70,7 +100,11 @@ public class ElectricalNetwork : MonoBehaviour
     }
 
     public double getConsumption(){
-        return getProduction()/(double)consumers.Count;
+        double totalConsumption = 0;
+        foreach(GameObject go in consumers){
+            totalConsumption += go.GetComponent<ConsommateurClass>().getConsommation();
+        }
+        return totalConsumption;
     }
 
     /**
@@ -111,6 +145,10 @@ public class ElectricalNetwork : MonoBehaviour
             return (GameObject) this.objLines[other];
         }
         return null;
+    }
+
+    public void showInfo(){
+        GameObject.FindGameObjectWithTag("GraphManager").GetComponent<InfoPanel>().SendMessage("showNetwork", this);
     }
 
 }

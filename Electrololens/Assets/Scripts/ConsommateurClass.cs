@@ -114,6 +114,7 @@ public class ConsommateurClass : MonoBehaviour
         apportElectricite = 0.0;
         consommation = randomConsommation;
         emissionCO2 = randomEmissionCO2;
+        nbHabitants = Random.Range(0, 100);
     }
 
     public void updateProgessValues()
@@ -144,7 +145,7 @@ public class ConsommateurClass : MonoBehaviour
 
     public void showInfo()
     {
-        GameObject.FindGameObjectWithTag("GraphManager").GetComponent<InfoPanel>().SendMessage("showDiag", TypeAgent.CONSUMER);
+        GameObject.FindGameObjectWithTag("GraphManager").GetComponent<InfoPanel>().SendMessage("showConsumer", this);
     }
 
     public void hideInfo()

@@ -15,6 +15,8 @@ public class ElectricalConnector : MonoBehaviour
 
     [SerializeField]
     private GameObject otherConnector = null;
+    [SerializeField]
+    private AudioSource audio;
 
     private GameObject goConnected = null;
 
@@ -55,6 +57,7 @@ public class ElectricalConnector : MonoBehaviour
             this.typeGo = typeObject.ElectricalCenter;
             if(otherGo != null){
                 goConnected.GetComponent<ElectricalNetwork>().addBuilding(otherGo);
+                audio.Play();
                 //Replace();
                 //otherConnector.GetComponent<ElectricalConnector>().Replace();
             }
@@ -65,6 +68,7 @@ public class ElectricalConnector : MonoBehaviour
             if(otherGo != null){
                 if(otherType == typeObject.ElectricalCenter){
                     otherGo.GetComponent<ElectricalNetwork>().addBuilding(goConnected);
+                    audio.Play();
                     //Replace();
                     //otherConnector.GetComponent<ElectricalConnector>().Replace();
                 }
@@ -76,6 +80,7 @@ public class ElectricalConnector : MonoBehaviour
             if(otherGo != null){
                 if(otherType == typeObject.ElectricalCenter){
                     otherGo.GetComponent<ElectricalNetwork>().addBuilding(goConnected);
+                    audio.Play();
                     //Replace();
                     //otherConnector.GetComponent<ElectricalConnector>().Replace();
                 }
