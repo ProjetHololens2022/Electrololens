@@ -169,6 +169,7 @@ public class SavePlayground : MonoBehaviour
             {
                 go2.GetComponent<ProducteurClass>().setEtat(os.etat);
                 go2.GetComponent<ProducteurClass>().setVraiProduction(os.production);
+                go2.GetComponent<ProducteurClass>().startDegradation();
             }
             else if (go2.GetComponent<ConsommateurClass>())
             {
