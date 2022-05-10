@@ -59,9 +59,9 @@ public class ProducteurClass : MonoBehaviour
         calculPollution();
         setEmissionCO2();
         Debug.Log("start : " + getEmissionCO2());
-}
+    }   
 
-void Update()
+    void Update()
     {
         if(getEtat() > 50){
             this.transform.Find("Sphere").GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0.0f,1.0f,0.0f,1.0f)*10.0f);
@@ -140,7 +140,7 @@ void Update()
         while (true)
         {
             if(isConnected){
-                double randomDegrad = Random.Range(0, 5);
+                double randomDegrad = (double)Random.Range(0.0f, 1.0f);
                 etat -= randomDegrad;
                 if (getEtat() < 0)
                 {
@@ -148,7 +148,7 @@ void Update()
                 }
             }
             calculPollution();
-            yield return new WaitForSeconds(5.0f);
+            yield return new WaitForSeconds(1f);
         }
     }
 

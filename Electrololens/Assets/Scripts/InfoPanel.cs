@@ -12,13 +12,17 @@ public class InfoPanel : MonoBehaviour
     private GameObject infoProducteur;
     [SerializeField]
     private GameObject infoConsomateur;
+    [SerializeField]
+    private GameObject infoNetwork;
+    [SerializeField]
+    private GameObject infoNone;
 
     private GameObject diagInfoRegion;
     private GameObject[] cons, prod;
 
-    private ConsommateurClass lastConsumer;
-    private ProducteurClass lastProducer;
-    private ElectricalNetwork lastElectricalNetwork;
+    private ConsommateurClass lastConsumer = null;
+    private ProducteurClass lastProducer = null;
+    private ElectricalNetwork lastElectricalNetwork = null;
 
 
     public void getAllPollution()
@@ -43,7 +47,9 @@ public class InfoPanel : MonoBehaviour
         double prodMax = 0.0;
         foreach (var p in prod)
         {
-            prodEnergie += getProductionProd(p);
+            if(isConnectedProd(p)){
+                prodEnergie += getProductionProd(p);
+            }
             prodMax += getMaxProductionProd(p);
         }
         double percentage = (prodEnergie / prodMax) * 100.0;
@@ -58,14 +64,22 @@ public class InfoPanel : MonoBehaviour
         double prodEnergie = 0.0;
         foreach (var p in prod)
         {
-            prodEnergie += getProductionProd(p);
+            if(isConnectedProd(p)){
+                prodEnergie += getProductionProd(p);
+            }
         }
         foreach (var c in cons)
         {
-            consEnergie += getConsommationCons(c);
+            if(isConnectedCons(c)){
+                consEnergie += getConsommationCons(c);
+            }
         }
-        Debug.Log(prodEnergie + " " + consEnergie);
-        double percentage = ((prodEnergie - consEnergie) / prodEnergie) * 100.0;
+        double percentage;
+        if(prodEnergie > 0.0){
+            percentage = ((prodEnergie - consEnergie) / prodEnergie) * 100.0;
+        } else {
+            percentage = 0.0;
+        }
         double realPercentage = percentage >= 0.0 ? Math.Round(percentage, 2) : 0.0;
         modifyDiag(realPercentage, "%", diagInfoRegion.transform.GetChild(2).GetComponentInChildren<ModifyDiagram>());
 
@@ -97,7 +111,15 @@ public class InfoPanel : MonoBehaviour
         getAllPollution();
         getAllEnergieProd();
         getAllEnergiePerdue();
-        majConsumer();
+        if(lastConsumer != null){
+            majConsumer();
+        }
+        if(lastProducer != null){
+            majProducer();
+        }
+        if(lastElectricalNetwork != null){
+            majNetwork();
+        }
     }
 
     int getAllAgents()
@@ -116,6 +138,10 @@ public class InfoPanel : MonoBehaviour
         return c.GetComponent<ConsommateurClass>().getConsommation();
     }
 
+    bool isConnectedCons(GameObject c){
+        return c.GetComponent<ConsommateurClass>().isConnected;
+    }
+
     double getPollutionProd(GameObject p)
     {
         return p.GetComponent<ProducteurClass>().getEmissionCO2();
@@ -124,6 +150,10 @@ public class InfoPanel : MonoBehaviour
     double getProductionProd(GameObject p)
     {
         return p.GetComponent<ProducteurClass>().getProduction();
+    }
+
+    bool isConnectedProd(GameObject p){
+        return p.GetComponent<ProducteurClass>().isConnected;
     }
 
     double getMaxProductionProd(GameObject p)
@@ -138,21 +168,53 @@ public class InfoPanel : MonoBehaviour
         int nbHabitants = lastConsumer.getNbHabitants();
         double tauxSatisfaction = lastConsumer.getTauxDeSatisfaction();
         Transform diagrams = infoConsomateur.transform.GetChild(0);
-        modifyDiag(consommation,"kWh",diagrams.GetChild(0).GetComponent<ModifyDiagram>());
-        modifyDiag(100.0*apport/consommation,"%",diagrams.GetChild(1).GetComponent<ModifyDiagram>());
+        modifyDiag(Math.Round(consommation, 2),"kWh",diagrams.GetChild(0).GetComponent<ModifyDiagram>());
+        modifyDiag(Math.Round(100.0*apport/consommation, 2),"%",diagrams.GetChild(1).GetComponent<ModifyDiagram>());
         modifyForeground(apport/consommation,diagrams.GetChild(1).GetComponent<ModifyDiagram>());
-        modifyDiag(pollution,"kg/an",diagrams.GetChild(2).GetComponent<ModifyDiagram>());
+        modifyDiag(Math.Round(pollution, 2),"kg/an",diagrams.GetChild(2).GetComponent<ModifyDiagram>());
         modifyDiag(nbHabitants,"k",diagrams.GetChild(3).GetComponent<ModifyDiagram>());
     }
 
+    void majProducer(){
+        double production = lastProducer.getProduction();
+        double maxProd = lastProducer.MaxProduction();
+        double etat = lastProducer.getEtat();
+        double pollution = lastProducer.getEmissionCO2();
+        Transform diagrams = infoProducteur.transform.GetChild(0);
+        modifyDiag(Math.Round(100.0*production/maxProd, 2),"%",diagrams.GetChild(0).GetComponent<ModifyDiagram>());
+        modifyForeground(production/maxProd,diagrams.GetChild(0).GetComponent<ModifyDiagram>());
+        modifyDiag(Math.Round(etat, 2),"%",diagrams.GetChild(1).GetComponent<ModifyDiagram>());
+        modifyForeground(etat/100.0,diagrams.GetChild(1).GetComponent<ModifyDiagram>());
+        modifyDiag(Math.Round(pollution, 2),"kg/an",diagrams.GetChild(2).GetComponent<ModifyDiagram>());
+    }
+
+    void majNetwork(){
+        double[] prodNetwork = lastElectricalNetwork.GetComponent<ElectricalNetwork>().GetProd();
+        double[] consNetwork = lastElectricalNetwork.GetComponent<ElectricalNetwork>().GetCons();
+        infoNetwork.GetComponent<InfoNetwork>().SetDatas(prodNetwork,consNetwork);
+    }
+
     void showConsumer(ConsommateurClass consumer){
+        infoNone.SetActive(false);
         infoProducteur.SetActive(false);
         infoConsomateur.SetActive(true);
+        infoNetwork.SetActive(false);
         lastConsumer = consumer;
     }
 
     void showProducer(ProducteurClass producer){
+        infoNone.SetActive(false);
         infoProducteur.SetActive(true);
         infoConsomateur.SetActive(false);
+        infoNetwork.SetActive(false);
+        lastProducer = producer;
+    }
+
+    void showNetwork(ElectricalNetwork network){
+        infoNone.SetActive(false);
+        infoProducteur.SetActive(false);
+        infoConsomateur.SetActive(false);
+        infoNetwork.SetActive(true);
+        lastElectricalNetwork = network;
     }
 }

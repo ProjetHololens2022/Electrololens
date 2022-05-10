@@ -14,12 +14,10 @@ public class InfoNetwork : MonoBehaviour
     [SerializeField]
     private LineRenderer cons;
     [SerializeField]
-    private LineRenderer diff;
-    [SerializeField]
     private TextMeshPro maxValueDisplay;
 
-    public double[] dataProd = new double[11] {0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0};
-    public double[] dataCons = new double[11] {0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0};
+    private double[] dataProd = new double[11] {0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0};
+    private double[] dataCons = new double[11] {0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0};
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +32,11 @@ public class InfoNetwork : MonoBehaviour
         DrawCurve(prod,dataProd);
         DrawCurve(cons,dataCons);
         maxValueDisplay.SetText(((int)GetMaxValue()).ToString());
+    }
+
+    public void SetDatas(double[] prod, double[] cons){
+        dataProd = prod;
+        dataCons = cons;
     }
 
     void DrawCurve(LineRenderer curve, double[] data){
