@@ -4131,18 +4131,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19072639b32bffb49a63730594ba1f7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BackplateTransform: {fileID: 1079631795591097251}
-  FlipPanels:
-  - {fileID: 1079631795672594310}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  InflateAngle: -170
-  DeflateAngle: -20
-  InflateScale: 0.3
-  DeflateScale: 0.2
 --- !u!114 &1079631795850000399
 MonoBehaviour:
   m_ObjectHideFlags: 0
