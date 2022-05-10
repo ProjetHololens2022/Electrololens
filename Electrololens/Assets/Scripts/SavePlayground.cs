@@ -59,7 +59,7 @@ public class SavePlayground : MonoBehaviour
 
     public void Save()
     {
-        print("recup");
+        // print("recup");
         Save s = new Save();
         List<ObjetScene> listeObjet = new List<ObjetScene>();
         // Object[] GameobjectList = Resources.FindObjectsOfTypeAll(typeof(GameObject));

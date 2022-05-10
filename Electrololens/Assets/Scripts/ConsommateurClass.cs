@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Microsoft.MixedReality.Toolkit.UI;
 using Microsoft.MixedReality.Toolkit.Experimental.UI;
+using System.IO;
+using System.Linq;
 
 public class ConsommateurClass : MonoBehaviour
 {
@@ -30,8 +32,7 @@ public class ConsommateurClass : MonoBehaviour
     private InfoVille infoVille;
 
     void Start()
-    {
-
+    {   
         infoVille = infoVilleGO.GetComponent<InfoVille>();
         randomizedCityData();
         List<NoRotationDockable> events = GameObject.FindGameObjectWithTag("EventManager").GetComponent<EventManager>().GetEvents();
@@ -110,7 +111,9 @@ public class ConsommateurClass : MonoBehaviour
     {
         double randomConsommation = Random.Range(0, 100);
         double randomEmissionCO2 = Random.Range(0, 100);
-
+        int nomId = Random.Range(0, 27537);
+        nom = File.ReadLines(Application.dataPath + "/Resources/cities.txt").ElementAtOrDefault(nomId);
+        print(nom);
         apportElectricite = 0.0;
         consommation = randomConsommation;
         emissionCO2 = randomEmissionCO2;

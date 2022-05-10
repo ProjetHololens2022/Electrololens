@@ -173,7 +173,7 @@ public class InfoPanel : MonoBehaviour
         double tauxSatisfaction = lastConsumer.getTauxDeSatisfaction();
         Transform diagrams = infoConsomateur.transform.GetChild(0);
 
-        infoConsomateur.transform.GetChild(1).gameObject.GetComponent<TextMeshPro>().SetText(lastConsumer.name);
+        infoConsomateur.transform.GetChild(1).gameObject.GetComponent<TextMeshPro>().SetText(lastConsumer.getNom());
         ModifyDiag(Math.Round(consommation, 2),"kWh",diagrams.GetChild(0).GetComponent<ModifyDiagram>());
         ModifyDiag(Math.Round(100.0*apport/consommation, 2),"%",diagrams.GetChild(1).GetComponent<ModifyDiagram>());
         ModifyForeground(apport/consommation,diagrams.GetChild(1).GetComponent<ModifyDiagram>());
