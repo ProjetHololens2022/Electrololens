@@ -75,7 +75,7 @@ public class SavePlayground : MonoBehaviour
                         instanceID = go.GetInstanceID(),
                         path = path,
                         name = go.name.Replace("(Clone)", ""),
-                        position = go.transform.position,
+                        position = go.transform.localPosition,
                         rotation = go.transform.rotation.eulerAngles,
                         scale = go.transform.localScale
                     };
@@ -158,9 +158,11 @@ public class SavePlayground : MonoBehaviour
             }
 
 
-            GameObject go2 = Instantiate(go, os.position, Quaternion.Euler(os.rotation));
+            GameObject go2 = Instantiate(go, Vector3.zero , Quaternion.Euler(os.rotation));
             go2.transform.parent = platform.transform;
             go2.transform.localScale = os.scale;
+            go2.transform.localPosition = os.position;
+
             go2.name = os.name;
             if (go2.GetComponent<ProducteurClass>())
             {
