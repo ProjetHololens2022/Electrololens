@@ -104,7 +104,7 @@ public class SavePlayground : MonoBehaviour
         }
         s.objects = listeObjet;
         string jsonSave = JsonUtility.ToJson(s,true);
-        File.WriteAllText(Application.dataPath + "/Resources/save.json", jsonSave);
+        File.WriteAllText(Path.Combine(Application.persistentDataPath, "save.json"), jsonSave);
         print(jsonSave);
     }
 
@@ -119,8 +119,9 @@ public class SavePlayground : MonoBehaviour
         resetDock.transform.parent = gameZone.transform;
         dockGameZone = resetDock;
 
-        TextAsset jsonTA = Resources.Load<TextAsset>("save");
-        string json = jsonTA.text;
+        // TextAsset jsonTA = Resources.Load<TextAsset>("save");
+        // string json = jsonTA.text;
+        string json = File.ReadAllText(Path.Combine(Application.persistentDataPath , "save.json"));
         Save s = JsonUtility.FromJson<Save>(json);
 
         Dictionary<int, List<GameObject>> connectedDict = new Dictionary<int, List<GameObject>>();
