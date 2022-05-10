@@ -251,11 +251,11 @@ public class ProducteurClass : MonoBehaviour
     }
 
     public void isSelected(){
-        this.gameObject.GetComponent<Outline>().OutlineWidth = 4.0f;
+        this.gameObject.GetComponent<Outline>().enabled = true;
     }
 
     public void isNotSelected(){
-        this.gameObject.GetComponent<Outline>().OutlineWidth = 0.0f;
+        this.gameObject.GetComponent<Outline>().enabled = false;
     }
 
     public void ApplyEvent(NoRotationDockable e)
