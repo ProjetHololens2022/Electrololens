@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class InfoPanel : MonoBehaviour
@@ -25,7 +26,33 @@ public class InfoPanel : MonoBehaviour
     private ElectricalNetwork lastElectricalNetwork = null;
 
 
-    public void getAllPollution()
+    void Start()
+    {
+        diagInfoRegion = infoRegion.transform.GetChild(0).gameObject;
+        GetAllAgents();
+    }
+
+    void Update()
+    {
+        GetAllAgents();
+        GetAllPollution();
+        GetAllEnergieProd();
+        GetAllEnergiePerdue();
+        if (lastConsumer != null)
+        {
+            MajConsumer();
+        }
+        if (lastProducer != null)
+        {
+            MajProducer();
+        }
+        if (lastElectricalNetwork != null)
+        {
+            majNetwork();
+        }
+    }
+
+    public void GetAllPollution()
     {
         double consPol = 0;
         double prodPol = 0;
@@ -39,10 +66,10 @@ public class InfoPanel : MonoBehaviour
             prodPol += getPollutionProd(p);
         }
 
-        modifyDiag(consPol + prodPol, " kg/an", diagInfoRegion.transform.GetChild(0).GetComponentInChildren<ModifyDiagram>());
+        ModifyDiag(consPol + prodPol, " kg/an", diagInfoRegion.transform.GetChild(0).GetComponentInChildren<ModifyDiagram>());
     }
 
-    void getAllEnergieProd()
+    void GetAllEnergieProd()
     {
         double prodEnergie = 0.0;
         double prodMax = 0.0;
@@ -55,11 +82,11 @@ public class InfoPanel : MonoBehaviour
         }
         double percentage = (prodEnergie / prodMax) * 100.0;
         double realPercentage = Math.Round(percentage, 2);
-        modifyDiag(realPercentage, "%", diagInfoRegion.transform.GetChild(1).GetComponentInChildren<ModifyDiagram>());
-        modifyForeground(realPercentage / 100, diagInfoRegion.transform.GetChild(1).GetComponentInChildren<ModifyDiagram>());
+        ModifyDiag(realPercentage, "%", diagInfoRegion.transform.GetChild(1).GetComponentInChildren<ModifyDiagram>());
+        ModifyForeground(realPercentage / 100, diagInfoRegion.transform.GetChild(1).GetComponentInChildren<ModifyDiagram>());
     }
 
-    void getAllEnergiePerdue()
+    void GetAllEnergiePerdue()
     {
         double consEnergie = 0.0;
         double prodEnergie = 0.0;
@@ -82,48 +109,23 @@ public class InfoPanel : MonoBehaviour
             percentage = 0.0;
         }
         double realPercentage = percentage >= 0.0 ? Math.Round(percentage, 2) : 0.0;
-        modifyDiag(realPercentage, "%", diagInfoRegion.transform.GetChild(2).GetComponentInChildren<ModifyDiagram>());
+        ModifyDiag(realPercentage, "%", diagInfoRegion.transform.GetChild(2).GetComponentInChildren<ModifyDiagram>());
 
-        modifyForeground(realPercentage / 100, diagInfoRegion.transform.GetChild(2).GetComponentInChildren<ModifyDiagram>());
+        ModifyForeground(realPercentage / 100, diagInfoRegion.transform.GetChild(2).GetComponentInChildren<ModifyDiagram>());
     }
 
-    void modifyDiag(double val, string unit, ModifyDiagram modDiag)
+    void ModifyDiag(double val, string unit, ModifyDiagram modDiag)
     {
         modDiag.updateValue(val, unit);
     }
 
-    void modifyForeground(double val, ModifyDiagram modDiag)
+    void ModifyForeground(double val, ModifyDiagram modDiag)
     {
         modDiag.updateForegroud(val);
     }
 
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        diagInfoRegion = infoRegion.transform.GetChild(0).gameObject;
-        getAllAgents();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        getAllAgents();
-        getAllPollution();
-        getAllEnergieProd();
-        getAllEnergiePerdue();
-        if(lastConsumer != null){
-            majConsumer();
-        }
-        if(lastProducer != null){
-            majProducer();
-        }
-        if(lastElectricalNetwork != null){
-            majNetwork();
-        }
-    }
-
-    int getAllAgents()
+    int GetAllAgents()
     {
         cons = GameObject.FindGameObjectsWithTag("Consumer");
         prod = GameObject.FindGameObjectsWithTag("Producer");
@@ -162,34 +164,42 @@ public class InfoPanel : MonoBehaviour
         return p.GetComponent<ProducteurClass>().MaxProduction();
     }
 
-    void majConsumer(){
+    void MajConsumer()
+    {
         double consommation = lastConsumer.getConsommation();
         double apport = lastConsumer.GetApportElectricite();
         double pollution = lastConsumer.getEmissionCO2();
         int nbHabitants = lastConsumer.getNbHabitants();
         double tauxSatisfaction = lastConsumer.getTauxDeSatisfaction();
         Transform diagrams = infoConsomateur.transform.GetChild(0);
-        modifyDiag(Math.Round(consommation, 2),"kWh",diagrams.GetChild(0).GetComponent<ModifyDiagram>());
-        modifyDiag(Math.Round(100.0*apport/consommation, 2),"%",diagrams.GetChild(1).GetComponent<ModifyDiagram>());
-        modifyForeground(apport/consommation,diagrams.GetChild(1).GetComponent<ModifyDiagram>());
-        modifyDiag(Math.Round(pollution, 2),"kg/an",diagrams.GetChild(2).GetComponent<ModifyDiagram>());
-        modifyDiag(nbHabitants,"k",diagrams.GetChild(3).GetComponent<ModifyDiagram>());
+
+        infoConsomateur.transform.GetChild(1).gameObject.GetComponent<TextMeshPro>().SetText(lastConsumer.name);
+        ModifyDiag(Math.Round(consommation, 2),"kWh",diagrams.GetChild(0).GetComponent<ModifyDiagram>());
+        ModifyDiag(Math.Round(100.0*apport/consommation, 2),"%",diagrams.GetChild(1).GetComponent<ModifyDiagram>());
+        ModifyForeground(apport/consommation,diagrams.GetChild(1).GetComponent<ModifyDiagram>());
+        ModifyDiag(Math.Round(pollution, 2),"kg/an",diagrams.GetChild(2).GetComponent<ModifyDiagram>());
+        ModifyDiag(nbHabitants,"k",diagrams.GetChild(3).GetComponent<ModifyDiagram>());
     }
 
-    void majProducer(){
+    void MajProducer()
+    {
         double production = lastProducer.getProduction();
         double maxProd = lastProducer.MaxProduction();
         double etat = lastProducer.getEtat();
         double pollution = lastProducer.getEmissionCO2();
         Transform diagrams = infoProducteur.transform.GetChild(0);
-        modifyDiag(Math.Round(100.0*production/maxProd, 2),"%",diagrams.GetChild(0).GetComponent<ModifyDiagram>());
-        modifyForeground(production/maxProd,diagrams.GetChild(0).GetComponent<ModifyDiagram>());
-        modifyDiag(Math.Round(etat, 2),"%",diagrams.GetChild(1).GetComponent<ModifyDiagram>());
-        modifyForeground(etat/100.0,diagrams.GetChild(1).GetComponent<ModifyDiagram>());
-        modifyDiag(Math.Round(pollution, 2),"kg/an",diagrams.GetChild(2).GetComponent<ModifyDiagram>());
+
+        infoProducteur.transform.GetChild(1).gameObject.GetComponent<TextMeshPro>().SetText("Usine - " + lastProducer.getType().ToString());
+
+        ModifyDiag(Math.Round(100.0*production/maxProd, 2),"%",diagrams.GetChild(0).GetComponent<ModifyDiagram>());
+        ModifyForeground(production/maxProd,diagrams.GetChild(0).GetComponent<ModifyDiagram>());
+        ModifyDiag(Math.Round(etat, 2),"%",diagrams.GetChild(1).GetComponent<ModifyDiagram>());
+        ModifyForeground(etat/100.0,diagrams.GetChild(1).GetComponent<ModifyDiagram>());
+        ModifyDiag(Math.Round(pollution, 2),"kg/an",diagrams.GetChild(2).GetComponent<ModifyDiagram>());
     }
 
-    void majNetwork(){
+    void majNetwork()
+    {
         double[] prodNetwork = lastElectricalNetwork.GetComponent<ElectricalNetwork>().GetProd();
         double[] consNetwork = lastElectricalNetwork.GetComponent<ElectricalNetwork>().GetCons();
         infoNetwork.GetComponent<InfoNetwork>().SetDatas(prodNetwork,consNetwork);
