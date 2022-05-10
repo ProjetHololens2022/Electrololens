@@ -25,7 +25,7 @@ public class CreateSiteProd : MonoBehaviour
 
     public void holdPrefabPanier()
     {
-        //On prend un des éléments du panier
+        //On prend un des ï¿½lï¿½ments du panier
         int nbVille = 0;
         for (int i = 0; i < platform.transform.childCount; ++i)
         { 

@@ -139,7 +139,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoConstraintSelection: 1
-  selectedConstraints: []
+  selectedConstraints:
+  - {fileID: 2996906272534524253}
+  - {fileID: 1501844364595589245}
+  - {fileID: 2230371026135258472}
+  - {fileID: 1793737614845264065}
 --- !u!114 &2996906272534524253
 MonoBehaviour:
   m_ObjectHideFlags: 0
