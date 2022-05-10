@@ -9,6 +9,7 @@ public struct ObjetScene{
     public int instanceID;
     public string path;
     public string name;
+    public string nomVille;
     public Vector3 position;
     public Vector3 rotation;
     public string type;
@@ -94,6 +95,7 @@ public class SavePlayground : MonoBehaviour
                         os.tauxDeSatisfaction = go.GetComponent<ConsommateurClass>().getTauxDeSatisfaction();
                         os.nbHabitants = go.GetComponent<ConsommateurClass>().getNbHabitants();
                         os.electricalNetwork = go.GetComponent<ConsommateurClass>().electricalNetwork.GetInstanceID();
+                        os.nomVille = go.GetComponent<ConsommateurClass>().getNom();
                     }else if (go.GetComponent<ElectricalNetwork>()){
                         os.type = "ElectricalNetwork";
                     }
@@ -178,6 +180,9 @@ public class SavePlayground : MonoBehaviour
                 go2.GetComponent<ConsommateurClass>().setTauxDeSatisfaction(os.tauxDeSatisfaction);
                 go2.GetComponent<ConsommateurClass>().setNbHabitants(os.nbHabitants);
                 go2.GetComponent<ConsommateurClass>().setEmissionCO2(os.emissionCO2Ville);
+                print(os.nomVille);
+                go2.GetComponent<ConsommateurClass>().setNom(os.nomVille);
+                print(go2.GetComponent<ConsommateurClass>().getNom());
             }
             if (os.electricalNetwork != 0)
             {
