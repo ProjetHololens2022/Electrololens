@@ -404,7 +404,7 @@ public class ProducteurClass : MonoBehaviour
 
     public int getEmissionCo2(string typeProd)
     {
-        string json = File.ReadAllText(Application.dataPath + "/Resources/données.json");
+        string json = File.ReadAllText(Application.dataPath + "/Resources/donnees.json");
         ensembleDonnees s = JsonUtility.FromJson<ensembleDonnees>(json);
         foreach (donneesEmissionCo2 donneeProd in s.emissionCO2)
         {

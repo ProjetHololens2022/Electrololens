@@ -34,7 +34,10 @@ public class ConsommateurClass : MonoBehaviour
     void Start()
     {   
         infoVille = infoVilleGO.GetComponent<InfoVille>();
-        randomizedCityData();
+        if (nom == null)
+        {
+            randomizedCityData();
+        }
         List<NoRotationDockable> events = GameObject.FindGameObjectWithTag("EventManager").GetComponent<EventManager>().GetEvents();
         foreach (NoRotationDockable e in events)
         {
@@ -57,6 +60,11 @@ public class ConsommateurClass : MonoBehaviour
     public string getNom()
     {
         return nom;
+    }
+
+    public void setNom(string nom)
+    {
+        this.nom = nom;
     }
 
     public double getConsommation()
