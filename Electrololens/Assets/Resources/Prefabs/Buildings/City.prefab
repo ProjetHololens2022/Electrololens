@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 2230371026135258472}
   - component: {fileID: 1793737614845264065}
   - component: {fileID: 8390265860866573019}
+  - component: {fileID: 3480810303112132226}
   m_Layer: 0
   m_Name: City
   m_TagString: Consumer
@@ -110,19 +111,7 @@ MonoBehaviour:
         m_CallState: 2
   onHoverExited:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8390265860866573019}
-        m_TargetAssemblyTypeName: ConsommateurClass, Assembly-CSharp
-        m_MethodName: hideInfo
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &3676162833867286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,7 +215,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab22cc6e0d7a83a4d8f09f940e2b6510, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isConnected: 0
+  electricalNetwork: {fileID: 0}
   infoVilleGO: {fileID: 4052008287137869991}
+--- !u!114 &3480810303112132226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2673552605051517129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 0
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &8315607696745360136
 GameObject:
   m_ObjectHideFlags: 0
@@ -611,6 +620,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 72c66a2898c5547428258b782f5e6132, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 72c66a2898c5547428258b782f5e6132, type: 3}
+      propertyPath: m_Materials.Array.data[4]
+      value: 
+      objectReference: {fileID: 2100000, guid: 311313efa011949e98b6761d652ad13c, type: 2}
     - target: {fileID: 919132149155446097, guid: 72c66a2898c5547428258b782f5e6132, type: 3}
       propertyPath: m_Name
       value: House

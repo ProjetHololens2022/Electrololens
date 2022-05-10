@@ -35,6 +35,7 @@ public class InfoPanel : MonoBehaviour
         }
         foreach (var p in prod)
         {
+            print(p);
             prodPol += getPollutionProd(p);
         }
 
@@ -195,26 +196,42 @@ public class InfoPanel : MonoBehaviour
     }
 
     void showConsumer(ConsommateurClass consumer){
-        infoNone.SetActive(false);
-        infoProducteur.SetActive(false);
+        hideLastBuilding();
         infoConsomateur.SetActive(true);
-        infoNetwork.SetActive(false);
         lastConsumer = consumer;
+        consumer.gameObject.GetComponent<ConsommateurClass>().isSelected();
     }
 
     void showProducer(ProducteurClass producer){
-        infoNone.SetActive(false);
+        hideLastBuilding();
         infoProducteur.SetActive(true);
-        infoConsomateur.SetActive(false);
-        infoNetwork.SetActive(false);
         lastProducer = producer;
+        producer.gameObject.GetComponent<ProducteurClass>().isSelected();
     }
 
     void showNetwork(ElectricalNetwork network){
+        hideLastBuilding();
+        infoNetwork.SetActive(true);
+        lastElectricalNetwork = network;
+        network.gameObject.GetComponent<ElectricalNetwork>().isSelected();
+    }
+
+    void hideLastBuilding(){
         infoNone.SetActive(false);
         infoProducteur.SetActive(false);
         infoConsomateur.SetActive(false);
-        infoNetwork.SetActive(true);
-        lastElectricalNetwork = network;
+        infoNetwork.SetActive(false);
+        if(lastConsumer != null){
+            lastConsumer.gameObject.GetComponent<ConsommateurClass>().isNotSelected();
+            lastConsumer = null;
+        }
+        if(lastProducer != null){
+            lastProducer.gameObject.GetComponent<ProducteurClass>().isNotSelected();
+            lastProducer = null;
+        }
+        if(lastElectricalNetwork != null){
+            lastElectricalNetwork.gameObject.GetComponent<ElectricalNetwork>().isNotSelected();
+            lastElectricalNetwork = null;
+        }
     }
 }

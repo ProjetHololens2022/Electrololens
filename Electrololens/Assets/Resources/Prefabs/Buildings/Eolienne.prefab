@@ -162,6 +162,7 @@ GameObject:
   - component: {fileID: 412363485878975515}
   - component: {fileID: 4957809038611933513}
   - component: {fileID: 3715838783371049945}
+  - component: {fileID: 9167837530929427382}
   m_Layer: 0
   m_Name: Eolienne
   m_TagString: Producer
@@ -283,19 +284,7 @@ MonoBehaviour:
         m_CallState: 2
   onHoverExited:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3715838783371049945}
-        m_TargetAssemblyTypeName: ProducteurClass, Assembly-CSharp
-        m_MethodName: hideInfo
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!95 &1311935634109455324
 Animator:
   serializedVersion: 3
@@ -395,6 +384,24 @@ MonoBehaviour:
   electricalNetwork: {fileID: 0}
   infoProducteurGO: {fileID: 2808168075226392633}
   jsonString: 
+--- !u!114 &9167837530929427382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6503761634230612836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 0
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &6792274988038513491
 GameObject:
   m_ObjectHideFlags: 0

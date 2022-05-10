@@ -148,9 +148,12 @@ public class ConsommateurClass : MonoBehaviour
         GameObject.FindGameObjectWithTag("GraphManager").GetComponent<InfoPanel>().SendMessage("showConsumer", this);
     }
 
-    public void hideInfo()
-    {
-        closeProgressBar();
+    public void isSelected(){
+        this.gameObject.GetComponent<Outline>().OutlineWidth = 4.0f;
+    }
+
+    public void isNotSelected(){
+        this.gameObject.GetComponent<Outline>().OutlineWidth = 0.0f;
     }
 
     public void ApplyEvent(NoRotationDockable e)

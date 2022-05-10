@@ -264,9 +264,12 @@ public class ProducteurClass : MonoBehaviour
         GameObject.FindGameObjectWithTag("GraphManager").SendMessage("showProducer", this);
     }
 
-    public void hideInfo()
-    {
-        closeProgressBar();
+    public void isSelected(){
+        this.gameObject.GetComponent<Outline>().OutlineWidth = 4.0f;
+    }
+
+    public void isNotSelected(){
+        this.gameObject.GetComponent<Outline>().OutlineWidth = 0.0f;
     }
 
     public void ApplyEvent(NoRotationDockable e)
