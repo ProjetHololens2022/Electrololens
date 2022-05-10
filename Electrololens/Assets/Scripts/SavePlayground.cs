@@ -56,32 +56,30 @@ public class SavePlayground : MonoBehaviour
     [SerializeField]
     private GameObject electricPole;
 
-
-
     public void Save()
     {
-        // print("recup");
         Save s = new Save();
         List<ObjetScene> listeObjet = new List<ObjetScene>();
-        // Object[] GameobjectList = Resources.FindObjectsOfTypeAll(typeof(GameObject));
         Transform transform = platform.transform;
+
         foreach (Transform t in transform)
         {
             GameObject go = t.gameObject;
             if(go.GetComponent<Saveable>() && go.GetComponent<Saveable>().isSaveable){
-                print(go.name);
+                //print(go.name);
                 string path = go.name.Replace("(Clone)", "");
-                print(path);
-                print(go);
                 if(path!=""){
 
-                    ObjetScene os = new ObjetScene();
-                    os.instanceID = go.GetInstanceID();
-                    os.path = path;
-                    os.name = go.name.Replace("(Clone)", "");
-                    os.position = go.transform.position;
-                    os.rotation = go.transform.rotation.eulerAngles;
-                    os.scale = go.transform.localScale;
+                    ObjetScene os = new ObjetScene()
+                    {
+                        instanceID = go.GetInstanceID(),
+                        path = path,
+                        name = go.name.Replace("(Clone)", ""),
+                        position = go.transform.position,
+                        rotation = go.transform.rotation.eulerAngles,
+                        scale = go.transform.localScale
+                    };
+                    
                     if (go.GetComponent<ProducteurClass>()){
                         os.type = go.GetComponent<ProducteurClass>().getType().ToString();
                         os.electricalNetwork = go.GetComponent<ProducteurClass>().electricalNetwork.GetInstanceID();
@@ -119,17 +117,15 @@ public class SavePlayground : MonoBehaviour
         Destroy(dockGameZone);
         GameObject resetDock = Instantiate(dock, dockGameZone.transform.position, dockGameZone.transform.rotation);
         resetDock.transform.parent = gameZone.transform;
-        this.dockGameZone = resetDock;
+        dockGameZone = resetDock;
 
-        print("LoadSave");
-        string json = File.ReadAllText(Application.dataPath + "/Resources/save.json");
+        TextAsset jsonTA = Resources.Load<TextAsset>("save");
+        string json = jsonTA.text;
         Save s = JsonUtility.FromJson<Save>(json);
 
-        
         Dictionary<int, List<GameObject>> connectedDict = new Dictionary<int, List<GameObject>>();
         Dictionary<int, GameObject> poleDict = new Dictionary<int, GameObject>();
         
-
         foreach (ObjetScene os in s.objects)
         {
             GameObject go = null;
@@ -158,7 +154,6 @@ public class SavePlayground : MonoBehaviour
 
                 case "ElectricalNetwork":
                 go = electricPole;
-                //poleDict.Add(os.instanceID, go);
                 break;
             }
 
@@ -208,15 +203,12 @@ public class SavePlayground : MonoBehaviour
                 if (go3.GetComponent<ProducteurClass>())
                 {
                     go3.GetComponent<ProducteurClass>().electricalNetwork = poleDict[item.Key];
-                    print("kkk");
                 }
                 else if (go3.GetComponent<ConsommateurClass>())
                 {
                     go3.GetComponent<ConsommateurClass>().electricalNetwork = poleDict[item.Key];
-                    print("kkk1");
                 }
                 poleDict[item.Key].GetComponent<ElectricalNetwork>().addBuilding(go3);
-                print("kkk2");
             }
         }
     }

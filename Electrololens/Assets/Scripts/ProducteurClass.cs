@@ -58,7 +58,7 @@ public class ProducteurClass : MonoBehaviour
         infoProducteur = infoProducteurGO.GetComponent<InfoProducteur>();
         calculPollution();
         setEmissionCO2();
-        Debug.Log("start : " + getEmissionCO2());
+        //Debug.Log("start : " + getEmissionCO2());
     }   
 
     void Update()
@@ -97,7 +97,6 @@ public class ProducteurClass : MonoBehaviour
     public double getEtat()
     {
         return etat + etatEvent > 0.0 ? etat + etatEvent : 0.0;
-        
     }
 
     public double MaxProduction(){
@@ -241,37 +240,9 @@ public class ProducteurClass : MonoBehaviour
         emissionCO2 = (getProduction() / 100) * pollution;
     }
 
-    public void setVraiProduction(double production)
+    public void setVraiProduction(double prod)
     {
-        production = production;
-    }
-
-    public void updateProgessValues()
-    {
-        setEmissionCO2();
-        if (infoProducteur != null
-            && infoProducteur.getProgressEtatLoadingBar() != null
-                && infoProducteur.getProgressProdLoadingBar() != null
-                    && infoProducteur.getProgressEmissionLoadingBar() != null)
-        {
-            infoProducteur.updateLoadingBar(infoProducteur.getProgressProdLoadingBar(), production / 100.0);
-            infoProducteur.updateLoadingBar(infoProducteur.getProgressEtatLoadingBar(), etat / 100.0);
-            infoProducteur.updateLoadingBar(infoProducteur.getProgressEmissionLoadingBar(), emissionCO2 / 100.0);
-        }
-    }
-
-
-    public void closeProgressBar()
-    {
-        if (infoProducteur != null
-            && infoProducteur.getProgressEtatLoadingBar() != null
-                && infoProducteur.getProgressProdLoadingBar() != null
-                    && infoProducteur.getProgressProdLoadingBar() != null)
-        {
-            infoProducteur.closeProgressAsync(infoProducteur.getProgressProdLoadingBar());
-            infoProducteur.closeProgressAsync(infoProducteur.getProgressEtatLoadingBar());
-            infoProducteur.closeProgressAsync(infoProducteur.getProgressEmissionLoadingBar());
-        }
+        production = prod;
     }
 
     public void showInfo()
@@ -404,7 +375,7 @@ public class ProducteurClass : MonoBehaviour
 
     public int getEmissionCo2(string typeProd)
     {
-        string json = File.ReadAllText(Application.dataPath + "/Resources/donnees.json");
+        string json = Resources.Load<TextAsset>("donnees").text;
         ensembleDonnees s = JsonUtility.FromJson<ensembleDonnees>(json);
         foreach (donneesEmissionCo2 donneeProd in s.emissionCO2)
         {

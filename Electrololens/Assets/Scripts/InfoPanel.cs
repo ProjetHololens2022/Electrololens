@@ -35,21 +35,24 @@ public class InfoPanel : MonoBehaviour
     void Update()
     {
         GetAllAgents();
-        GetAllPollution();
-        GetAllEnergieProd();
-        GetAllEnergiePerdue();
+        
+        if (cons.Length != 0 && prod.Length != 0)
+        {
+            GetAllPollution();
+            GetAllEnergiePerdue();
+        }
+        
+        if (prod.Length != 0)
+            GetAllEnergieProd();
+        
         if (lastConsumer != null)
-        {
             MajConsumer();
-        }
+        
         if (lastProducer != null)
-        {
             MajProducer();
-        }
+     
         if (lastElectricalNetwork != null)
-        {
             majNetwork();
-        }
     }
 
     public void GetAllPollution()
@@ -66,7 +69,7 @@ public class InfoPanel : MonoBehaviour
             prodPol += getPollutionProd(p);
         }
 
-        ModifyDiag(consPol + prodPol, " kg/an", diagInfoRegion.transform.GetChild(0).GetComponentInChildren<ModifyDiagram>());
+        ModifyDiag(Math.Round(consPol + prodPol, 2), " kg/an", diagInfoRegion.transform.GetChild(0).GetComponentInChildren<ModifyDiagram>());
     }
 
     void GetAllEnergieProd()
@@ -175,8 +178,17 @@ public class InfoPanel : MonoBehaviour
 
         infoConsomateur.transform.GetChild(1).gameObject.GetComponent<TextMeshPro>().SetText(lastConsumer.getNom());
         ModifyDiag(Math.Round(consommation, 2),"kWh",diagrams.GetChild(0).GetComponent<ModifyDiagram>());
-        ModifyDiag(Math.Round(100.0*apport/consommation, 2),"%",diagrams.GetChild(1).GetComponent<ModifyDiagram>());
-        ModifyForeground(apport/consommation,diagrams.GetChild(1).GetComponent<ModifyDiagram>());
+        
+        if(consommation != 0.0)
+        {
+            ModifyDiag(Math.Round(100.0*apport/consommation, 2),"%",diagrams.GetChild(1).GetComponent<ModifyDiagram>());
+            ModifyForeground(apport/consommation,diagrams.GetChild(1).GetComponent<ModifyDiagram>());
+        }else
+        {
+            ModifyDiag(0.0, "%", diagrams.GetChild(1).GetComponent<ModifyDiagram>());
+            ModifyForeground(0.0, diagrams.GetChild(1).GetComponent<ModifyDiagram>());
+        }
+        
         ModifyDiag(Math.Round(pollution, 2),"kg/an",diagrams.GetChild(2).GetComponent<ModifyDiagram>());
         ModifyDiag(nbHabitants,"k",diagrams.GetChild(3).GetComponent<ModifyDiagram>());
     }

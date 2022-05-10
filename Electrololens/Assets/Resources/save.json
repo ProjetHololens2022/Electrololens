@@ -1,7 +1,7 @@
 {
     "objects": [
         {
-            "instanceID": -2016,
+            "instanceID": 53530,
             "path": "UsineCharbonPrefab",
             "name": "UsineCharbonPrefab",
             "nomVille": "",
@@ -12,18 +12,18 @@
             },
             "rotation": {
                 "x": 0.0,
-                "y": 142.5638427734375,
+                "y": 141.28118896484376,
                 "z": 0.0
             },
             "type": "Charbon",
             "scale": {
-                "x": 0.9996251463890076,
-                "y": 0.9996251463890076,
-                "z": 0.9996251463890076
+                "x": 0.9960616827011108,
+                "y": 0.9960616827011108,
+                "z": 0.9960616827011108
             },
-            "electricalNetwork": 0,
+            "electricalNetwork": 53974,
             "production": 100.0,
-            "etat": 100.0,
+            "etat": 79.95273751020432,
             "emissionCO2Ville": 0.0,
             "consommation": 0.0,
             "apportElectricite": 0.0,
@@ -31,10 +31,10 @@
             "nbHabitants": 0
         },
         {
-            "instanceID": -2292,
+            "instanceID": 51646,
             "path": "Paris",
             "name": "Paris",
-            "nomVille": "Douzens",
+            "nomVille": "Remauville\r",
             "position": {
                 "x": 0.1602032333612442,
                 "y": -0.3499999940395355,
@@ -42,59 +42,59 @@
             },
             "rotation": {
                 "x": 0.0,
-                "y": 107.69895935058594,
+                "y": 106.41629791259766,
                 "z": 0.0
             },
             "type": "ConsommateurClass",
             "scale": {
-                "x": 0.9996251463890076,
-                "y": 0.9996251463890076,
-                "z": 0.9996251463890076
+                "x": 0.9960616827011108,
+                "y": 0.9960616827011108,
+                "z": 0.9960616827011108
             },
-            "electricalNetwork": 0,
+            "electricalNetwork": 53974,
             "production": 0.0,
             "etat": 0.0,
-            "emissionCO2Ville": 80.0,
-            "consommation": 96.0,
-            "apportElectricite": 0.0,
+            "emissionCO2Ville": 15.0,
+            "consommation": 65.0,
+            "apportElectricite": 65.0,
             "tauxDeSatisfaction": 0.0,
-            "nbHabitants": 84
+            "nbHabitants": 55
         },
         {
-            "instanceID": -2600,
+            "instanceID": 53432,
             "path": "Chambery",
             "name": "Chambery",
-            "nomVille": "Valleres",
+            "nomVille": "Etrembieres\r",
             "position": {
-                "x": -0.13204318284988404,
+                "x": 0.16575899720191956,
                 "y": -0.3499999940395355,
-                "z": 0.8959388732910156
+                "z": 0.913734495639801
             },
             "rotation": {
                 "x": 0.0,
-                "y": 319.809814453125,
+                "y": 318.527099609375,
                 "z": 0.0
             },
             "type": "ConsommateurClass",
             "scale": {
-                "x": 0.9996251463890076,
-                "y": 0.9996251463890076,
-                "z": 0.9996251463890076
+                "x": 0.9960616827011108,
+                "y": 0.9960616827011108,
+                "z": 0.9960616827011108
             },
-            "electricalNetwork": 0,
+            "electricalNetwork": 53974,
             "production": 0.0,
             "etat": 0.0,
-            "emissionCO2Ville": 5.0,
-            "consommation": 76.0,
-            "apportElectricite": 0.0,
+            "emissionCO2Ville": 49.0,
+            "consommation": 85.0,
+            "apportElectricite": 35.0,
             "tauxDeSatisfaction": 0.0,
-            "nbHabitants": 20
+            "nbHabitants": 58
         },
         {
-            "instanceID": -2908,
+            "instanceID": 51198,
             "path": "Tourcquoin",
             "name": "Tourcquoin",
-            "nomVille": "St donat",
+            "nomVille": "Fouqueure\r",
             "position": {
                 "x": -0.003938284702599049,
                 "y": -0.3499999940395355,
@@ -102,44 +102,44 @@
             },
             "rotation": {
                 "x": 0.0,
-                "y": 70.61566925048828,
+                "y": 69.33293151855469,
                 "z": 0.0
             },
             "type": "ConsommateurClass",
             "scale": {
-                "x": 0.9996251463890076,
-                "y": 0.9996251463890076,
-                "z": 0.9996251463890076
+                "x": 0.9960616827011108,
+                "y": 0.9960616827011108,
+                "z": 0.9960616827011108
             },
             "electricalNetwork": 0,
             "production": 0.0,
             "etat": 0.0,
-            "emissionCO2Ville": 75.0,
-            "consommation": 44.0,
+            "emissionCO2Ville": 28.0,
+            "consommation": 0.0,
             "apportElectricite": 0.0,
             "tauxDeSatisfaction": 0.0,
-            "nbHabitants": 26
+            "nbHabitants": 42
         },
         {
-            "instanceID": -3216,
+            "instanceID": 53974,
             "path": "BigElectricPolePrefab",
             "name": "BigElectricPolePrefab",
             "nomVille": "",
             "position": {
-                "x": -0.030815400183200837,
+                "x": 0.25548693537712099,
                 "y": -0.3499999940395355,
-                "z": 1.0
+                "z": 1.0086157321929932
             },
             "rotation": {
                 "x": 0.0,
-                "y": 359.86492919921877,
+                "y": 358.5822448730469,
                 "z": 0.0
             },
             "type": "ElectricalNetwork",
             "scale": {
-                "x": 0.9996251463890076,
-                "y": 0.9996251463890076,
-                "z": 0.9996251463890076
+                "x": 0.9960616827011108,
+                "y": 0.9960616827011108,
+                "z": 0.9960616827011108
             },
             "electricalNetwork": 0,
             "production": 0.0,
@@ -151,7 +151,7 @@
             "nbHabitants": 0
         },
         {
-            "instanceID": -3266,
+            "instanceID": 52600,
             "path": "PanneauSolairePrefab",
             "name": "PanneauSolairePrefab",
             "nomVille": "",
@@ -162,14 +162,14 @@
             },
             "rotation": {
                 "x": 0.0,
-                "y": 359.86492919921877,
+                "y": 358.5822448730469,
                 "z": 0.0
             },
             "type": "Solaire",
             "scale": {
-                "x": 0.9996251463890076,
-                "y": 0.9996251463890076,
-                "z": 0.9996251463890076
+                "x": 0.9960616827011108,
+                "y": 0.9960616827011108,
+                "z": 0.9960616827011108
             },
             "electricalNetwork": 0,
             "production": 60.0,
@@ -181,7 +181,7 @@
             "nbHabitants": 0
         },
         {
-            "instanceID": -3548,
+            "instanceID": 54100,
             "path": "Eolienne",
             "name": "Eolienne",
             "nomVille": "",
@@ -192,14 +192,14 @@
             },
             "rotation": {
                 "x": 0.0,
-                "y": 179.86492919921876,
+                "y": 178.582275390625,
                 "z": 0.0
             },
             "type": "Eolien",
             "scale": {
-                "x": 0.9996251463890076,
-                "y": 0.9996251463890076,
-                "z": 0.9996251463890076
+                "x": 0.9960616827011108,
+                "y": 0.9960616827011108,
+                "z": 0.9960616827011108
             },
             "electricalNetwork": 0,
             "production": 80.0,

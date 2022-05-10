@@ -47,7 +47,7 @@ public class ElectricalNetwork : MonoBehaviour
                 dataCons[i] = dataCons[i+1];
             }
             dataProd[10] = getProduction();
-            print(getProduction());
+            //print(getProduction());
             dataCons[10] = getConsumption();
             print(getConsumption());
             yield return new WaitForSeconds(10.0f);

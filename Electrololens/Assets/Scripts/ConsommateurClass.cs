@@ -8,12 +8,12 @@ using System.Linq;
 
 public class ConsommateurClass : MonoBehaviour
 {
-    private string nom;
-    private double consommation; //Besoin
-    private double apportElectricite; //Reçu
-    private double emissionCO2;
-    private double tauxDeSatisfaction;
-    private int nbHabitants;
+    private string nom = "Chambéry";
+    private double consommation = 0.0; //Besoin
+    private double apportElectricite = 0.0; //Reçu
+    private double emissionCO2 = 0.0;
+    private double tauxDeSatisfaction = 0.0;
+    private int nbHabitants = 0;
 
     private double consommationEvent = 0.0; 
     private double apportElectriciteEvent = 0.0;
@@ -50,6 +50,7 @@ public class ConsommateurClass : MonoBehaviour
         if (!isConnected || GetApportElectricite() < getConsommation())
         {
             this.transform.Find("Sphere").GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(1.0f, 0.0f, 0.0f, 1.0f) * 10.0f);
+            apportElectricite = 0.0;
         }
         else
         {
@@ -114,44 +115,34 @@ public class ConsommateurClass : MonoBehaviour
         this.emissionCO2 = emissionCO2;
     }
 
+    private List<string> TextAssetToList(TextAsset ta)
+    {
+        var listToReturn = new List<string>();
+        var arrayString = ta.text.Split('\n');
+        foreach (var line in arrayString)
+        {
+            listToReturn.Add(line);
+        }
+        return listToReturn;
+    }
+
 
     void randomizedCityData()
     {
         double randomConsommation = Random.Range(0, 100);
         double randomEmissionCO2 = Random.Range(0, 100);
         int nomId = Random.Range(0, 27537);
-        nom = File.ReadLines(Application.dataPath + "/Resources/cities.txt").ElementAtOrDefault(nomId);
+        var cities = Resources.Load<TextAsset>("cities");
+
+        List<string> l = TextAssetToList(cities);
+        //nom = File.ReadLines(cities).ElementAtOrDefault(nomId);
+        nom = l[nomId];
         print(nom);
+
         apportElectricite = 0.0;
         consommation = randomConsommation;
         emissionCO2 = randomEmissionCO2;
         nbHabitants = Random.Range(0, 100);
-    }
-
-    public void updateProgessValues()
-    {
-        if (infoVille != null 
-            && infoVille.getProgressApportLoadingBar() != null
-                && infoVille.getProgressConsoLoadingBar() != null
-                    && infoVille.getProgressConsoLoadingBar() != null)
-        {
-            infoVille.updateLoadingBar(infoVille.getProgressConsoLoadingBar(), getConsommation() / 100);
-            infoVille.updateLoadingBar(infoVille.getProgressApportLoadingBar(), GetApportElectricite() / 100);
-            infoVille.updateLoadingBar(infoVille.getProgressEmissionLoadingBar(), getEmissionCO2() / 100);
-        }
-    }
-
-    public void closeProgressBar()
-    {
-        if (infoVille != null 
-            && infoVille.getProgressApportLoadingBar() != null
-                && infoVille.getProgressConsoLoadingBar() != null
-                    && infoVille.getProgressConsoLoadingBar() != null)
-        {
-            infoVille.closeProgressAsync(infoVille.getProgressConsoLoadingBar());
-            infoVille.closeProgressAsync(infoVille.getProgressApportLoadingBar());
-            infoVille.closeProgressAsync(infoVille.getProgressEmissionLoadingBar());
-        }
     }
 
     public void showInfo()
