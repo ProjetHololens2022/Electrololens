@@ -87,13 +87,18 @@ public class CreateSiteProd : MonoBehaviour
             GameObject go = (GameObject)Instantiate(prefabPlatform, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
             go.transform.parent = platform.transform;
 
-            /*prefabPanierPoint = Vector3.Normalize(prefabPanierPoint);
-            prefabPanierPoint = Quaternion.Euler(0, -2.0f * platform.transform.eulerAngles.y, 0) * prefabPanierPoint; //Angle -X*/
+            Vector3 localDir = prefabPanierPoint-platform.transform.position; //Angle 0
+            localDir = Quaternion.Euler(0, platform.transform.eulerAngles.y, 0) * localDir; //Angle X
+            localDir = Vector3.Normalize(localDir);
+            localDir = Quaternion.Euler(0, -2.0f * platform.transform.eulerAngles.y, 0) * localDir; //Angle -X
+            localDir.x *= 0.225f;
+            localDir.z *= 0.15f;
+            localDir = Quaternion.Euler(0, platform.transform.eulerAngles.y, 0) * localDir; //Angle 0
+            localDir.y = 0.0f;
 
-            go.transform.localPosition = new Vector3((prefabpanierX-platform.transform.position.x)*50.0f, 0.0f, (prefabpanierZ-platform.transform.position.z)*50.0f);
-            go.transform.localPosition = Quaternion.Euler(0, platform.transform.eulerAngles.y, 0) * go.transform.localPosition;
-            Vector3 scale = platform.transform.GetChild(0).localScale;
-            go.transform.localScale = scale;
+            go.transform.position = platform.transform.position + localDir;
+            go.transform.localScale = new Vector3(1.0f,1.0f,1.0f);
+            go.transform.rotation = prefabPanier.transform.rotation;
             if(go.GetComponent<ProducteurClass>() != null)
             {
                 go.GetComponent<ProducteurClass>().startDegradation();
