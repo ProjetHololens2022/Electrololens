@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Microsoft.MixedReality.Toolkit.UI;
+using Microsoft.MixedReality.Toolkit.Utilities;
 using UnityEngine;
 
 public class CreateSiteProd : MonoBehaviour
@@ -23,7 +25,7 @@ public class CreateSiteProd : MonoBehaviour
 
     public void holdPrefabPanier()
     {
-        //On prend un des éléments du panier
+        //On prend un des ï¿½lï¿½ments du panier
         int nbVille = 0;
         for (int i = 0; i < platform.transform.childCount; ++i)
         { 
@@ -80,13 +82,18 @@ public class CreateSiteProd : MonoBehaviour
         StopCoroutine("ProjectionPrefabPanier");
         float prefabpanierX = prefabPanier.transform.position.x;
         float prefabpanierZ = prefabPanier.transform.position.z;
+        Vector3 prefabPanierPoint = prefabPanier.transform.position;
         //Si le prefab est dans la gamezone.platform
-        if (isInsinePlatform(prefabPanier.transform.position))
+        if (isInsinePlatform(prefabPanierPoint))
         {
             GameObject go = (GameObject)Instantiate(prefabPlatform, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
             go.transform.parent = platform.transform;
-            go.transform.localPosition = new Vector3((prefabpanierX-platform.transform.position.x)*50.0f, 0.0f, (prefabpanierZ-platform.transform.position.z)*50.0f);
-            go.transform.localPosition = Quaternion.Euler(0, platform.transform.eulerAngles.y, 0) * go.transform.localPosition;
+
+            prefabPanierPoint = Vector3.Normalize(prefabPanierPoint);
+            prefabPanierPoint = Quaternion.Euler(0, -2.0f * platform.transform.eulerAngles.y, 0) * prefabPanierPoint; //Angle -X
+
+            /*go.transform.localPosition = new Vector3((prefabpanierX-platform.transform.position.x)*50.0f, 0.0f, (prefabpanierZ-platform.transform.position.z)*50.0f);
+            go.transform.localPosition = Quaternion.Euler(0, platform.transform.eulerAngles.y, 0) * go.transform.localPosition;*/
             Vector3 scale = platform.transform.GetChild(0).localScale;
             go.transform.localScale = scale;
             if(go.GetComponent<ProducteurClass>() != null)
@@ -108,7 +115,9 @@ public class CreateSiteProd : MonoBehaviour
         const float long_diameter = 0.3f;
         const float small_diameter = 0.2f;
         pointToTest = pointToTest - platform.transform.position; //Angle 0
+        Debug.Log(pointToTest);
         pointToTest = Quaternion.Euler(0, platform.transform.eulerAngles.y, 0) * pointToTest; //Angle X
+        Debug.Log(pointToTest);
         float equation = Mathf.Pow(pointToTest.x, 2.0f) / Mathf.Pow(long_diameter, 2.0f) + Mathf.Pow(pointToTest.z, 2.0f) / Mathf.Pow(small_diameter, 2.0f);
         if (equation <= 1.0f)
         {

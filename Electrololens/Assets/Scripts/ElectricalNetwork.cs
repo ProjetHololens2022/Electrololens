@@ -151,4 +151,11 @@ public class ElectricalNetwork : MonoBehaviour
         GameObject.FindGameObjectWithTag("GraphManager").GetComponent<InfoPanel>().SendMessage("showNetwork", this);
     }
 
+    public void isSelected(){
+        this.gameObject.GetComponent<Outline>().OutlineWidth = 4.0f;
+    }
+    
+    public void isNotSelected(){
+        this.gameObject.GetComponent<Outline>().OutlineWidth = 0.0f;
+    }
 }
