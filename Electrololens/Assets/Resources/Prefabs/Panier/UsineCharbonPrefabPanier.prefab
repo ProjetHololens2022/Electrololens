@@ -16,6 +16,8 @@ GameObject:
   - component: {fileID: 2304062281537324235}
   - component: {fileID: 8836113929324880951}
   - component: {fileID: 210025371017943051}
+  - component: {fileID: 4922428821910007325}
+  - component: {fileID: 3282012660131206040}
   m_Layer: 0
   m_Name: UsineCharbonPrefabPanier
   m_TagString: Untagged
@@ -213,6 +215,39 @@ MonoBehaviour:
   prefabPanier: {fileID: 2658830338614815400}
   prefabPlatform: {fileID: 2658830338614815400, guid: 4c95a6eaabf83494199122e2e263ca1d, type: 3}
   prefabProjection: {fileID: 2735245621464144481}
+--- !u!114 &4922428821910007325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2658830338614815400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b3e6359c9750ad4fb8a05c9b8704d7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handType: 3
+  proximityType: 3
+  constraintOnRotation: 5
+  useLocalSpaceForConstraint: 0
+--- !u!114 &3282012660131206040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2658830338614815400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 820f94d57893bf843a0cd6d93313fe6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handType: 3
+  proximityType: 3
+  scaleMinimum: 1
+  scaleMaximum: 1
+  relativeToInitialState: 1
 --- !u!23 &2181941463378975249
 MeshRenderer:
   m_ObjectHideFlags: 0

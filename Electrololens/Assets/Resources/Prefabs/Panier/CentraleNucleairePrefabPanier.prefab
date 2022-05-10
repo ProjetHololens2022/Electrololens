@@ -16,6 +16,8 @@ GameObject:
   - component: {fileID: 2606559528435884722}
   - component: {fileID: 8649543896165464260}
   - component: {fileID: 5067097271835881126}
+  - component: {fileID: 236194418689226416}
+  - component: {fileID: 8594510665291296145}
   m_Layer: 0
   m_Name: CentraleNucleairePrefabPanier
   m_TagString: Nucleaire
@@ -210,6 +212,39 @@ MonoBehaviour:
   prefabPanier: {fileID: 506657874716124142}
   prefabPlatform: {fileID: 506657874716124142, guid: adda42b160be4e04a8de9b8d76bd4376, type: 3}
   prefabProjection: {fileID: 1317286146135736399}
+--- !u!114 &236194418689226416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 506657874716124142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 820f94d57893bf843a0cd6d93313fe6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handType: 3
+  proximityType: 3
+  scaleMinimum: 1
+  scaleMaximum: 1
+  relativeToInitialState: 1
+--- !u!114 &8594510665291296145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 506657874716124142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b3e6359c9750ad4fb8a05c9b8704d7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handType: 3
+  proximityType: 3
+  constraintOnRotation: 5
+  useLocalSpaceForConstraint: 0
 --- !u!23 &1820329993638718761
 MeshRenderer:
   m_ObjectHideFlags: 0

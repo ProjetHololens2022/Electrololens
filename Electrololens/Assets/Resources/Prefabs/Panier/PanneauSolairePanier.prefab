@@ -210,6 +210,8 @@ GameObject:
   - component: {fileID: -4242858538870099436}
   - component: {fileID: -5237471518596896753}
   - component: {fileID: -2375255487603560725}
+  - component: {fileID: 4239614304235259120}
+  - component: {fileID: 3277694333816345962}
   m_Layer: 0
   m_Name: PanneauSolairePanier
   m_TagString: Untagged
@@ -370,6 +372,39 @@ MonoBehaviour:
   prefabPanier: {fileID: 7034057967842326162}
   prefabPlatform: {fileID: 2658830338614815400, guid: f8ed6fcb7d55ab8459b430a2609600dd, type: 3}
   prefabProjection: {fileID: 2854280638079692711}
+--- !u!114 &4239614304235259120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7034057967842326162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b3e6359c9750ad4fb8a05c9b8704d7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handType: 3
+  proximityType: 3
+  constraintOnRotation: 5
+  useLocalSpaceForConstraint: 0
+--- !u!114 &3277694333816345962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7034057967842326162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 820f94d57893bf843a0cd6d93313fe6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handType: 3
+  proximityType: 3
+  scaleMinimum: 1
+  scaleMaximum: 1
+  relativeToInitialState: 1
 --- !u!1001 &5794942861035614517
 PrefabInstance:
   m_ObjectHideFlags: 0

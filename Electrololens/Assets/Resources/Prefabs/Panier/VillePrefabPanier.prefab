@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 3676162833867286}
   - component: {fileID: 8162629690342747223}
   - component: {fileID: 4108547246419619507}
+  - component: {fileID: 9165762304931827794}
+  - component: {fileID: 6558304455927833842}
   m_Layer: 0
   m_Name: VillePrefabPanier
   m_TagString: City
@@ -184,6 +186,39 @@ MonoBehaviour:
   prefabPanier: {fileID: 2673552605051517129}
   prefabPlatform: {fileID: 2673552605051517129, guid: 7490065cf5cd66146a1944e106eac24a, type: 3}
   prefabProjection: {fileID: 5354893377208948033}
+--- !u!114 &9165762304931827794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2673552605051517129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b3e6359c9750ad4fb8a05c9b8704d7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handType: 3
+  proximityType: 3
+  constraintOnRotation: 5
+  useLocalSpaceForConstraint: 0
+--- !u!114 &6558304455927833842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2673552605051517129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 820f94d57893bf843a0cd6d93313fe6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handType: 3
+  proximityType: 3
+  scaleMinimum: 1
+  scaleMaximum: 1
+  relativeToInitialState: 1
 --- !u!1 &4551786496720935046
 GameObject:
   m_ObjectHideFlags: 0
