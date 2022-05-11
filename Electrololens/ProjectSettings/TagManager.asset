@@ -11,6 +11,8 @@ TagManager:
   - EventManager
   - Nucleaire
   - GraphManager
+  - ToolCarpet
+  - Tool
   layers:
   - Default
   - TransparentFX

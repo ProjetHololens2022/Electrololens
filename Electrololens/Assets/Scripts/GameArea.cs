@@ -19,11 +19,14 @@ public class GameArea : MonoBehaviour
     private GameObject buttonLoad;
     [SerializeField]
     private GameObject infopanel;
+    [SerializeField]
+    private GameObject toolCarpet;
 
     void Start(){
         platform.SetActive(false);
         panier.SetActive(false);
         tools.SetActive(false);
+        toolCarpet.SetActive(false);
         dock.SetActive(false);
         buttonSave.SetActive(false);
         buttonLoad.SetActive(false);
@@ -35,6 +38,7 @@ public class GameArea : MonoBehaviour
         platform.SetActive(true);
         panier.SetActive(true);
         tools.SetActive(true);
+        toolCarpet.SetActive(true);
         dock.SetActive(true);
         buttonSave.SetActive(true);
         buttonLoad.SetActive(true);
@@ -65,7 +69,7 @@ public class GameArea : MonoBehaviour
         while(scale < 1.0f)
         {
             child.localScale = new Vector3(scale,scale,scale);
-            child.rotation = Quaternion.Euler(0,rotation + baseAngle,0);
+            child.rotation = Quaternion.Euler(child.eulerAngles.x,rotation + baseAngle,child.eulerAngles.z);
             yield return 0;
             scale += (1.0f/time) * Time.deltaTime;
             rotation += (360.0f/time) * Time.deltaTime;
