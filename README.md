@@ -2,7 +2,7 @@
 
 ## Une simulation de gestion d'énergies en réalitée augmentée.
 
-> KHIAL Omar, LAFFONT Léo, SAVAETE Romain, LACERENZA Laris, BAJT Arthur
+> KHIAL Omar, LAFFONT Léo, SAVAETE Romain, LACERENZA Loris, BAJT Arthur
 
 ---
 ### Avant de lancer l'éditeur
